@@ -15,7 +15,7 @@ For more recent work by Horn et al., please refer to ICFP 2018 paper [4] and Hor
 
 [2] Extended version of [1] as University of Pennsylvania technical report MS-CIS-05-27. http://www.cis.upenn.edu/~bcpierce/papers/dblenses-tr.pdf
 
-[3] Horn, Rudi, Language Integrated Incremental Relational Lenses, Master of Science by Research, 
+[3] Rudi Horn, Language Integrated Incremental Relational Lenses, Master of Science by Research, 
 School of Informatics, University of Edinburgh, 2017. https://project-archive.inf.ed.ac.uk/msc/20172439/msc_proj.pdf 
 
 [4] Rudi Horn, Roly Perera, and James Cheney. 2018. Incremental relational lenses. Proc. ACM Program. Lang. 2, ICFP, Article 74 (July 2018), 30 pages. DOI: https://doi.org/10.1145/3236769
