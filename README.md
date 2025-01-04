@@ -4,7 +4,7 @@ The former implementation also includes some code that corresponds to the extend
 
 The implementation is not endoesed by any of the authors of the above papers. Although I tried to align the implementation with the above papers, there is no guarantee in the alignment, and the author of the code is solely responsible for any deviation from the papers.
 
-The implementation was conducted as a part of the early years of JSPS Kakenhi project [Software Foundation for Interoperability of Autonomic Distributed Data based on Bidirectional Transformation (2017-2022)](https://kaken.nii.ac.jp/en/grant/KAKENHI-PROJECT-17H06099/) to study the state of the art that time.
+The implementation was conducted as a part of the early years of JSPS Grant-in-Aid for Scientific Research (S) [Software Foundation for Interoperability of Autonomic Distributed Data based on Bidirectional Transformation (2017-2022)](https://kaken.nii.ac.jp/en/grant/KAKENHI-PROJECT-17H06099/) to study the state of the art that time.
 
 The purpose of making the code public is to make it citable by the papers/projects built on this implementation.
 For more recent work by Horn et al., please refer to ICFP 2018 paper [4] and Horn's PhD thesis [5], and associated implementations.
