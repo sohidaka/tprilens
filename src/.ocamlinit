@@ -1,0 +1,38 @@
+(***  -*- mode: caml -*- ***)
+#load "rellens_types.cmo"
+#load "print.cmo"
+#load "rellens.cmo"
+#load "rellens_test_util.cmo"
+open Rellens_types
+open Print
+open Rellens
+open Rellens_test_util
+#install_printer pp_attr
+#install_printer pp_SetofAttr
+#install_printer pp_value
+#install_printer pp_MapofAttr2value
+#install_printer pp_SetofRecord
+#install_printer pp_ptype
+#install_printer pp_MapofAttr2sort
+#install_printer pp_MapofAttr2ptype
+#install_printer pp_fd
+#install_printer pp_SetofFD
+#install_printer pp_PSetofAttr 
+#install_printer pp_MapofSetofAttr2PSetofAttr
+#install_printer pp_rname
+#install_printer pp_pred 
+#install_printer pp_sort
+#install_printer pp_database
+#install_printer pp_MapofRname2SetofChange
+#install_printer pp_MapofRname2sort
+#install_printer pp_mult
+#install_printer pp_change_entry
+#install_printer pp_phrase
+#install_printer pp_wcl
+(* installing will print WHEN and THEN for all pair of phases *)
+(* #install_printer pp_wc *)
+#install_printer pp_SetofChange
+#install_printer pp_record
+#install_printer pp_SetofPRecord
+#install_printer pp_fd_srecord
+#install_printer pp_SetofFDSPRecord

@@ -1,0 +1,35 @@
+\usepackage{stmaryrd}  % for \llbracket, \rrbracket
+\usepackage{amsmath}   % for \allowdisplaybreaks
+\usepackage{mathtools} % for \xRightarrow
+\usepackage{breqn}     % for dmath environment (didn't work)
+\newcommand{\sem}[1]{\llbracket#1\rrbracket} % semantic bracket [[ ]]
+\newcommand{\mi}[1]{\mathit{#1}}
+\newcommand{\mt}[1]{\mathtt{#1}}
+\newcommand{\mr}[1]{\mathrm{#1}}
+\newcommand{\mb}[1]{\mathbf{#1}}
+\newcommand{\kw}[1]{\ensuremath{\mathop\mb{#1}}}
+\newcommand{\CASE}{\kw{CASE}}
+\newcommand{\WHEN}{\kw{WHEN}}
+\newcommand{\THEN}{\kw{THEN}}
+\newcommand{\ELSE}{\kw{ELSE}}
+\newcommand{\END}{\kw{END}}
+
+% right-biased combination of records
+\newcommand{\rbcr}{\mathrel{\leftarrow\mkern-7mu+\mkern-7mu-}}
+% single-dependency record revision
+\newcommand{\sdrr}[2]{\xrightarrow[#2]{#1}}
+% record revision
+\newcommand{\recordrevision}[2]{\xRightarrow[#1]{\phantom{F}#2\phantom{F}}}
+% relational merge
+\newcommand{\relationalmerge}[1]{\xleftarrow{\cup}_{#1}}
+% parameterized relational merge
+\newcommand{\relationalmergep}[1]{\xleftarrow{\cup{?}}_{#1}}
+% relational delta merge
+\newcommand{\relationaldeltamerge}[1]{\xleftarrow{\Delta\cup}_{#1}}
+
+\newcommand{\lget}{\nearrow}  % lens get (arrow to the north east)
+\newcommand{\lput}{\searrow}  % lens put (arrow to the south east)
+% quasi-quote << >>
+\newcommand{\qquote}[1]{\mathopen{\langle\mkern-4mu{\langle}}#1\mathclose{\rangle\mkern-4mu{\rangle}}}
+\allowdisplaybreaks[4]
+
