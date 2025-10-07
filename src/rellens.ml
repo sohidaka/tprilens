@@ -119,8 +119,9 @@ let rec qtype (env:tenv) (p:phrase) : ptype = match p with
 | PLt (p1,p2) | PGt(p1,p2) | PLte(p1,p2) | PGte(p1,p2) ->
     let t1,t2 = qtype env p1, qtype env p2 in
     (match t1,t2 with 
-      TInt,TInt -> TBol
-    | TFlt,TFlt -> TFlt
+    | TInt,TInt -> TBol
+    | TFlt,TFlt -> TBol
+    | TStr,TStr -> TBol
     | _         -> failwith "qtype: invalid operand type for comparison")
 | PEq (p1,p2)  ->
     let t1,t2 = qtype env p1, qtype env p2 in
@@ -153,15 +154,17 @@ let rec eval (r:record) (p:phrase) : value = match p with
  | PVar attr -> MapofAttr.find attr r
  | PLt (p1,p2) | PGt (p1,p2) | PLte (p1,p2) | PGte (p1,p2) -> 
     (let (v1,v2) = (eval r p1,eval r p2) in
-     let op =
+     let compare_values v1 v2 =
        match p with
-       | PLt  _ -> (<)
-       | PGt  _ -> (>)
-       | PLte _ -> (<=)
-       | PGte _ -> (>=) 
+       | PLt  _ -> v1 < v2
+       | PGt  _ -> v1 > v2
+       | PLte _ -> v1 <= v2
+       | PGte _ -> v1 >= v2
        | _      -> failwith "eval: unexpected operator" in
      match (v1,v2) with
-       (Int i1,Int i2) -> Bol (op i1 i2)
+     | (Int i1,Int i2) -> Bol (compare_values i1 i2)
+     | (Flt f1,Flt f2) -> Bol (compare_values f1 f2)
+     | (Str s1,Str s2) -> Bol (compare_values s1 s2)
      | _,_             -> failwith "comparison: mismatch operand")
  | PEq (p1,p2) -> 
      (let (v1,v2)=(eval r p1, eval r p2) in Bol (v1 = v2) )
