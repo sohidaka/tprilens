@@ -319,7 +319,7 @@ let is_tree (fds:SetofFD.t) : bool =
                      PSetofAttr.union (MapofSetofAttr.find w !cv'))
 		   (fwd v fds) PSetofAttr.empty
 		)
-	     ) !cv'
+	     ) !cv
 		      ) nS;
       i := !i + 1
     done;
