@@ -334,7 +334,7 @@ let is_tree (fds:SetofFD.t) : bool =
       let extend_by_fwd  (closure:PSetofAttr.t) : PSetofAttr.t =
         setmap_PSetofAttr (fun v -> PSetofAttr.add v (fwd v)) closure 
       in
-      (* complete the map from the node to its irreflective transitive closure of fwd 
+      (* complete the map from the node to its irreflexive transitive closure of fwd 
          by repeating one step extension of the closure |nS| times (number of nodes) 
          to the initial closure map *)
       let closure_map =
