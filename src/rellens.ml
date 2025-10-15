@@ -300,6 +300,8 @@ let is_tree (fds:SetofFD.t) : bool =
     let _ = 
       PSetofAttr.iter (fun (v:SetofAttr.t) ->
 	  if PSetofAttr.cardinal (bwd v fds) > 1 then raise Multiple_Indegree) nS in
+
+    (*
     let n : int = PSetofAttr.cardinal nS in
     let i : int ref = ref 1 in
     let cv' : PSetofAttr.t MapofSetofAttr.t ref = ref MapofSetofAttr.empty in
@@ -322,7 +324,29 @@ let is_tree (fds:SetofFD.t) : bool =
 	     ) !cv
 		      ) nS;
       i := !i + 1
-    done;
+    done; *)
+    let is_cyclic (fds:SetofFD.t) (nS: PSetofAttr.t) : bool =
+      let fwd v = fwd v fds in 
+      (* finite map from left hand side of FD to the set of right hand sides of FD *)
+      (* {v₁ ↦ fwd(v₁)   ,v₂  ↦ fwd(v₂) , ... , vₙ ↦ fwd(vₙ)} *)
+      let initial_closure_map : PSetofAttr.t MapofSetofAttr.t = f2map_PSetofAttr fwd nS in
+      (* extend the closure by the sets of attributes obtained by one time application of fwd *)
+      let extend_by_fwd  (closure:PSetofAttr.t) : PSetofAttr.t =
+        setmap_PSetofAttr (fun v -> PSetofAttr.add v (fwd v)) closure 
+      in
+      (* complete the map from the node to its irreflective transitive closure of fwd 
+         by repeating one step extension of the closure |nS| times (number of nodes) 
+         to the initial closure map *)
+      let closure_map =
+        PSetofAttr.fold (fun _ -> MapofSetofAttr.map extend_by_fwd) nS initial_closure_map in
+      (* check if a node is in its closure, i.e.,
+          ∨{v ∈ closure(v) | (v ↦ closure(v)) ∈ cosure_map } 
+
+       =                 ⋁ v ∈ closure(v)
+        (v ↦ closure(v)) ∈ cosure_map 
+       *)
+      MapofSetofAttr.exists PSetofAttr.mem closure_map in
+    if is_cyclic fds nS then raise Is_Cyclic else
     true in
     try (it ()) with
       Is_Cyclic -> 

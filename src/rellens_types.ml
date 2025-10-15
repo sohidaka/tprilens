@@ -100,8 +100,18 @@ module SetofFD = Set.Make(FD)
 (* set of set of attributes *)
 module PSetofAttr = Set.Make(SetofAttr)
 
+(* set map *)
+let setmap_PSetofAttr (f: SetofAttr.t -> PSetofAttr.t) (ss:PSetofAttr.t) =
+   PSetofAttr.fold (fun s -> PSetofAttr.union (f s)) ss PSetofAttr.empty
+    
 (* map of nodes *)
 module MapofSetofAttr = Map.Make(SetofAttr)
+
+(* convert function f to a finite map on given domain D *)
+(* { v ↦ f(v) | v ← D }  *)
+let f2map_PSetofAttr (f: SetofAttr.t -> 'a) (ss:PSetofAttr.t) : 'a MapofSetofAttr.t = 
+  PSetofAttr.fold  (fun (s:SetofAttr.t) ->
+	  MapofSetofAttr.add (s:SetofAttr.t) (f s)) ss MapofSetofAttr.empty
 
 (* relation name *)
 type rname = string

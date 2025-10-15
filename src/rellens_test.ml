@@ -170,6 +170,33 @@ let _ = is_tree
         [(SetofAttr.of_list ["A"],SetofAttr.of_list ["B"]);
 	 (SetofAttr.of_list ["B"],SetofAttr.of_list ["A"])])
 
+(* {A -> B, B -> C, C -> A} *) (* maximum cycle size by more than two nodes *)
+let _ = is_tree
+     (SetofFD.of_list
+        [(SetofAttr.of_list ["A"],SetofAttr.of_list ["B"]);
+	 (SetofAttr.of_list ["B"],SetofAttr.of_list ["C"]);
+	 (SetofAttr.of_list ["C"],SetofAttr.of_list ["A"])])
+
+(* {D -> A, A -> B, B -> C, C -> A} *) (* cycle that is smaller than the maximum *)
+(* then more than one in-degree is detected before cycle detection *)
+let _ = is_tree
+     (SetofFD.of_list
+        [(SetofAttr.of_list ["D"],SetofAttr.of_list ["A"]);
+	 (SetofAttr.of_list ["A"],SetofAttr.of_list ["B"]);
+	 (SetofAttr.of_list ["B"],SetofAttr.of_list ["C"]);
+	 (SetofAttr.of_list ["C"],SetofAttr.of_list ["A"])])
+
+(* {A -> B, B -> C, C -> D, D-> A}*)
+let _ = is_tree
+     (SetofFD.of_list
+        [(SetofAttr.of_list ["A"],SetofAttr.of_list ["B"]);
+	 (SetofAttr.of_list ["B"],SetofAttr.of_list ["C"]);
+	 (SetofAttr.of_list ["C"],SetofAttr.of_list ["D"]);
+	 (SetofAttr.of_list ["D"],SetofAttr.of_list ["A"]);
+       ])
+
+
+
 (*  {A -> C, B -> C} *)
 let _ = is_tree
      (SetofFD.of_list
@@ -182,6 +209,7 @@ let _ = is_tree
         [(SetofAttr.of_list ["A"],SetofAttr.of_list ["B"]);
 	 (SetofAttr.of_list ["B";"C"],SetofAttr.of_list ["D"])])
 
+(* self cycle *)
 let fds' = 
      (SetofFD.of_list
         [(SetofAttr.of_list ["Album"],SetofAttr.of_list ["Album"])])
