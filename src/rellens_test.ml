@@ -1159,3 +1159,48 @@ let dbJ' =
 let dbI' =  put_join_template ("R",(PCns (Bol true))) ("S",(PCns (Bol false))) "T" (dbJ',dbI)
 let dbI' =  put_join_template ("R",(PCns (Bol false))) ("S",(PCns (Bol true))) "T" (dbJ',dbI)
 let dbI' =  put_join_template ("R",(PCns (Bol true))) ("S",(PCns (Bol true))) "T" (dbJ',dbI)
+
+(* test data for float values *)
+let dbI = 
+  let m = MapofRname.empty in
+  let (sort_R,relation_R) = load_int_float
+      ["A";"B"] [(["A"],["B"])]
+      [(2,1.0);
+       (3,2.0);
+       (4,2.0);
+     ] in 
+  let m = MapofRname.add "R" (sort_R,relation_R) m in 
+  m
+
+(* test for float value comparison *)
+let _ = get_select "R"
+      (PLt (PVar "B", PCns (Flt 2.0))) "S" dbI
+
+let _ = get_select "R"
+      (PGt (PVar "B", PCns (Flt 2.0))) "S" dbI
+
+let _ = get_select "R"
+      (PLte (PVar "B", PCns (Flt 2.0))) "S" dbI
+
+let _ = get_select "R"
+      (PGte (PVar "B", PCns (Flt 2.0))) "S" dbI
+
+let _ = get_select "R"
+      (PEq (PVar "B", PCns (Flt 2.0))) "S" dbI
+
+(* test for string value comparison *)
+let _ = get_select "Tracks1"
+      (PLt (PVar "Album",PCns (Str "Galore"))) "T1" db_Tracks1
+
+let _ = get_select "Tracks1"
+      (PGt (PVar "Album",PCns (Str "Galore"))) "T1" db_Tracks1
+
+let _ = get_select "Tracks1"
+      (PLte (PVar "Album",PCns (Str "Galore"))) "T1" db_Tracks1
+
+let _ = get_select "Tracks1"
+      (PGte (PVar "Album",PCns (Str "Galore"))) "T1" db_Tracks1
+
+let _ = get_select "Tracks1"
+      (PEq (PVar "Album",PCns (Str "Galore"))) "T1" db_Tracks1
+

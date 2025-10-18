@@ -213,3 +213,20 @@ let load_int_string_int (attrs: attr list)
     let m = MapofAttr.add a3 (Int v3) m in
     SetofRecord.add m) l SetofRecord.empty in
   ((u,tenv,(PCns (Bol true)),fds),relation)
+
+
+let load_int_float (attrs: attr list)
+    (fdl: ((attr list) * (attr list)) list)
+    (l: (int*float) list)
+   : (sort*relation) =
+  let u  = SetofAttr.of_list attrs in
+  let a1 = List.nth attrs 0 in
+  let a2 = List.nth attrs 1 in
+  let tenv = mapofAttr_of_list [(a1,TInt);(a2,TFlt);] in
+  let fds = load_fds fdl in
+  let relation = List.fold_right (fun (v1,v2) ->
+    let m = MapofAttr.empty in
+    let m = MapofAttr.add a1 (Int v1) m in
+    let m = MapofAttr.add a2 (Flt v2) m in
+    SetofRecord.add m) l SetofRecord.empty in
+  ((u,tenv,(PCns (Bol true)),fds),relation)

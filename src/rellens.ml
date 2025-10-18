@@ -118,9 +118,8 @@ let rec qtype (env:tenv) (p:phrase) : ptype = match p with
     | _      -> failwith "qtype: invalid operand type for boolean")
 | PLt (p1,p2) | PGt(p1,p2) | PLte(p1,p2) | PGte(p1,p2) ->
     let t1,t2 = qtype env p1, qtype env p2 in
-    (match t1,t2 with 
-      TInt,TInt -> TBol
-    | TFlt,TFlt -> TFlt
+    (match t1,t2 with
+      TInt,TInt | TFlt,TFlt | TStr,TStr -> TBol
     | _         -> failwith "qtype: invalid operand type for comparison")
 | PEq (p1,p2)  ->
     let t1,t2 = qtype env p1, qtype env p2 in
@@ -153,7 +152,7 @@ let rec eval (r:record) (p:phrase) : value = match p with
  | PVar attr -> MapofAttr.find attr r
  | PLt (p1,p2) | PGt (p1,p2) | PLte (p1,p2) | PGte (p1,p2) -> 
     (let (v1,v2) = (eval r p1,eval r p2) in
-     let op =
+     let value_comparison_op : value -> value -> bool =
        match p with
        | PLt  _ -> (<)
        | PGt  _ -> (>)
@@ -161,8 +160,12 @@ let rec eval (r:record) (p:phrase) : value = match p with
        | PGte _ -> (>=) 
        | _      -> failwith "eval: unexpected operator" in
      match (v1,v2) with
-       (Int i1,Int i2) -> Bol (op i1 i2)
-     | _,_             -> failwith "comparison: mismatch operand")
+       (Int _,Int _)
+     | (Flt _,Flt _)
+     | (Str _,Str _) -> (* use value type to rely on Stdlib.compare *)
+	                Bol (value_comparison_op v1 v2)
+     | (Bol _,Bol _) -> failwith "comparison: boolean operands"
+     | _,_           -> failwith "comparison: mismatch operand")
  | PEq (p1,p2) -> 
      (let (v1,v2)=(eval r p1, eval r p2) in Bol (v1 = v2) )
  | PCase (wlist,else_phrase) -> eval_case r wlist else_phrase
