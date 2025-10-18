@@ -239,17 +239,42 @@ set of set of attributes
 \ocwkw{module}~$\ocwupperid{PSetofAttr}~=~\ocwupperid{Set.Make}(\ocwupperid{SetofAttr})$\medskip
 
 \ocwendcode{}\ocwindent{0.00em}
+set map 
+\ocweol
+\label{rellens_types.ml:2995}%
+\medskip
+\ocwbegincode{}\ocwindent{0.00em}
+\ocwkw{let}~$\ocwlowerid{setmap\_PSetofAttr}~(\ocwlowerid{f}:~\ocwupperid{SetofAttr.}\ocwlowerid{t}~\rightarrow{}~\ocwupperid{PSetofAttr.}\ocwlowerid{t})~(\ocwlowerid{ss}:\ocwupperid{PSetofAttr.}\ocwlowerid{t})~=$\ocweol
+\ocwindent{1.50em}
+$\ocwupperid{PSetofAttr.}\ocwlowerid{fold}~($\ocwkw{fun}~$\ocwlowerid{s}~\rightarrow{}~\ocwupperid{PSetofAttr.}\ocwlowerid{union}~(\ocwlowerid{f}~\ocwlowerid{s}))~\ocwlowerid{ss}~\ocwupperid{PSetofAttr.}\ocwlowerid{empty}$\medskip
+
+\ocwendcode{}\ocwindent{0.00em}
 map of nodes 
 \ocweol
-\label{rellens_types.ml:3000}%
+\label{rellens_types.ml:3167}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{module}~$\ocwupperid{MapofSetofAttr}~=~\ocwupperid{Map.Make}(\ocwupperid{SetofAttr})$\medskip
 
 \ocwendcode{}\ocwindent{0.00em}
+convert function $f$ to a finite map on given domain $D$ 
+\ocweol
+\ocwindent{0.00em}
+$\{v\mapsto f(v)\mid v\leftarrow D \}   $
+\ocweol
+\label{rellens_types.ml:3355}%
+\medskip
+\ocwbegincode{}\ocwindent{0.00em}
+\ocwkw{let}~$\ocwlowerid{f2map\_PSetofAttr}~(\ocwlowerid{f}:~\ocwupperid{SetofAttr.}\ocwlowerid{t}~\rightarrow{}~\alpha{})~(\ocwlowerid{ss}:\ocwupperid{PSetofAttr.}\ocwlowerid{t})~:~\alpha{}~\ocwupperid{MapofSetofAttr.}\ocwlowerid{t}~=~$\ocweol
+\ocwindent{1.00em}
+$\ocwupperid{PSetofAttr.}\ocwlowerid{fold}~($\ocwkw{fun}~$(\ocwlowerid{s}:\ocwupperid{SetofAttr.}\ocwlowerid{t})~\rightarrow{}$\ocweol
+\ocwindent{5.00em}
+$\ocwupperid{MapofSetofAttr.}\ocwlowerid{add}~(\ocwlowerid{s}:\ocwupperid{SetofAttr.}\ocwlowerid{t})~(\ocwlowerid{f}~\ocwlowerid{s}))~\ocwlowerid{ss}~\ocwupperid{MapofSetofAttr.}\ocwlowerid{empty}$\medskip
+
+\ocwendcode{}\ocwindent{0.00em}
 relation name 
 \ocweol
-\label{rellens_types.ml:3065}%
+\label{rellens_types.ml:3575}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{type}~$\ocwlowerid{rname}~=~$\ocwbt{string}\medskip
@@ -258,7 +283,7 @@ relation name
 database instances, ranged over by $I,J$, are 
    finite maps from relation names to relations 
 \ocweol
-\label{rellens_types.ml:3188}%
+\label{rellens_types.ml:3698}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{module}~$\ocwupperid{Rname}~=~$\ocwkw{struct}\ocweol
@@ -269,14 +294,14 @@ database instances, ranged over by $I,J$, are
 \ocwindent{0.00em}
 \ocwkw{end}\medskip
 
-\label{rellens_types.ml:3279}%
+\label{rellens_types.ml:3789}%
 \ocwindent{0.00em}
 \ocwkw{module}~$\ocwupperid{MapofRname}~=~\ocwupperid{Map.Make}(\ocwupperid{Rname})$\medskip
 
 \ocwendcode{}\ocwindent{0.00em}
 sort : quadruple of domain $U$, (attribute type environment), predicate $P$ and functional dependencies $F$ 
 \ocweol
-\label{rellens_types.ml:3430}%
+\label{rellens_types.ml:3940}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{type}~$\ocwlowerid{sort}~=~\ocwupperid{SetofAttr.}\ocwlowerid{t}~\times{}~\ocwlowerid{tenv}~\times{}~\ocwlowerid{phrase}~\times{}~\ocwupperid{SetofFD.}\ocwlowerid{t}$\medskip
@@ -284,7 +309,7 @@ sort : quadruple of domain $U$, (attribute type environment), predicate $P$ and 
 \ocwendcode{}\ocwindent{0.00em}
 database: map from rname to pair of sort and relation 
 \ocweol
-\label{rellens_types.ml:3543}%
+\label{rellens_types.ml:4053}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{type}~$\ocwlowerid{database}~=~(\ocwlowerid{sort}~\times{}~\ocwlowerid{relation})~\ocwupperid{MapofRname.}\ocwlowerid{t}$\medskip
@@ -295,7 +320,7 @@ change set
 \ocwindent{0.00em}
 multiplicity mult: delete, keep, insert 
 \ocweol
-\label{rellens_types.ml:3654}%
+\label{rellens_types.ml:4164}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{type}~$\ocwlowerid{mult}~=~$\ocweol
@@ -309,12 +334,12 @@ $\mid{}~\ocwupperid{Insert}~$\ocwbc{} +1 \ocwec{}\medskip
 \ocwendcode{}\ocwindent{0.00em}
 change entry as a pair of record (Horn's row) and multiplicity 
 \ocweol
-\label{rellens_types.ml:3800}%
+\label{rellens_types.ml:4310}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{type}~$\ocwlowerid{change\_entry}~=~\ocwlowerid{record}\times{}\ocwlowerid{mult}$\medskip
 
-\label{rellens_types.ml:3833}%
+\label{rellens_types.ml:4343}%
 \ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{compare\_change\_entry}~(\ocwlowerid{ce1}:\ocwlowerid{change\_entry})~(\ocwlowerid{ce2}:\ocwlowerid{change\_entry})~:~$\ocwbt{int}~=\ocweol
 \ocwindent{2.00em}
@@ -328,7 +353,7 @@ change entry as a pair of record (Horn's row) and multiplicity
 \ocwindent{2.00em}
 \ocwkw{else}~$\ocwlowerid{c}$\medskip
 
-\label{rellens_types.ml:4086}%
+\label{rellens_types.ml:4596}%
 \ocwindent{0.00em}
 \ocwkw{module}~$\ocwupperid{ChangeEntry}~=~$\ocwkw{struct}\ocweol
 \ocwindent{1.00em}
@@ -338,11 +363,11 @@ change entry as a pair of record (Horn's row) and multiplicity
 \ocwindent{0.00em}
 \ocwkw{end}\medskip
 
-\label{rellens_types.ml:4180}%
+\label{rellens_types.ml:4690}%
 \ocwindent{0.00em}
 \ocwkw{module}~$\ocwupperid{SetofChange}~=~\ocwupperid{Set.Make}(\ocwupperid{ChangeEntry})$\medskip
 
-\label{rellens_types.ml:4224}%
+\label{rellens_types.ml:4734}%
 \ocwindent{0.00em}
 \ocwkw{module}~$\ocwupperid{PRecord}~=~$\ocwkw{struct}\ocweol
 \ocwindent{1.50em}
@@ -360,14 +385,14 @@ change entry as a pair of record (Horn's row) and multiplicity
 \ocwindent{0.00em}
 \ocwkw{end}\medskip
 
-\label{rellens_types.ml:4460}%
+\label{rellens_types.ml:4970}%
 \ocwindent{0.00em}
 \ocwkw{module}~$\ocwupperid{SetofPRecord}~=~\ocwupperid{Set.Make}(\ocwupperid{PRecord})$\medskip
 
 \ocwendcode{}\ocwindent{0.00em}
 pair of FD and set of pair of records 
 \ocweol
-\label{rellens_types.ml:4545}%
+\label{rellens_types.ml:5055}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{module}~$\ocwupperid{FDSPRecord}~=~$\ocwkw{struct}\ocweol
@@ -389,7 +414,7 @@ pair of FD and set of pair of records
 \ocwendcode{}\ocwindent{0.00em}
 (fd * ((record * record) set)) set  used for update set 
 \ocweol
-\label{rellens_types.ml:4798}%
+\label{rellens_types.ml:5308}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{module}~$\ocwupperid{SetofFDSPRecord}~=~\ocwupperid{Set.Make}(\ocwupperid{FDSPRecord})$\medskip
@@ -397,7 +422,7 @@ pair of FD and set of pair of records
 \ocwendcode{}\ocwindent{0.00em}
 tentative type definition for lens in the thesis 
 \ocweol
-\label{rellens_types.ml:4900}%
+\label{rellens_types.ml:5410}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{type}~$\ocwlowerid{ilens}~=~\ocwlowerid{sort}~\times{}~\ocwlowerid{relation}$\medskip
@@ -405,7 +430,7 @@ tentative type definition for lens in the thesis
 \ocwendcode{}\ocwindent{0.00em}
 $v \in \Sigma \leftrightarrow \Delta$ 
 \ocweol
-\label{rellens_types.ml:4995}%
+\label{rellens_types.ml:5505}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{type}~$\ocwlowerid{lens}~=$\ocweol
@@ -678,11 +703,9 @@ $\mid{}~\ocwupperid{PLt}~(\ocwlowerid{p1},\ocwlowerid{p2})~\mid{}~\ocwupperid{PG
 \ocwindent{2.00em}
 \ocwkw{let}~$\ocwlowerid{t1},\ocwlowerid{t2}~=~\ocwlowerid{qtype}~\ocwlowerid{env}~\ocwlowerid{p1},~\ocwlowerid{qtype}~\ocwlowerid{env}~\ocwlowerid{p2}~$\ocwkw{in}\ocweol
 \ocwindent{2.00em}
-$($\ocwkw{match}~$\ocwlowerid{t1},\ocwlowerid{t2}~$\ocwkw{with}~\ocweol
+$($\ocwkw{match}~$\ocwlowerid{t1},\ocwlowerid{t2}~$\ocwkw{with}\ocweol
 \ocwindent{3.00em}
-$\ocwupperid{TInt},\ocwupperid{TInt}~\rightarrow{}~\ocwupperid{TBol}$\ocweol
-\ocwindent{2.00em}
-$\mid{}~\ocwupperid{TFlt},\ocwupperid{TFlt}~\rightarrow{}~\ocwupperid{TFlt}$\ocweol
+$\ocwupperid{TInt},\ocwupperid{TInt}~\mid{}~\ocwupperid{TFlt},\ocwupperid{TFlt}~\mid{}~\ocwupperid{TStr},\ocwupperid{TStr}~\rightarrow{}~\ocwupperid{TBol}$\ocweol
 \ocwindent{2.00em}
 $\mid{}~\ocwlowerid{\_}~\rightarrow{}~\ocwlowerid{failwith}~$\ocwstring{"qtype:\ocwvspace{}invalid\ocwvspace{}operand\ocwvspace{}type\ocwvspace{}for\ocwvspace{}comparison"}$)$\ocweol
 \ocwindent{0.00em}
@@ -695,7 +718,7 @@ $\mid{}~\ocwupperid{PEq}~(\ocwlowerid{p1},\ocwlowerid{p2})~\rightarrow{}$\ocweol
 \ocwendcode{}\ocwindent{0.00em}
 $\sem{p}_r$ : interpret phrase $p$ on record $r$ 
 \ocweol
-\label{rellens.ml:4432}%
+\label{rellens.ml:4431}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~\ocwkw{rec}~$\ocwlowerid{eval}~(\ocwlowerid{r}:\ocwlowerid{record})~(\ocwlowerid{p}:\ocwlowerid{phrase})~:~\ocwlowerid{value}~=~$\ocwkw{match}~$\ocwlowerid{p}~$\ocwkw{with}\ocweol
@@ -746,7 +769,7 @@ $\mid{}~\ocwupperid{PLt}~(\ocwlowerid{p1},\ocwlowerid{p2})~\mid{}~\ocwupperid{PG
 \ocwindent{2.00em}
 $($\ocwkw{let}~$(\ocwlowerid{v1},\ocwlowerid{v2})~=~(\ocwlowerid{eval}~\ocwlowerid{r}~\ocwlowerid{p1},\ocwlowerid{eval}~\ocwlowerid{r}~\ocwlowerid{p2})~$\ocwkw{in}\ocweol
 \ocwindent{2.50em}
-\ocwkw{let}~$\ocwlowerid{op}~=$\ocweol
+\ocwkw{let}~$\ocwlowerid{value\_comparison\_op}~:~\ocwlowerid{value}~\rightarrow{}~\ocwlowerid{value}~\rightarrow{}~$\ocwbt{bool}~=\ocweol
 \ocwindent{3.50em}
 \ocwkw{match}~$\ocwlowerid{p}~$\ocwkw{with}\ocweol
 \ocwindent{3.50em}
@@ -762,7 +785,15 @@ $\mid{}~\ocwlowerid{\_}~\rightarrow{}~\ocwlowerid{failwith}~$\ocwstring{"eval:\o
 \ocwindent{2.50em}
 \ocwkw{match}~$(\ocwlowerid{v1},\ocwlowerid{v2})~$\ocwkw{with}\ocweol
 \ocwindent{3.50em}
-$(\ocwupperid{Int}~\ocwlowerid{i1},\ocwupperid{Int}~\ocwlowerid{i2})~\rightarrow{}~\ocwupperid{Bol}~(\ocwlowerid{op}~\ocwlowerid{i1}~\ocwlowerid{i2})$\ocweol
+$(\ocwupperid{Int}~\ocwlowerid{\_},\ocwupperid{Int}~\ocwlowerid{\_})$\ocweol
+\ocwindent{2.50em}
+$\mid{}~(\ocwupperid{Flt}~\ocwlowerid{\_},\ocwupperid{Flt}~\ocwlowerid{\_})$\ocweol
+\ocwindent{2.50em}
+$\mid{}~(\ocwupperid{Str}~\ocwlowerid{\_},\ocwupperid{Str}~\ocwlowerid{\_})~\rightarrow{}~$\ocwbc{} use value type to rely on Stdlib.compare \ocwec{}\ocweol
+\ocwindent{12.00em}
+$\ocwupperid{Bol}~(\ocwlowerid{value\_comparison\_op}~\ocwlowerid{v1}~\ocwlowerid{v2})$\ocweol
+\ocwindent{2.50em}
+$\mid{}~(\ocwupperid{Bol}~\ocwlowerid{\_},\ocwupperid{Bol}~\ocwlowerid{\_})~\rightarrow{}~\ocwlowerid{failwith}~$\ocwstring{"comparison:\ocwvspace{}boolean\ocwvspace{}operands"}\ocweol
 \ocwindent{2.50em}
 $\mid{}~\ocwlowerid{\_},\ocwlowerid{\_}~\rightarrow{}~\ocwlowerid{failwith}~$\ocwstring{"comparison:\ocwvspace{}mismatch\ocwvspace{}operand"}$)$\ocweol
 \ocwindent{0.50em}
@@ -795,7 +826,7 @@ $\mid{}~[\,]~\rightarrow{}~\ocwlowerid{eval}~\ocwlowerid{r}~\ocwlowerid{else\_ph
 \ocwendcode{}\ocwindent{0.00em}
 evaluator specific to boolean predicates 
 \ocweol
-\label{rellens.ml:6052}%
+\label{rellens.ml:6276}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{eval\_bool}~(\ocwlowerid{r}:\ocwlowerid{record})~(\ocwlowerid{p}:\ocwlowerid{phrase})~:~$\ocwbt{bool}~=\ocweol
@@ -820,7 +851,7 @@ predicates, ranged over by $P$ and $Q$
 \ocwindent{0.00em}
 $P\ ignores\ X$ : predicate $P$ does not refer to attributes in $X$ 
 \ocweol
-\label{rellens.ml:6529}%
+\label{rellens.ml:6753}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~\ocwkw{rec}~$\ocwlowerid{ignores}~(\ocwlowerid{p}:\ocwlowerid{phrase})~(\ocwlowerid{x}:\ocwupperid{SetofAttr.}\ocwlowerid{t})~:~$\ocwbt{bool}~=~\ocwkw{match}~$\ocwlowerid{p}~$\ocwkw{with}\ocweol
@@ -847,7 +878,7 @@ $M \models X \to Y$ : $M$ models functional dependency $X \to Y$
 \ocwindent{0.00em}
 list of all pairs of a list 
 \ocweol
-\label{rellens.ml:7050}%
+\label{rellens.ml:7274}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{list\_pairs}~(\ocwlowerid{l}:~\alpha{}~$\ocwbt{list}$)~:~(\alpha{}~\times{}~\alpha{})~$\ocwbt{list}~=\ocweol
@@ -861,7 +892,7 @@ naive test of $M \models X \to Y$
 
   by testing if $m[X]=m'[X] \Rightarrow m[Y]=m'[Y]$ for all $m,m' \in M$ 
 \ocweol
-\label{rellens.ml:7289}%
+\label{rellens.ml:7513}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{models}~(\ocwlowerid{m}:\ocwlowerid{relation})~((\ocwlowerid{x},\ocwlowerid{y}):\ocwlowerid{fd})~:~$\ocwbt{bool}~=\ocweol
@@ -882,7 +913,7 @@ $\models$ lifted to set of fd
 \ocwindent{0.00em}
 $M \models F = \bigwedge_{\mathit{fd}\in F} M \models \mathit{fd}$ 
 \ocweol
-\label{rellens.ml:7651}%
+\label{rellens.ml:7875}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{models\_fds}~(\ocwlowerid{m}:\ocwlowerid{relation})~(\ocwlowerid{fds}:\ocwupperid{SetofFD.}\ocwlowerid{t})~:~$\ocwbt{bool}~=\ocweol
@@ -895,7 +926,7 @@ functions on functional dependencies
 \ocwindent{0.00em}
 $\mi{left}(F) = \cup\{ X \mid  X \to Y \in F\}$ 
 \ocweol
-\label{rellens.ml:7836}%
+\label{rellens.ml:8060}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{left}~(\ocwlowerid{fds}:\ocwupperid{SetofFD.}\ocwlowerid{t})~:~\ocwupperid{SetofAttr.}\ocwlowerid{t}~=~$\ocweol
@@ -907,7 +938,7 @@ $\ocwupperid{SetofAttr.}\ocwlowerid{union}~\ocwlowerid{x})~\ocwlowerid{fds}~\ocw
 \ocwendcode{}\ocwindent{0.00em}
 $\mi{right}(F) = \cup\{ Y \mid  X \to Y \in F\}$ 
 \ocweol
-\label{rellens.ml:8011}%
+\label{rellens.ml:8235}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{right}~(\ocwlowerid{fds}:\ocwupperid{SetofFD.}\ocwlowerid{t})~:~\ocwupperid{SetofAttr.}\ocwlowerid{t}~=~$\ocweol
@@ -919,7 +950,7 @@ $\ocwupperid{SetofAttr.}\ocwlowerid{union}~\ocwlowerid{y})~\ocwlowerid{fds}~\ocw
 \ocwendcode{}\ocwindent{0.00em}
 $\mi{names}(F) = \mi{left}(F) \cup \mi{right}(F)$ 
 \ocweol
-\label{rellens.ml:8226}%
+\label{rellens.ml:8450}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{names}~(\ocwlowerid{fds}:\ocwupperid{SetofFD.}\ocwlowerid{t})~:~\ocwupperid{SetofAttr.}\ocwlowerid{t}~=$\ocweol
@@ -930,7 +961,7 @@ $\ocwupperid{SetofAttr.}\ocwlowerid{union}~(\ocwlowerid{left}~\ocwlowerid{fds})~
 $\mi{outputs}(F) = \{ A \in U \mid \exists X \subseteq U . 
            A \notin X \mathbin{\text{and}} F \models X \to A\}$ 
 \ocweol
-\label{rellens.ml:8441}%
+\label{rellens.ml:8665}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{outputs}~(\ocwlowerid{fds}:\ocwupperid{SetofFD.}\ocwlowerid{t})~:~\ocwupperid{SetofAttr.}\ocwlowerid{t}~=~$\ocweol
@@ -947,12 +978,12 @@ $(\ocwupperid{SetofAttr.}\ocwlowerid{mem}~\ocwlowerid{attr}~\ocwlowerid{y})~\lan
 \ocwindent{0.00em}
 distinctness of sources and destinations of FD 
 \ocweol
-\label{rellens.ml:8712}%
+\label{rellens.ml:8936}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{exception}~$\ocwupperid{Overlap\_Between\_Attributes}~$\ocwbc{} overlap between sets of attributes \ocwec{}\medskip
 
-\label{rellens.ml:8791}%
+\label{rellens.ml:9015}%
 \ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{merge\_attrs}~(\ocwlowerid{attrs}:\ocwupperid{SetofAttr.}\ocwlowerid{t})~(\ocwlowerid{attrss}:\ocwupperid{PSetofAttr.}\ocwlowerid{t})~:~\ocwupperid{PSetofAttr.}\ocwlowerid{t}~=~$\ocweol
 \ocwindent{1.00em}
@@ -974,7 +1005,7 @@ $($\ocwkw{fun}~$\ocwlowerid{s}~\rightarrow{}~\ocwupperid{SetofAttr.}\ocwlowerid{
 \ocwindent{3.00em}
 \ocwkw{else}~$\ocwlowerid{raise}~\ocwupperid{Overlap\_Between\_Attributes}$\medskip
 
-\label{rellens.ml:9189}%
+\label{rellens.ml:9413}%
 \ocwindent{0.00em}
 \ocwkw{exception}~$\ocwupperid{Is\_Cyclic}$\ocweol
 \ocwindent{0.00em}
@@ -983,7 +1014,7 @@ $($\ocwkw{fun}~$\ocwlowerid{s}~\rightarrow{}~\ocwupperid{SetofAttr.}\ocwlowerid{
 \ocwendcode{}\ocwindent{0.00em}
 set of nodes (distinctness test) 
 \ocweol
-\label{rellens.ml:9277}%
+\label{rellens.ml:9501}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{nodes}~(\ocwlowerid{fds}:\ocwupperid{SetofFD.}\ocwlowerid{t})~:~\ocwupperid{PSetofAttr.}\ocwlowerid{t}~=~$\ocweol
@@ -992,7 +1023,7 @@ $\ocwupperid{SetofFD.}\ocwlowerid{fold}~($\ocwkw{fun}~$(\ocwlowerid{x},\ocwlower
 \ocwindent{3.00em}
 $(\ocwlowerid{merge\_attrs}~\ocwlowerid{y}~(\ocwlowerid{merge\_attrs}~\ocwlowerid{x}~\ocwlowerid{ss})))~\ocwlowerid{fds}~\ocwupperid{PSetofAttr.}\ocwlowerid{empty}$\medskip
 
-\label{rellens.ml:9419}%
+\label{rellens.ml:9643}%
 \ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{fwd}~(\ocwlowerid{v}:\ocwupperid{SetofAttr.}\ocwlowerid{t})~(\ocwlowerid{fds}:\ocwupperid{SetofFD.}\ocwlowerid{t})~:~\ocwupperid{PSetofAttr.}\ocwlowerid{t}~=$\ocweol
 \ocwindent{1.50em}
@@ -1004,7 +1035,7 @@ $\ocwupperid{SetofFD.}\ocwlowerid{fold}~($\ocwkw{fun}~$(\ocwlowerid{x},\ocwlower
 \ocwindent{2.00em}
 \ocwkw{else}~$\ocwlowerid{ss})~\ocwlowerid{edges}~\ocwupperid{PSetofAttr.}\ocwlowerid{empty}$\medskip
 
-\label{rellens.ml:9620}%
+\label{rellens.ml:9844}%
 \ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{bwd}~(\ocwlowerid{v}:\ocwupperid{SetofAttr.}\ocwlowerid{t})~(\ocwlowerid{fds}:\ocwupperid{SetofFD.}\ocwlowerid{t})~:~\ocwupperid{PSetofAttr.}\ocwlowerid{t}~=$\ocweol
 \ocwindent{1.50em}
@@ -1019,7 +1050,7 @@ $\ocwupperid{SetofFD.}\ocwlowerid{fold}~($\ocwkw{fun}~$(\ocwlowerid{x},\ocwlower
 \ocwendcode{}\ocwindent{0.00em}
 tree form test: check if a set of FDs is in tree form 
 \ocweol
-\label{rellens.ml:9882}%
+\label{rellens.ml:10106}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{is\_tree}~(\ocwlowerid{fds}:\ocwupperid{SetofFD.}\ocwlowerid{t})~:~$\ocwbt{bool}~=\ocweol
@@ -1032,53 +1063,43 @@ tree form test: check if a set of FDs is in tree form
 \ocwindent{3.00em}
 $\ocwupperid{PSetofAttr.}\ocwlowerid{iter}~($\ocwkw{fun}~$(\ocwlowerid{v}:\ocwupperid{SetofAttr.}\ocwlowerid{t})~\rightarrow{}$\ocweol
 \ocwindent{5.00em}
-\ocwkw{if}~$\ocwupperid{PSetofAttr.}\ocwlowerid{cardinal}~(\ocwlowerid{bwd}~\ocwlowerid{v}~\ocwlowerid{fds})~>~1~$\ocwkw{then}~$\ocwlowerid{raise}~\ocwupperid{Multiple\_Indegree})~\ocwlowerid{nS}~$\ocwkw{in}\ocweol
+\ocwkw{if}~$\ocwupperid{PSetofAttr.}\ocwlowerid{cardinal}~(\ocwlowerid{bwd}~\ocwlowerid{v}~\ocwlowerid{fds})~>~1~$\ocwkw{then}~$\ocwlowerid{raise}~\ocwupperid{Multiple\_Indegree})~\ocwlowerid{nS}~$\ocwkw{in}\medskip
+
+\label{rellens.ml:11220}%
 \ocwindent{2.00em}
-\ocwkw{let}~$\ocwlowerid{n}~:~$\ocwbt{int}~=~$\ocwupperid{PSetofAttr.}\ocwlowerid{cardinal}~\ocwlowerid{nS}~$\ocwkw{in}\ocweol
-\ocwindent{2.00em}
-\ocwkw{let}~$\ocwlowerid{i}~:~$\ocwbt{int}~\ocwbt{ref}~=~\ocwbt{ref}~1~\ocwkw{in}\ocweol
-\ocwindent{2.00em}
-\ocwkw{let}~$\ocwlowerid{cv'}~:~\ocwupperid{PSetofAttr.}\ocwlowerid{t}~\ocwupperid{MapofSetofAttr.}\ocwlowerid{t}~$\ocwbt{ref}~=~\ocwbt{ref}~$\ocwupperid{MapofSetofAttr.}\ocwlowerid{empty}~$\ocwkw{in}\ocweol
-\ocwindent{2.00em}
-\ocwkw{let}~$\ocwlowerid{cv}~:~\ocwupperid{PSetofAttr.}\ocwlowerid{t}~\ocwupperid{MapofSetofAttr.}\ocwlowerid{t}~$\ocwbt{ref}~=~\ocweol
+\ocwkw{let}~$\ocwlowerid{is\_cyclic}~(\ocwlowerid{fds}:\ocwupperid{SetofFD.}\ocwlowerid{t})~(\ocwlowerid{nS}:~\ocwupperid{PSetofAttr.}\ocwlowerid{t})~:~$\ocwbt{bool}~=\ocweol
 \ocwindent{3.00em}
-\ocwbt{ref}~$(\ocwupperid{PSetofAttr.}\ocwlowerid{fold}~($\ocwkw{fun}~$(\ocwlowerid{v}:\ocwupperid{SetofAttr.}\ocwlowerid{t})~\rightarrow{}$\ocweol
+\ocwkw{let}~$\ocwlowerid{fwd}~\ocwlowerid{v}~=~\ocwlowerid{fwd}~\ocwlowerid{v}~\ocwlowerid{fds}~$\ocwkw{in}~\ocweol
 \ocwindent{3.00em}
-$\ocwupperid{MapofSetofAttr.}\ocwlowerid{add}~(\ocwlowerid{v}:\ocwupperid{SetofAttr.}\ocwlowerid{t})~(\ocwlowerid{fwd}~\ocwlowerid{v}~\ocwlowerid{fds}))~\ocwlowerid{nS}~\ocwupperid{MapofSetofAttr.}\ocwlowerid{empty})~$\ocwkw{in}\ocweol
-\ocwindent{2.00em}
-\ocwkw{while}~$(!\ocwlowerid{i}~\le{}~\ocwlowerid{n})~$\ocwkw{do}~\ocwbc{} largest possible cycle is of length n so no more than n iterations are necessary \ocwec{}\ocweol
+\ocwbc{} finite map from left hand side of FD to the set of right hand sides of FD \ocwec{}\ocweol
+\ocwindent{6.00em}
+\ocwbc{} $\{v_1 \mapsto fwd(v_1), v_2 \mapsto fwd(v_2), \ldots, v_n \mapsto fwd(v_n) \}$ \ocwec{}\ocweol
 \ocwindent{3.00em}
-$\ocwlowerid{cv'}~:=~!\ocwlowerid{cv};$\ocweol
+\ocwkw{let}~$\ocwlowerid{initial\_closure\_map}~:~\ocwupperid{PSetofAttr.}\ocwlowerid{t}~\ocwupperid{MapofSetofAttr.}\ocwlowerid{t}~=~\ocwlowerid{f2map\_PSetofAttr}~\ocwlowerid{fwd}~\ocwlowerid{nS}~$\ocwkw{in}\ocweol
 \ocwindent{3.00em}
-$\ocwupperid{PSetofAttr.}\ocwlowerid{iter}~($\ocwkw{fun}~$\ocwlowerid{v}~\rightarrow{}$\ocweol
+\ocwbc{} extend the closure by the sets of attributes obtained by one time application of fwd \ocwec{}\ocweol
+\ocwindent{3.00em}
+\ocwkw{let}~$\ocwlowerid{extend\_by\_fwd}~(\ocwlowerid{closure}:\ocwupperid{PSetofAttr.}\ocwlowerid{t})~:~\ocwupperid{PSetofAttr.}\ocwlowerid{t}~=$\ocweol
 \ocwindent{4.00em}
-\ocwkw{if}~$\ocwupperid{PSetofAttr.}\ocwlowerid{mem}~\ocwlowerid{v}~(\ocwupperid{MapofSetofAttr.}\ocwlowerid{find}~\ocwlowerid{v}~!\ocwlowerid{cv'})~$\ocwkw{then}~$\ocwlowerid{raise}~\ocwupperid{Is\_Cyclic}$\ocweol
-\ocwindent{4.00em}
-\ocwkw{else}~\ocweol
-\ocwindent{5.00em}
-$\ocwlowerid{cv}~:=~\ocwupperid{MapofSetofAttr.}\ocwlowerid{add}~\ocwlowerid{v}$\ocweol
-\ocwindent{6.50em}
-$(\ocwupperid{PSetofAttr.}\ocwlowerid{union}~$\ocweol
-\ocwindent{8.00em}
-$(\ocwupperid{MapofSetofAttr.}\ocwlowerid{find}~\ocwlowerid{v}~!\ocwlowerid{cv'})$\ocweol
-\ocwindent{8.00em}
-$(\ocwupperid{PSetofAttr.}\ocwlowerid{fold}~$\ocweol
-\ocwindent{9.50em}
-$($\ocwkw{fun}~$\ocwlowerid{w}~\rightarrow{}$\ocweol
-\ocwindent{10.50em}
-$\ocwupperid{PSetofAttr.}\ocwlowerid{union}~(\ocwupperid{MapofSetofAttr.}\ocwlowerid{find}~\ocwlowerid{w}~!\ocwlowerid{cv'}))$\ocweol
-\ocwindent{9.50em}
-$(\ocwlowerid{fwd}~\ocwlowerid{v}~\ocwlowerid{fds})~\ocwupperid{PSetofAttr.}\ocwlowerid{empty}$\ocweol
-\ocwindent{8.00em}
-$)$\ocweol
-\ocwindent{6.50em}
-$)~!\ocwlowerid{cv'}$\ocweol
-\ocwindent{11.00em}
-$)~\ocwlowerid{nS};$\ocweol
+$\ocwlowerid{setmap\_PSetofAttr}~($\ocwkw{fun}~$\ocwlowerid{v}~\rightarrow{}~\ocwupperid{PSetofAttr.}\ocwlowerid{add}~\ocwlowerid{v}~(\ocwlowerid{fwd}~\ocwlowerid{v}))~\ocwlowerid{closure}~$\ocweol
 \ocwindent{3.00em}
-$\ocwlowerid{i}~:=~!\ocwlowerid{i}~+~1$\ocweol
+\ocwkw{in}\ocweol
+\ocwindent{3.00em}
+\ocwbc{} complete the map from the node to its irreflexive transitive closure of fwd 
+         by repeating one step extension of the closure $|nS|$ times (number of nodes) 
+         to the initial closure map \ocwec{}\ocweol
+\ocwindent{3.00em}
+\ocwkw{let}~$\ocwlowerid{closure\_map}~=$\ocweol
+\ocwindent{4.00em}
+$\ocwupperid{PSetofAttr.}\ocwlowerid{fold}~($\ocwkw{fun}~$\ocwlowerid{\_}~\rightarrow{}~\ocwupperid{MapofSetofAttr.}\ocwlowerid{map}~\ocwlowerid{extend\_by\_fwd})~\ocwlowerid{nS}~\ocwlowerid{initial\_closure\_map}~$\ocwkw{in}\ocweol
+\ocwindent{6.00em}
+\ocwbc{} $ \vee\{v \in closure(v) \mid (v \mapsto closure(v)) \in closure\_map\}$ \ocwec{}\ocweol
+\ocwindent{3.00em}
+\ocwbc{} ${\displaystyle= \bigvee_{(v\mapsto closure(v))\in closure\_map}{v\in closure(v)}}$  \ocwec{}\ocweol
+\ocwindent{3.00em}
+$\ocwupperid{MapofSetofAttr.}\ocwlowerid{exists}~\ocwupperid{PSetofAttr.}\ocwlowerid{mem}~\ocwlowerid{closure\_map}~$\ocwkw{in}\ocweol
 \ocwindent{2.00em}
-\ocwkw{done};\ocweol
+\ocwkw{if}~$\ocwlowerid{is\_cyclic}~\ocwlowerid{fds}~\ocwlowerid{nS}~$\ocwkw{then}~$\ocwlowerid{raise}~\ocwupperid{Is\_Cyclic}~$\ocwkw{else}\ocweol
 \ocwindent{2.00em}
 \ocwkw{true}~\ocwkw{in}\ocweol
 \ocwindent{2.00em}
@@ -1102,7 +1123,7 @@ $\ocwupperid{Format.}\ocwlowerid{fprintf}~\ocwupperid{Format.}\ocwlowerid{err\_f
 \ocwindent{4.00em}
 \ocwkw{false}\medskip
 
-\label{rellens.ml:11351}%
+\label{rellens.ml:13120}%
 \ocwindent{0.00em}
 \ocwkw{exception}~$\ocwupperid{Not\_in\_Tree\_Form}$\medskip
 
@@ -1112,7 +1133,7 @@ $leavs(F)$ : nodes that have no overlap with left parts of $F$
 \ocwindent{0.00em}
 $\{ Y \mid \exists X.X\to Y\in F \mathbin{\text{and}} Y \cap \mi{left}(F)=\emptyset \}$ 
 \ocweol
-\label{rellens.ml:11542}%
+\label{rellens.ml:13311}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{leaves}~(\ocwlowerid{fds}:\ocwupperid{SetofFD.}\ocwlowerid{t})~:~\ocwupperid{PSetofAttr.}\ocwlowerid{t}~=$\ocweol
@@ -1135,7 +1156,7 @@ $roots(F)$ : nodes that have no overlap with the right parts of $F$
 \ocwindent{0.00em}
 $\{ Y \mid \exists X.X\to Y\in F \mathbin{\text{and}} Y \cap \mi{right}(F)=\emptyset \}$ 
 \ocweol
-\label{rellens.ml:11990}%
+\label{rellens.ml:13759}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{roots}~(\ocwlowerid{fds}:\ocwupperid{SetofFD.}\ocwlowerid{t})~:~\ocwupperid{PSetofAttr.}\ocwlowerid{t}~=$\ocweol
@@ -1166,7 +1187,7 @@ $m \rbcr n$
 
  
 \ocweol
-\label{rellens.ml:12776}%
+\label{rellens.ml:14545}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{rbcr}~(\ocwlowerid{m}:\ocwlowerid{record})~(\ocwlowerid{n}:\ocwlowerid{record})~:~\ocwlowerid{record}~=~$\ocweol
@@ -1187,7 +1208,7 @@ single-dependency record revision
 \ocwindent{0.00em}
 $m \sdrr{X\to Y}{N} m'$ 
 \ocweol
-\label{rellens.ml:13424}%
+\label{rellens.ml:15193}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{sdrr}~(\ocwlowerid{m}:\ocwlowerid{record})~((\ocwlowerid{x},\ocwlowerid{y}):\ocwlowerid{fd})~(\ocwlowerid{n}:\ocwlowerid{relation})~:~\ocwlowerid{record}~=$\ocweol
@@ -1226,7 +1247,7 @@ record revision of $m$ to $n$ under set of functional dependencies $F$
 \ocwindent{0.00em}
 $m \recordrevision{L}{F} n$ 
 \ocweol
-\label{rellens.ml:14340}%
+\label{rellens.ml:16109}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~\ocwkw{rec}~$\ocwlowerid{record\_revision}~(\ocwlowerid{m}:\ocwlowerid{record})~(\ocwlowerid{fds}:\ocwupperid{SetofFD.}\ocwlowerid{t})~(\ocwlowerid{l}:\ocwlowerid{relation})~:~\ocwlowerid{record}~=~$\ocweol
@@ -1279,7 +1300,7 @@ relation revision
 \ocwindent{0.00em}
 $M \leftarrow_F L = \{ m'\mid m \recordrevision{L}{F} m'\ \text{for some}\ m \in M\}$ 
 \ocweol
-\label{rellens.ml:15392}%
+\label{rellens.ml:17161}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{relation\_revision}~(\ocwlowerid{m}:\ocwlowerid{relation})~(\ocwlowerid{fds}:\ocwupperid{SetofFD.}\ocwlowerid{t})~(\ocwlowerid{l}:\ocwlowerid{relation})~:~\ocwlowerid{relation}~=~$\ocweol
@@ -1294,7 +1315,7 @@ relational merge
 \ocwindent{0.00em}
 $M \relationalmerge{F} L = M \leftarrow_F L \cup L$  
 \ocweol
-\label{rellens.ml:15698}%
+\label{rellens.ml:17467}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{relational\_merge}~(\ocwlowerid{m}:\ocwlowerid{relation})~(\ocwlowerid{fds}:\ocwupperid{SetofFD.}\ocwlowerid{t})~(\ocwlowerid{l}:\ocwlowerid{relation})~:~\ocwlowerid{relation}~=~$\ocweol
@@ -1304,7 +1325,7 @@ $\ocwupperid{SetofRecord.}\ocwlowerid{union}~(\ocwlowerid{relation\_revision}~\o
 \ocwendcode{}\ocwindent{0.00em}
 sort function $sort(R)$ 
 \ocweol
-\label{rellens.ml:15858}%
+\label{rellens.ml:17627}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{sort}~(\ocwlowerid{r}:\ocwlowerid{rname})~(\ocwlowerid{db}:\ocwlowerid{database})~:~\ocwlowerid{sort}~=~$\ocweol
@@ -1314,7 +1335,7 @@ $\ocwlowerid{fst}~(\ocwupperid{MapofRname.}\ocwlowerid{find}~\ocwlowerid{r}~\ocw
 \ocwendcode{}\ocwindent{0.00em}
 instance $I(R)$ 
 \ocweol
-\label{rellens.ml:15953}%
+\label{rellens.ml:17722}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{instance}~(\ocwlowerid{r}:\ocwlowerid{rname})~(\ocwlowerid{db}:\ocwlowerid{database})~:~\ocwlowerid{relation}~=$\ocweol
@@ -1324,7 +1345,7 @@ $\ocwlowerid{snd}~(\ocwupperid{MapofRname.}\ocwlowerid{find}~\ocwlowerid{r}~\ocw
 \ocwendcode{}\ocwindent{0.00em}
 functional dependencies of relation $R$ : $\mathit{fd}(R)$ 
 \ocweol
-\label{rellens.ml:16098}%
+\label{rellens.ml:17867}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{fd}~(\ocwlowerid{r}:\ocwlowerid{rname})~(\ocwlowerid{db}:\ocwlowerid{database})~:~\ocwupperid{SetofFD.}\ocwlowerid{t}~=$\ocweol
@@ -1354,7 +1375,7 @@ $
 \ocwindent{0.00em}
 type check and inference for select 
 \ocweol
-\label{rellens.ml:16642}%
+\label{rellens.ml:18411}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{typeinf\_select}~(\ocwlowerid{p}:\ocwlowerid{phrase})~(\ocwlowerid{srt}:\ocwlowerid{sort})~:~\ocwlowerid{sort}~=~$\ocweol
@@ -1385,7 +1406,7 @@ get part of select lens
 \ocwindent{0.00em}
 $v\lget(I) = I\setminus_R[S\mapsto P\cap I(R)]$ 
 \ocweol
-\label{rellens.ml:17311}%
+\label{rellens.ml:19080}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{get\_select}~(\ocwlowerid{r}:\ocwlowerid{rname})~(\ocwlowerid{p}:\ocwlowerid{phrase})~(\ocwlowerid{s}:\ocwlowerid{rname})~(\ocwlowerid{db}:\ocwlowerid{database})~:~\ocwlowerid{database}~=$\ocweol
@@ -1413,7 +1434,7 @@ $
  \end{array}
 $ 
 \ocweol
-\label{rellens.ml:17924}%
+\label{rellens.ml:19693}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{put\_select}~(\ocwlowerid{r}:\ocwlowerid{rname})~(\ocwlowerid{p}~:~\ocwlowerid{phrase})~(\ocwlowerid{s}:\ocwlowerid{rname})~$\ocweol
@@ -1482,7 +1503,7 @@ $
 \ocwindent{0.00em}
 type check and inference for join 
 \ocweol
-\label{rellens.ml:19636}%
+\label{rellens.ml:21405}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{typeinf\_join\_dl}~(\ocwlowerid{sortR}:\ocwlowerid{sort})~(\ocwlowerid{sortS}:\ocwlowerid{sort})~:~\ocwlowerid{sort}~=$\ocweol
@@ -1532,7 +1553,7 @@ $v\lget(I) = I{\setminus_{R,S}}[T\mapsto I(R)\bowtie I(S)]$
 \ocwindent{0.00em}
 TODO: check if $G \models U \cap V \to V$ 
 \ocweol
-\label{rellens.ml:20907}%
+\label{rellens.ml:22676}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{get\_join\_dl}~(\ocwlowerid{r}:\ocwlowerid{rname})~(\ocwlowerid{s}:\ocwlowerid{rname})~(\ocwlowerid{t}:\ocwlowerid{rname})~(\ocwlowerid{db}:\ocwlowerid{database})~:~\ocwlowerid{database}~=$\ocweol
@@ -1567,7 +1588,7 @@ $
   \end{array}
 $ 
 \ocweol
-\label{rellens.ml:21776}%
+\label{rellens.ml:23545}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{put\_join\_dl}~(\ocwlowerid{r}:\ocwlowerid{rname})~(\ocwlowerid{s}:\ocwlowerid{rname})~(\ocwlowerid{t}:\ocwlowerid{rname})$\ocweol
@@ -1627,7 +1648,7 @@ $
 \ocwindent{0.00em}
 type check and inference for union 
 \ocweol
-\label{rellens.ml:23109}%
+\label{rellens.ml:24878}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{typeinf\_union}~(\ocwlowerid{sortR}:\ocwlowerid{sort})~(\ocwlowerid{sortS}:\ocwlowerid{sort})~:~\ocwlowerid{sort}~=$\ocweol
@@ -1691,7 +1712,7 @@ TODO: determine necessary condition and check
    in particular, simple record union may violate FD. it should be checked 
    at run time. 
 \ocweol
-\label{rellens.ml:24704}%
+\label{rellens.ml:26473}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{get\_union}~(\ocwlowerid{r}:\ocwlowerid{rname})~(\ocwlowerid{s}:\ocwlowerid{rname})~(\ocwlowerid{t}:\ocwlowerid{rname})~(\ocwlowerid{db}:\ocwlowerid{database})~:~\ocwlowerid{database}~=$\ocweol
@@ -1713,7 +1734,7 @@ TODO: determine necessary condition and check
 \ocwindent{1.00em}
 $\ocwupperid{MapofRname.}\ocwlowerid{add}~\ocwlowerid{t}~(\ocwlowerid{sortT},\ocwlowerid{instanceT})~\ocwlowerid{db}$\medskip
 
-\label{rellens.ml:25182}%
+\label{rellens.ml:26951}%
 \ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{put\_union}~(\ocwlowerid{r}:\ocwlowerid{rname})~(\ocwlowerid{s}:\ocwlowerid{rname})~(\ocwlowerid{t}:\ocwlowerid{rname})$\ocweol
 \ocwindent{2.00em}
@@ -1760,7 +1781,7 @@ $\mt{change\_set}\ T\ T' =
  \{(t,+1)\mid t\in T'\setminus T\}
  $ 
 \ocweol
-\label{rellens.ml:26321}%
+\label{rellens.ml:28090}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{change\_set}~(\ocwlowerid{table}:\ocwlowerid{relation})~(\ocwlowerid{table'}:\ocwlowerid{relation})~:~\ocwupperid{SetofChange.}\ocwlowerid{t}~=~$\ocweol
@@ -1794,7 +1815,7 @@ $M \relationaldeltamerge{F} \Delta N =
           \relationalmerge{F} 
        \{ t \mid (t,m)\in \Delta N \wedge m = +1\}$  
 \ocweol
-\label{rellens.ml:27096}%
+\label{rellens.ml:28865}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{relational\_delta\_merge}~(\ocwlowerid{m}:\ocwlowerid{relation})~(\ocwlowerid{fds}:\ocwupperid{SetofFD.}\ocwlowerid{t})~(\ocwlowerid{n}:\ocwupperid{SetofChange.}\ocwlowerid{t})~:~\ocwlowerid{relation}~=~$\ocweol
@@ -1819,7 +1840,7 @@ match on
 \ocwindent{0.00em}
 $\mt{match\ on}\ t\ t'\ X = (t[X] = t'[X]) = \bigwedge\{t[A]=t'[A]\mid A\in X\}$ 
 \ocweol
-\label{rellens.ml:27606}%
+\label{rellens.ml:29375}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{match\_on}~(\ocwlowerid{t}:\ocwlowerid{record})~(\ocwlowerid{t'}:\ocwlowerid{record})~(\ocwlowerid{cols}:\ocwupperid{SetofAttr.}\ocwlowerid{t})~:~$\ocwbt{bool}~=\ocweol
@@ -1829,7 +1850,7 @@ $\ocwlowerid{record\_equal}~(\ocwlowerid{restrict}~\ocwlowerid{cols}~\ocwlowerid
 \ocwendcode{}\ocwindent{0.00em}
 unflatten list of phrases as conjunction 
 \ocweol
-\label{rellens.ml:27770}%
+\label{rellens.ml:29539}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~\ocwkw{rec}~$\ocwlowerid{uf\_and}~(\ocwlowerid{l}:\ocwlowerid{phrase}~$\ocwbt{list}$)~:~\ocwlowerid{phrase}~=$\ocweol
@@ -1845,7 +1866,7 @@ $\mid{}\ocwlowerid{p}::\ocwlowerid{ps}~\rightarrow{}~\ocwupperid{PAnd}~(\ocwlowe
 \ocwendcode{}\ocwindent{0.00em}
 unflatten list of phrases as disjunction 
 \ocweol
-\label{rellens.ml:27959}%
+\label{rellens.ml:29728}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~\ocwkw{rec}~$\ocwlowerid{uf\_or}~(\ocwlowerid{l}:\ocwlowerid{phrase}~$\ocwbt{list}$)~:~\ocwlowerid{phrase}~=$\ocweol
@@ -1864,7 +1885,7 @@ production of expression to compare all columns in $\mi{cols}$ to a record $t$
 \ocwindent{0.00em}
 $\qquote{\bigwedge\sem{\{\qquote{\sem{c}=\sem{t[c]}} \mid c\in \mi{cols} \} } }$ 
 \ocweol
-\label{rellens.ml:28272}%
+\label{rellens.ml:30041}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{match\_on\_expr}~(\ocwlowerid{t}:\ocwlowerid{record})~(\ocwlowerid{cols}:\ocwupperid{SetofAttr.}\ocwlowerid{t})~:~\ocwlowerid{phrase}~=$\ocweol
@@ -1878,7 +1899,7 @@ $\ocwlowerid{uf\_and}~\ocwlowerid{phrase\_list}$\medskip
 \ocwendcode{}\ocwindent{0.00em}
 multiplicity is complement with each other : $m = -m'$ 
 \ocweol
-\label{rellens.ml:28544}%
+\label{rellens.ml:30313}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{is\_compl}~(\ocwlowerid{m}:\ocwlowerid{mult})~(\ocwlowerid{m'}:\ocwlowerid{mult})~:~$\ocwbt{bool}~=~\ocweol
@@ -1894,7 +1915,7 @@ not sure if attributes key should always be indeed keys
 \ocwindent{0.00em}
 $\{(t',m')\mid (t',m')\in\Delta R,t[key]=t'[key],m'=-m\}$ 
 \ocweol
-\label{rellens.ml:28786}%
+\label{rellens.ml:30555}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{compl\_rows}~((\ocwlowerid{t},\ocwlowerid{m}):\ocwlowerid{change\_entry})~(\ocwlowerid{dR}:\ocwupperid{SetofChange.}\ocwlowerid{t})~(\ocwlowerid{key}:\ocwupperid{SetofAttr.}\ocwlowerid{t})~:~\ocwupperid{SetofChange.}\ocwlowerid{t}~$\ocweol
@@ -1907,7 +1928,7 @@ $\ocwlowerid{match\_on}~\ocwlowerid{t}~\ocwlowerid{t'}~\ocwlowerid{key}~\land{}~
 $\mt{get\_fd\_updates}\ \Delta R\ (X\to Y) = 
   (X\to Y,\{(t[X],t[Y]) \mid (t,+1) \in \Delta R\}) $ 
 \ocweol
-\label{rellens.ml:29065}%
+\label{rellens.ml:30834}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{get\_fd\_updates}~(\ocwlowerid{dR}:\ocwupperid{SetofChange.}\ocwlowerid{t})~((\ocwlowerid{x},\ocwlowerid{y}):\ocwlowerid{fd})~:~\ocwlowerid{fd}~\times{}~\ocwupperid{SetofPRecord.}\ocwlowerid{t}~=$\ocweol
@@ -1923,7 +1944,7 @@ $($\ocwkw{fun}~$(\ocwlowerid{t},\ocwlowerid{m})~\ocwlowerid{ss}~\rightarrow{}$\o
 \ocwendcode{}\ocwindent{0.00em}
 $\{\mathtt{get\_fd\_updates}\ \Delta R\ f \mid f \in F \}$ 
 \ocweol
-\label{rellens.ml:29388}%
+\label{rellens.ml:31157}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{get\_updateset}~(\ocwlowerid{dR}:\ocwupperid{SetofChange.}\ocwlowerid{t})~(\ocwlowerid{f}:\ocwupperid{SetofFD.}\ocwlowerid{t})~:~\ocwupperid{SetofFDSPRecord.}\ocwlowerid{t}~=$\ocweol
@@ -1940,7 +1961,7 @@ $\mt{var\_case\_expr}\ \mi{map}\ c\ \mi{or}\ (X\to Y) := \\
 \quad \ELSE \sem{\mi{or}} \END
 }$ 
 \ocweol
-\label{rellens.ml:31117}%
+\label{rellens.ml:32886}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{var\_case\_expr}~(\ocwlowerid{map}~:~\ocwupperid{SetofPRecord.}\ocwlowerid{t})~(\ocwlowerid{attr}:\ocwlowerid{attr})~(\ocwlowerid{or\_phrase}:\ocwlowerid{phrase})~(\ocwlowerid{fd}:\ocwlowerid{fd})~:~\ocwlowerid{phrase}~=$\ocweol
@@ -1953,7 +1974,7 @@ $(\ocwupperid{SetofPRecord.}\ocwlowerid{elements}~\ocwlowerid{map})~$\ocwkw{in}\
 \ocwindent{2.00em}
 $\ocwupperid{PCase}~(\ocwlowerid{where\_clause\_list},~\ocwlowerid{or\_phrase})$\medskip
 
-\label{rellens.ml:31393}%
+\label{rellens.ml:33162}%
 \ocwindent{0.00em}
 \ocwkw{let}~\ocwkw{rec}~$\ocwlowerid{calc\_updated\_var\_expr}~(\ocwlowerid{chl}~:~\ocwupperid{SetofFDSPRecord.}\ocwlowerid{t})$\ocweol
 \ocwindent{2.00em}
@@ -2011,7 +2032,7 @@ $\ocwlowerid{calc\_updated\_var\_expr}~\ocwlowerid{chl}~\ocwlowerid{key}~(\ocwlo
 \ocwindent{3.00em}
 $\ocwlowerid{attr}~(\ocwlowerid{var\_case\_expr}~\ocwlowerid{map'}~\ocwlowerid{attr}~\ocwlowerid{or\_phrase}~\ocwlowerid{f})~(\ocwupperid{Some}~\ocwlowerid{map'})$\medskip
 
-\label{rellens.ml:32535}%
+\label{rellens.ml:34304}%
 \ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{updated\_var\_expr}~(\ocwlowerid{chl}:~\ocwupperid{SetofFDSPRecord.}\ocwlowerid{t})~(\ocwlowerid{key}:\ocwupperid{SetofAttr.}\ocwlowerid{t})~(\ocwlowerid{col}:\ocwlowerid{attr})$\ocweol
 \ocwindent{0.50em}
@@ -2022,7 +2043,7 @@ $\ocwlowerid{calc\_updated\_var\_expr}~\ocwlowerid{chl}~\ocwlowerid{key}~(\ocwup
 \ocwendcode{}\ocwindent{0.00em}
 sort: target sort of the input 
 \ocweol
-\label{rellens.ml:32747}%
+\label{rellens.ml:34516}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{updated\_pred}~(\ocwlowerid{dR}:\ocwupperid{SetofChange.}\ocwlowerid{t})~(\ocwlowerid{sort}:\ocwlowerid{sort})~(\ocwlowerid{p}:\ocwlowerid{phrase})~:~\ocwlowerid{phrase}~=~$\ocweol
@@ -2066,7 +2087,7 @@ $\sigma_{\qquote{
 \sem{\neg P}\wedge \sem{\mt{updated\_pred}\ \Delta R\ l\ P}
 }}(l)$ 
 \ocweol
-\label{rellens.ml:33565}%
+\label{rellens.ml:35334}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{query\_deleted\_rows}~(\ocwlowerid{dR}~:~\ocwupperid{SetofChange.}\ocwlowerid{t})~(\ocwlowerid{r}:\ocwlowerid{rname})~(\ocwlowerid{p}:\ocwlowerid{phrase})~(\ocwlowerid{dbI}:\ocwlowerid{database})~:~\ocwlowerid{relation}~=$\ocweol
@@ -2088,7 +2109,7 @@ $\ocwupperid{SetofRecord.}\ocwlowerid{filter}~($\ocwkw{fun}~$\ocwlowerid{r}~\rig
 \ocwendcode{}\ocwindent{0.00em}
 $\Delta R\cup \{(t,-1)\mid t \in \mt{query\_deleted\_rows}\ \Delta R\ l\ P\}$ 
 \ocweol
-\label{rellens.ml:34066}%
+\label{rellens.ml:35835}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{delta\_put\_select}~(\ocwlowerid{r}:\ocwlowerid{rname})~(\ocwlowerid{dbI}:\ocwlowerid{database})~(\ocwlowerid{p}:\ocwlowerid{phrase})~(\ocwlowerid{dR}:\ocwupperid{SetofChange.}\ocwlowerid{t})$\ocweol
@@ -2109,7 +2130,7 @@ Thesis ignores multiplicity of change set, but deletion should be ignored
 \ocwindent{0.00em}
 $\qquote{\bigvee\sem{\{\mt{match\_on\_expr}\ t\ x \mid (t,m) \in \Delta R\}}}$ 
 \ocweol
-\label{rellens.ml:34502}%
+\label{rellens.ml:36271}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{any\_match\_expr}~(\ocwlowerid{dR}:\ocwupperid{SetofChange.}\ocwlowerid{t})~(\ocwlowerid{x}:\ocwupperid{SetofAttr.}\ocwlowerid{t})~:~\ocwlowerid{phrase}~=$\ocweol
@@ -2123,7 +2144,7 @@ $\ocwlowerid{change\_list}~$\ocwkw{in}~$\ocwlowerid{uf\_or}~\ocwlowerid{phrase\_
 \ocwendcode{}\ocwindent{0.00em}
 $\sigma_{\mt{any\_match\_expr}\ \Delta R\ X}(I(R)[X \cup \{A\}])$ 
 \ocweol
-\label{rellens.ml:34864}%
+\label{rellens.ml:36633}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{query\_lookup\_table}~(\ocwlowerid{dR}:\ocwupperid{SetofChange.}\ocwlowerid{t})~(\ocwlowerid{r}:\ocwlowerid{rname})~(\ocwlowerid{db}:\ocwlowerid{database})$\ocweol
@@ -2144,7 +2165,7 @@ $\ocwupperid{SetofRecord.}\ocwlowerid{filter}~($\ocwkw{fun}~$\ocwlowerid{r}~\rig
 \ocwindent{3.00em}
 $(\ocwlowerid{restrict\_relation}~(\ocwupperid{SetofAttr.}\ocwlowerid{add}~\ocwlowerid{a}~\ocwlowerid{x})~(\ocwlowerid{instance}~\ocwlowerid{r}~\ocwlowerid{db}))$\medskip
 
-\label{rellens.ml:35305}%
+\label{rellens.ml:37074}%
 \ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{lookup\_col}~(\ocwlowerid{t}:\ocwlowerid{record})~(\ocwlowerid{a}:\ocwlowerid{attr})~(\ocwlowerid{x}:\ocwupperid{SetofAttr.}\ocwlowerid{t})$\ocweol
 \ocwindent{1.50em}
@@ -2171,7 +2192,7 @@ $\kw{let} L = \mt{query\_lookup\_table}\ \Delta R\ l\ X\ A$
 $\{(\mt{lookup\_col}\ t\ A\ X\ a\ L, m) \mid (t, m) \in \Delta R\}$
 
 \ocweol
-\label{rellens.ml:35766}%
+\label{rellens.ml:37535}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{delta\_put\_drop}~(\ocwlowerid{r}:\ocwlowerid{rname})~(\ocwlowerid{db}:\ocwlowerid{database})~(\ocwlowerid{a}:\ocwlowerid{attr})~(\ocwlowerid{x}:\ocwupperid{SetofAttr.}\ocwlowerid{t})~(\ocwlowerid{v}:\ocwlowerid{value})$\ocweol
@@ -2195,7 +2216,7 @@ $F = F' \cup \{X \to A\}$
 \ocwindent{0.00em}
 arbitrary decomposition 
 \ocweol
-\label{rellens.ml:36155}%
+\label{rellens.ml:37924}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{decompose\_fd}~(\ocwlowerid{f}:\ocwupperid{SetofFD.}\ocwlowerid{t})~(\ocwlowerid{a}:\ocwlowerid{attr})~:~\ocwupperid{SetofFD.}\ocwlowerid{t}~\times{}~\ocwlowerid{fd}~=$\ocweol
@@ -2233,7 +2254,7 @@ $\ocwlowerid{df}~\ocwupperid{SetofFD.}\ocwlowerid{empty}~(\ocwupperid{SetofFD.}\
 \ocwendcode{}\ocwindent{0.00em}
 FD split for projection lens, using attributes defining attribute a 
 \ocweol
-\label{rellens.ml:36820}%
+\label{rellens.ml:38589}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{decompose\_fd}~(\ocwlowerid{f}:\ocwupperid{SetofFD.}\ocwlowerid{t})~(\ocwlowerid{x'}:\ocwupperid{SetofAttr.}\ocwlowerid{t})~(\ocwlowerid{a}:\ocwlowerid{attr})~:~\ocwupperid{SetofFD.}\ocwlowerid{t}~\times{}~\ocwlowerid{fd}~=$\ocweol
@@ -2283,7 +2304,7 @@ $\neg (P \vee   Q) \Rightarrow \neg P \wedge \neg Q$
 \ocwindent{0.00em}
 $(P \wedge Q) \vee R \Rightarrow (P \vee R) \wedge (Q \vee R)$ 
 \ocweol
-\label{rellens.ml:37904}%
+\label{rellens.ml:39673}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~\ocwkw{rec}~$\ocwlowerid{cnf}~(\ocwlowerid{p}:\ocwlowerid{phrase})~:~\ocwlowerid{phrase}~=~$\ocwkw{match}~$\ocwlowerid{p}~$\ocwkw{with}\ocweol
@@ -2362,7 +2383,7 @@ after turning into conjunctive normal form,
 \ocwindent{0.00em}
 set of free variables appear in the given phrase p 
 \ocweol
-\label{rellens.ml:39292}%
+\label{rellens.ml:41061}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~\ocwkw{rec}~$\ocwlowerid{freevars}~(\ocwlowerid{p}:\ocwlowerid{phrase})~:~\ocwupperid{SetofAttr.}\ocwlowerid{t}~=~$\ocwkw{match}~$\ocwlowerid{p}~$\ocwkw{with}~\ocweol
@@ -2393,7 +2414,7 @@ split predicate $P:U$ into a pair $(P[U-A],P[A])$
 \ocwindent{0.00em}
 used for decomposition $P= P[U-A] \bowtie P[A]$ in drop lens  
 \ocweol
-\label{rellens.ml:39905}%
+\label{rellens.ml:41674}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{split\_phrase}~(\ocwlowerid{p}:\ocwlowerid{phrase})~(\ocwlowerid{a}:\ocwlowerid{attr})~:~\ocwlowerid{phrase}~\times{}~\ocwlowerid{phrase}~=~$\ocweol
@@ -2453,7 +2474,7 @@ $
 \ocwindent{0.00em}
 type check and inference for drop 
 \ocweol
-\label{rellens.ml:41157}%
+\label{rellens.ml:42926}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{typeinf\_drop}~(\ocwlowerid{a}:\ocwlowerid{attr})~((\ocwlowerid{x},\ocwlowerid{v}):\ocwupperid{SetofAttr.}\ocwlowerid{t}~\times{}~\ocwlowerid{value})~(\ocwlowerid{sortR}:\ocwlowerid{sort})~:~\ocwlowerid{sort}~=~$\ocweol
@@ -2486,7 +2507,7 @@ get part of drop lens
 \ocwindent{0.00em}
 $v\lget(I) = I {\setminus_R}[S\mapsto I(R)[U-A]]$ 
 \ocweol
-\label{rellens.ml:41869}%
+\label{rellens.ml:43638}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{get\_drop}~(\ocwlowerid{a}:\ocwlowerid{attr})~((\ocwlowerid{x},\ocwlowerid{v}):\ocwupperid{SetofAttr.}\ocwlowerid{t}~\times{}~\ocwlowerid{value})~(\ocwlowerid{r}:\ocwlowerid{rname})~(\ocwlowerid{s}:\ocwlowerid{rname})~(\ocwlowerid{dbI}:\ocwlowerid{database})~:~\ocwlowerid{database}~=~$\ocweol
@@ -2516,7 +2537,7 @@ $
 \end{array}
    $ 
 \ocweol
-\label{rellens.ml:42566}%
+\label{rellens.ml:44335}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{put\_drop}~(\ocwlowerid{a}:\ocwlowerid{attr})~((\ocwlowerid{x},\ocwlowerid{v}):\ocwupperid{SetofAttr.}\ocwlowerid{t}~\times{}~\ocwlowerid{value})~(\ocwlowerid{r}:\ocwlowerid{rname})~(\ocwlowerid{s}:\ocwlowerid{rname})$\ocweol
@@ -2548,7 +2569,7 @@ $(\ocwupperid{MapofRname.}\ocwlowerid{remove}~\ocwlowerid{s}~\ocwlowerid{dbJ})$\
 \ocwendcode{}\ocwindent{0.00em}
 key(l) compute tentative keys from sort 
 \ocweol
-\label{rellens.ml:43233}%
+\label{rellens.ml:45002}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{key}~(\ocwlowerid{l}:\ocwlowerid{ilens})~:~\ocwupperid{SetofAttr.}\ocwlowerid{t}~=~$\ocweol
@@ -2562,20 +2583,20 @@ $\ocwupperid{PSetofAttr.}\ocwlowerid{fold}~($\ocwkw{fun}~$\ocwlowerid{s}~\righta
 \ocwendcode{}\ocwindent{0.00em}
 dom(l) 
 \ocweol
-\label{rellens.ml:43400}%
+\label{rellens.ml:45169}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{idom}~(\ocwlowerid{l}:\ocwlowerid{ilens})~:~\ocwupperid{SetofAttr.}\ocwlowerid{t}~=~$\ocweol
 \ocwindent{1.00em}
 \ocwkw{let}~$((\ocwlowerid{u},\ocwlowerid{\_},\ocwlowerid{\_},\ocwlowerid{\_}),\ocwlowerid{\_})~=~\ocwlowerid{l}~$\ocwkw{in}~$\ocwlowerid{u}$\medskip
 
-\label{rellens.ml:43466}%
+\label{rellens.ml:45235}%
 \ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{irel}~(\ocwlowerid{l}:\ocwlowerid{ilens})~:~\ocwlowerid{relation}~=$\ocweol
 \ocwindent{1.00em}
 \ocwkw{let}~$((\ocwlowerid{\_},\ocwlowerid{\_},\ocwlowerid{\_},\ocwlowerid{\_}),\ocwlowerid{r})~=~\ocwlowerid{l}~$\ocwkw{in}~$\ocwlowerid{r}$\medskip
 
-\label{rellens.ml:43528}%
+\label{rellens.ml:45297}%
 \ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{is\_neutral}~((\ocwlowerid{t},\ocwlowerid{m})~:~\ocwlowerid{change\_entry})~:~$\ocwbt{bool}~=~$(\ocwlowerid{m}~=~\ocwupperid{Keep})$\medskip
 
@@ -2583,7 +2604,7 @@ dom(l)
 $m \neq 0 \wedge \exists (t',m')\in\Delta R,m'=0\wedge t[\mt{key}(l_2)]=
  t'[\mt{key}(l_2)]$ 
 \ocweol
-\label{rellens.ml:43686}%
+\label{rellens.ml:45455}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{ntrl\_exists\_right}~((\ocwlowerid{t},\ocwlowerid{m}):\ocwlowerid{change\_entry})~(\ocwlowerid{dR}:\ocwupperid{SetofChange.}\ocwlowerid{t})~(\ocwlowerid{l2}:\ocwlowerid{ilens})~:~$\ocwbt{bool}~=\ocweol
@@ -2596,7 +2617,7 @@ $($\ocwkw{fun}~$(\ocwlowerid{t'},\ocwlowerid{m'})~\rightarrow{}~\ocwlowerid{m'}~
 $m \neq 0 \wedge \exists (t',m')\in\Delta R,m'=-m\wedge t[\mt{key}(l_1)]=
  t'[\mt{key}(l_1)]$ 
 \ocweol
-\label{rellens.ml:43977}%
+\label{rellens.ml:45746}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{compl\_exists\_left}~((\ocwlowerid{t},\ocwlowerid{m}):\ocwlowerid{change\_entry})~(\ocwlowerid{dR}:\ocwupperid{SetofChange.}\ocwlowerid{t})~(\ocwlowerid{l1}:\ocwlowerid{ilens})~:~$\ocwbt{bool}~=\ocweol
@@ -2609,7 +2630,7 @@ $($\ocwkw{fun}~$(\ocwlowerid{t'},\ocwlowerid{m'})~\rightarrow{}~\ocwlowerid{is\_
 $m \neq 0 \wedge \exists (t',m')\in\Delta R,m'=-m\wedge t[\mt{key}(l_2)]=
  t'[\mt{key}(l_2)]$ 
 \ocweol
-\label{rellens.ml:44273}%
+\label{rellens.ml:46042}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{compl\_exists\_right}~((\ocwlowerid{t},\ocwlowerid{m}):\ocwlowerid{change\_entry})~(\ocwlowerid{dR}:\ocwupperid{SetofChange.}\ocwlowerid{t})~(\ocwlowerid{l2}:\ocwlowerid{ilens})~:~$\ocwbt{bool}~=\ocweol
@@ -2623,7 +2644,7 @@ $\mt{compl\_exists\_left}\ (t,m)\ \Delta R\ l_1 \\
 \wedge \exists (t',m')\in\Delta R,m'=-m\wedge 
 t[\mt{key}(l_1)]= t'[\mt{key}(l_1)] \wedge t[\mt{dom}(l_1)]\neq t'[\mt{dom}(l_1)  ]$ 
 \ocweol
-\label{rellens.ml:44659}%
+\label{rellens.ml:46428}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{upd\_left}~((\ocwlowerid{t},\ocwlowerid{m}):\ocwlowerid{change\_entry})~(\ocwlowerid{dR}:\ocwupperid{SetofChange.}\ocwlowerid{t})~(\ocwlowerid{l1}:\ocwlowerid{ilens})~:~$\ocwbt{bool}~=\ocweol
@@ -2639,7 +2660,7 @@ $\mt{compl\_exists\_right}\ (t,m)\ \Delta R\ l_2 \\
 \wedge \exists (t',m')\in\Delta R,m'=-m\wedge 
 t[\mt{key}(l_2)]= t'[\mt{key}(l_2)] \wedge t[\mt{dom}(l_2)]\neq t'[\mt{dom}(l_2)]$ 
 \ocweol
-\label{rellens.ml:45063}%
+\label{rellens.ml:46832}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{upd\_right}~((\ocwlowerid{t},\ocwlowerid{m}):\ocwlowerid{change\_entry})~(\ocwlowerid{dR}:\ocwupperid{SetofChange.}\ocwlowerid{t})~(\ocwlowerid{l2}:\ocwlowerid{ilens})~:~$\ocwbt{bool}~=\ocweol
@@ -2650,19 +2671,19 @@ $\ocwupperid{SetofChange.}\ocwlowerid{exists}~($\ocwkw{fun}~$(\ocwlowerid{t'},\o
 \ocwindent{2.50em}
 $\ocwlowerid{match\_on}~\ocwlowerid{t}~\ocwlowerid{t'}~(\ocwlowerid{key}~\ocwlowerid{l2})~\land{}~(\lnot{}~(\ocwlowerid{match\_on}~\ocwlowerid{t}~\ocwlowerid{t'}~(\ocwlowerid{idom}~\ocwlowerid{l2}))))~\ocwlowerid{dR}$\medskip
 
-\label{rellens.ml:45280}%
+\label{rellens.ml:47049}%
 \ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{non\_upd\_left}~((\ocwlowerid{t},\ocwlowerid{m}):\ocwlowerid{change\_entry})~(\ocwlowerid{dR}:\ocwupperid{SetofChange.}\ocwlowerid{t})~(\ocwlowerid{l1}:\ocwlowerid{ilens})~:~$\ocwbt{bool}~=\ocweol
 \ocwindent{1.00em}
 $\ocwlowerid{compl\_exists\_left}~(\ocwlowerid{t},\ocwlowerid{m})~\ocwlowerid{dR}~\ocwlowerid{l1}~\land{}~(\lnot{}~(\ocwlowerid{upd\_left}~(\ocwlowerid{t},\ocwlowerid{m})~\ocwlowerid{dR}~\ocwlowerid{l1}))$\medskip
 
-\label{rellens.ml:45422}%
+\label{rellens.ml:47191}%
 \ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{non\_upd\_right}~((\ocwlowerid{t},\ocwlowerid{m}):\ocwlowerid{change\_entry})~(\ocwlowerid{dR}:\ocwupperid{SetofChange.}\ocwlowerid{t})~(\ocwlowerid{l2}:\ocwlowerid{ilens})~:~$\ocwbt{bool}~=\ocweol
 \ocwindent{1.00em}
 $\ocwlowerid{compl\_exists\_right}~(\ocwlowerid{t},\ocwlowerid{m})~\ocwlowerid{dR}~\ocwlowerid{l2}~\land{}~(\lnot{}~(\ocwlowerid{upd\_right}~(\ocwlowerid{t},\ocwlowerid{m})~\ocwlowerid{dR}~\ocwlowerid{l2}))$\medskip
 
-\label{rellens.ml:45567}%
+\label{rellens.ml:47336}%
 \ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{found\_any\_right}~((\ocwlowerid{t},\ocwlowerid{m})~:~\ocwlowerid{change\_entry})~(\ocwlowerid{l2}:\ocwlowerid{ilens})~:~$\ocwbt{bool}~=\ocweol
 \ocwindent{2.00em}
@@ -2670,7 +2691,7 @@ $\ocwupperid{SetofRecord.}\ocwlowerid{exists}~$\ocweol
 \ocwindent{2.00em}
 $($\ocwkw{fun}~$\ocwlowerid{r}~\rightarrow{}~\ocwlowerid{eval\_bool}~\ocwlowerid{r}~(\ocwlowerid{match\_on\_expr}~\ocwlowerid{t}~(\ocwlowerid{key}~\ocwlowerid{l2})))~(\ocwlowerid{irel}~\ocwlowerid{l2})$\medskip
 
-\label{rellens.ml:45719}%
+\label{rellens.ml:47488}%
 \ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{found\_same\_right}~((\ocwlowerid{t},\ocwlowerid{m})~:~\ocwlowerid{change\_entry})~(\ocwlowerid{l2}:\ocwlowerid{ilens})~:~$\ocwbt{bool}~=\ocweol
 \ocwindent{2.00em}
@@ -2678,7 +2699,7 @@ $\ocwupperid{SetofRecord.}\ocwlowerid{exists}$\ocweol
 \ocwindent{2.00em}
 $($\ocwkw{fun}~$\ocwlowerid{r}~\rightarrow{}~\ocwlowerid{eval\_bool}~\ocwlowerid{r}~(\ocwlowerid{match\_on\_expr}~\ocwlowerid{t}~(\ocwlowerid{idom}~\ocwlowerid{l2})))~(\ocwlowerid{irel}~\ocwlowerid{l2})$\medskip
 
-\label{rellens.ml:45872}%
+\label{rellens.ml:47641}%
 \ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{found\_upd\_right}~((\ocwlowerid{t},\ocwlowerid{m})~:~\ocwlowerid{change\_entry})~(\ocwlowerid{l2}:\ocwlowerid{ilens})~:~$\ocwbt{bool}~=\ocweol
 \ocwindent{2.00em}
@@ -2689,7 +2710,7 @@ $\qquote{\bigvee\sem{\{\mt{match\_on\_expr}\ t\ \mi{key}
   \mid (t,m) \in \Delta R,m=-1,
     \mt{compl\_rows}\ (t,m)\ \Delta R\ \mi{key} = \emptyset\}}}$ 
 \ocweol
-\label{rellens.ml:46165}%
+\label{rellens.ml:47934}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{removed\_row\_expr}~(\ocwlowerid{dR}:\ocwupperid{SetofChange.}\ocwlowerid{t})~(\ocwlowerid{key}:\ocwupperid{SetofAttr.}\ocwlowerid{t})~:~\ocwlowerid{phrase}~=$\ocweol
@@ -2708,7 +2729,7 @@ $($\ocwkw{fun}~$(\ocwlowerid{t},\ocwlowerid{m})~\ocwlowerid{ps}~\rightarrow{}$\o
 $ \{(t,t') \mid (t,m) \in \Delta R,
     (t',m')\in \mt{compl\_rows}\ (t,m)\ \Delta R\ \mi{key}, m=-1\}$ 
 \ocweol
-\label{rellens.ml:46522}%
+\label{rellens.ml:48291}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{find\_changed\_rows}~(\ocwlowerid{dR}:\ocwupperid{SetofChange.}\ocwlowerid{t})~(\ocwlowerid{key}:\ocwupperid{SetofAttr.}\ocwlowerid{t})~:~\ocwupperid{SetofPRecord.}\ocwlowerid{t}~=$\ocweol
@@ -2730,7 +2751,7 @@ $\qquote{\bigvee\{\sem{\mt{match\_on\_expr}\ t\ X
   \mid (X\to Y)\in \mi{fds}, t[X]=t'[X], t[Y]\neq t'[Y]\}}}$
 
 \ocweol
-\label{rellens.ml:46961}%
+\label{rellens.ml:48730}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{match\_changes\_expr}~((\ocwlowerid{t},\ocwlowerid{t'})~:~\ocwlowerid{record}~\times{}~\ocwlowerid{record}~)(\ocwlowerid{fds}:\ocwupperid{SetofFD.}\ocwlowerid{t})~:~\ocwlowerid{phrase}~=~$\ocweol
@@ -2743,7 +2764,7 @@ $(\ocwupperid{SetofFD.}\ocwlowerid{fold}~($\ocwkw{fun}~$(\ocwlowerid{x},\ocwlowe
 \ocwindent{4.00em}
 $(\ocwlowerid{match\_on\_expr}~\ocwlowerid{t}~\ocwlowerid{x})::\ocwlowerid{ss}~$\ocwkw{else}~$\ocwlowerid{ss})~\ocwlowerid{fds}~[\,])$\medskip
 
-\label{rellens.ml:47243}%
+\label{rellens.ml:49012}%
 \ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{fwd\_fds}~(\ocwlowerid{s}:\ocwupperid{SetofAttr.}\ocwlowerid{t})~(\ocwlowerid{fds}:\ocwupperid{SetofFD.}\ocwlowerid{t})~:~\ocwupperid{SetofAttr.}\ocwlowerid{t}~=$\ocweol
 \ocwindent{1.50em}
@@ -2755,7 +2776,7 @@ $\ocwupperid{SetofFD.}\ocwlowerid{fold}~($\ocwkw{fun}~$(\ocwlowerid{x},\ocwlower
 \ocwindent{2.00em}
 \ocwkw{else}~$\ocwlowerid{ss})~\ocwlowerid{edges}~\ocwupperid{SetofAttr.}\ocwlowerid{empty}$\medskip
 
-\label{rellens.ml:47448}%
+\label{rellens.ml:49217}%
 \ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{lefts}~(\ocwlowerid{fds}:\ocwupperid{SetofFD.}\ocwlowerid{t})~:~\ocwupperid{PSetofAttr.}\ocwlowerid{t}~=~$\ocweol
 \ocwindent{2.00em}
@@ -2763,7 +2784,7 @@ $\ocwupperid{SetofFD.}\ocwlowerid{fold}~($\ocwkw{fun}~$(\ocwlowerid{x},\ocwlower
 \ocwindent{3.00em}
 $\ocwupperid{PSetofAttr.}\ocwlowerid{add}~\ocwlowerid{x})~\ocwlowerid{fds}~\ocwupperid{PSetofAttr.}\ocwlowerid{empty}$\medskip
 
-\label{rellens.ml:47570}%
+\label{rellens.ml:49339}%
 \ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{closure}~(\ocwlowerid{fd}:\ocwlowerid{fd})~(\ocwlowerid{fds}:\ocwupperid{SetofFD.}\ocwlowerid{t})~:~\ocwupperid{SetofAttr.}\ocwlowerid{t}~=$\ocweol
 \ocwindent{1.50em}
@@ -2780,7 +2801,7 @@ $\ocwlowerid{cl}~(\ocwlowerid{snd}~\ocwlowerid{fd})~(\ocwlowerid{snd}~\ocwloweri
 \ocwendcode{}\ocwindent{0.00em}
 $\{\mi{fd} \mid \mi{fd}\in \mi{fds}, \mi{key}\subset \mt{closure}(\mi{fd},\mi{fds})\}$ 
 \ocweol
-\label{rellens.ml:48124}%
+\label{rellens.ml:49893}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{defining\_fds}~(\ocwlowerid{key}:\ocwupperid{SetofAttr.}\ocwlowerid{t})~(\ocwlowerid{fds}:\ocwupperid{SetofFD.}\ocwlowerid{t})~:~\ocwupperid{SetofFD.}\ocwlowerid{t}~=~$\ocweol
@@ -2797,7 +2818,7 @@ $\ocwupperid{SetofFD.}\ocwlowerid{fold}~($\ocwkw{fun}~$\ocwlowerid{fd}~\ocwlower
 $\qquote{\bigvee\{ \sem{\mt{match\_on\_expr}\ chl\ \mt{left}(f) \mid 
    (\mi{chl},\mi{chr}) \in \mi{changes}\}}}$ 
 \ocweol
-\label{rellens.ml:48446}%
+\label{rellens.ml:50215}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{fd\_changes\_expr}~(\ocwlowerid{changes}:\ocwupperid{SetofPRecord.}\ocwlowerid{t})~(\ocwlowerid{f}:\ocwlowerid{fd})~:~\ocwlowerid{phrase}~=~$\ocweol
@@ -2814,7 +2835,7 @@ $ \qquote{\bigvee\{ \sem{\mt{fd\_changes\_expr}\ \mi{changes}\ f \mid
    (f,\mi{changes}) \in \mt{get\_updateset}\ \Delta R\ F\}}}
  $ 
 \ocweol
-\label{rellens.ml:48792}%
+\label{rellens.ml:50561}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{changes\_expr}~(\ocwlowerid{dR}:\ocwupperid{SetofChange.}\ocwlowerid{t})~(\ocwlowerid{fS}:\ocwupperid{SetofFD.}\ocwlowerid{t})~(\ocwlowerid{j}:\ocwupperid{SetofAttr.}\ocwlowerid{t})~:~\ocwlowerid{phrase}~=$\ocweol
@@ -2839,7 +2860,7 @@ $
   }
 $
 \ocweol
-\label{rellens.ml:49269}%
+\label{rellens.ml:51038}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{create\_query\_expr}~(\ocwlowerid{t}:\ocwlowerid{record})~(\ocwlowerid{dR}:\ocwupperid{SetofChange.}\ocwlowerid{t})~(\ocwlowerid{pd}:\ocwupperid{SetofAttr.}\ocwlowerid{t})$\ocweol
@@ -2852,7 +2873,7 @@ $\ocwupperid{PAnd}~(\ocwupperid{PNot}~(\ocwlowerid{removed\_row\_expr}~\ocwlower
 \ocwindent{7.00em}
 $\ocwupperid{PNot}~(\ocwlowerid{changes\_expr}~\ocwlowerid{dR}~\ocwlowerid{fS}~\ocwlowerid{j})))$\medskip
 
-\label{rellens.ml:49487}%
+\label{rellens.ml:51256}%
 \ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{remove\_entry\_left}~((\ocwlowerid{t},\ocwlowerid{m}):\ocwlowerid{change\_entry})~(\ocwlowerid{dR}:\ocwupperid{SetofChange.}\ocwlowerid{t})~(\ocwlowerid{l1}:\ocwlowerid{ilens})~:~$\ocwbt{bool}~=\ocweol
 \ocwindent{1.00em}
@@ -2864,7 +2885,7 @@ join with colums j
 \ocwindent{0.50em}
 $\bowtie_J$ 
 \ocweol
-\label{rellens.ml:49680}%
+\label{rellens.ml:51449}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{join\_with\_columns}~(\ocwlowerid{j}:\ocwupperid{SetofAttr.}\ocwlowerid{t})~(\ocwlowerid{l1}:\ocwlowerid{ilens})~(\ocwlowerid{l2}:\ocwlowerid{ilens})~:~\ocwlowerid{ilens}~=$\ocweol
@@ -2915,7 +2936,7 @@ $\mid{}~(\ocwupperid{None},\ocwupperid{None})~\rightarrow{}~\ocwupperid{None})~\
 \ocwindent{6.00em}
 \ocwkw{else}~$\ocwlowerid{rns})~\ocwlowerid{n}~\ocwlowerid{rms}))~\ocwlowerid{rms})~\ocwlowerid{m}~\ocwupperid{SetofRecord.}\ocwlowerid{empty})$\medskip
 
-\label{rellens.ml:50797}%
+\label{rellens.ml:52566}%
 \ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{remove\_entry\_right}~((\ocwlowerid{t},\ocwlowerid{m}):\ocwlowerid{change\_entry})~(\ocwlowerid{dR}:\ocwupperid{SetofChange.}\ocwlowerid{t})~$\ocweol
 \ocwindent{2.00em}
@@ -2933,7 +2954,7 @@ $\ocwupperid{SetofRecord.}\ocwlowerid{exists}$\ocweol
 \ocwindent{5.50em}
 $($\ocwkw{fun}~$\ocwlowerid{r}~\rightarrow{}~\ocwlowerid{eval\_bool}~\ocwlowerid{r}~(\ocwlowerid{create\_query\_expr}~\ocwlowerid{t}~\ocwlowerid{dR}~(\ocwlowerid{key}~\ocwlowerid{l1})~\ocwlowerid{j}~\ocwlowerid{fds}~))~\ocwlowerid{join\_l1\_l2}))$\medskip
 
-\label{rellens.ml:51214}%
+\label{rellens.ml:52983}%
 \ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{join\_left\_row}~((\ocwlowerid{t},\ocwlowerid{m}):\ocwlowerid{change\_entry})~(\ocwlowerid{dR}:\ocwupperid{SetofChange.}\ocwlowerid{t})$\ocweol
 \ocwindent{2.00em}
@@ -2989,7 +3010,7 @@ $\ocwupperid{SetofChange.}\ocwlowerid{empty}~$\ocwbc{} OK? \ocwec{}\ocweol
 \ocwindent{4.00em}
 $\ocwupperid{SetofChange.}\ocwlowerid{singleton}~(\ocwlowerid{pi\_u\_t},\ocwupperid{Insert})$\medskip
 
-\label{rellens.ml:52116}%
+\label{rellens.ml:53885}%
 \ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{join\_right\_row}~((\ocwlowerid{t},\ocwlowerid{m}):\ocwlowerid{change\_entry})~(\ocwlowerid{dR}:\ocwupperid{SetofChange.}\ocwlowerid{t})~$\ocweol
 \ocwindent{2.00em}
@@ -3078,7 +3099,7 @@ $
 \end{array} 
 $ 
 \ocweol
-\label{rellens.ml:53994}%
+\label{rellens.ml:55763}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{delta\_put\_join}~(\ocwlowerid{l1}:\ocwlowerid{ilens})~(\ocwlowerid{l2}:\ocwlowerid{ilens})~(\ocwlowerid{j}:\ocwupperid{SetofAttr.}\ocwlowerid{t})~(\ocwlowerid{pd}:\ocwlowerid{phrase})$\ocweol
@@ -3100,7 +3121,7 @@ $(\ocwlowerid{join\_right\_row}~(\ocwlowerid{t},\ocwlowerid{m})~\ocwlowerid{dR}~
 \ocwendcode{}\ocwindent{0.00em}
 $v\nearrow \in \Sigma \to \Delta$ 
 \ocweol
-\label{rellens.ml:54441}%
+\label{rellens.ml:56210}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~\ocwkw{rec}~$\ocwlowerid{get}~(\ocwlowerid{l}:\ocwlowerid{lens})~(\ocwlowerid{dbI}:\ocwlowerid{database})~:~\ocwlowerid{database}~=~$\ocwkw{match}~$\ocwlowerid{l}~$\ocwkw{with}\ocweol
@@ -3198,7 +3219,7 @@ $\mid{}~\ocwupperid{Compose}~(\ocwlowerid{l1},\ocwlowerid{l2})~\rightarrow{}$\oc
 \ocwindent{1.50em}
 $\ocwlowerid{delta\_put\_map}~\ocwlowerid{l1}~\ocwlowerid{dbI}~(\ocwlowerid{delta\_put\_map}~\ocwlowerid{l2}~\ocwlowerid{dbK}~\ocwlowerid{dRm})$\medskip
 
-\label{rellens.ml:56682}%
+\label{rellens.ml:58451}%
 \ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{select}~\ocwlowerid{r}~\ocwlowerid{p}~\ocwlowerid{s}~=~\ocwupperid{Select}~(\ocwlowerid{r},~\ocwlowerid{p},~\ocwlowerid{s})$\ocweol
 \ocwindent{0.00em}
@@ -3217,7 +3238,7 @@ $\displaystyle\frac{
 $
 
 \ocweol
-\label{rellens.ml:57008}%
+\label{rellens.ml:58777}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{compose}~\ocwlowerid{l1}~\ocwlowerid{l2}~=~\ocwupperid{Compose}~(\ocwlowerid{l1},\ocwlowerid{l2})$\medskip
@@ -3225,7 +3246,7 @@ $
 \ocwendcode{}\ocwindent{0.00em}
 composition lens in infix form 
 \ocweol
-\label{rellens.ml:57082}%
+\label{rellens.ml:58851}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$(\&:)~(\ocwlowerid{l1}:\ocwlowerid{lens})~(\ocwlowerid{l2}:\ocwlowerid{lens})~:~\ocwlowerid{lens}~=~\ocwlowerid{compose}~\ocwlowerid{l1}~\ocwlowerid{l2}$\medskip
@@ -3233,7 +3254,7 @@ composition lens in infix form
 \ocwendcode{}\ocwindent{0.00em}
 type inference of lens, given sort on the left 
 \ocweol
-\label{rellens.ml:57188}%
+\label{rellens.ml:58957}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~\ocwkw{rec}~$\ocwlowerid{qt\_lens}~(\ocwlowerid{l}:\ocwlowerid{lens})~(\ocwlowerid{srt}:~\ocwlowerid{sort}~\ocwupperid{MapofRname.}\ocwlowerid{t})~:~\ocwlowerid{sort}~\ocwupperid{MapofRname.}\ocwlowerid{t}~=~$\ocwkw{match}~$\ocwlowerid{l}~$\ocwkw{with}\ocweol
@@ -3280,7 +3301,7 @@ $\begin{array}{rcl} {\relationalmergep{F}} &=& {\relationalmerge{F}}\\
 \ocwindent{0.00em}
 TODO : statically (at least dynamically) check $P_d \cup Q_d = \top_{UV}$ 
 \ocweol
-\label{rellens.ml:58370}%
+\label{rellens.ml:60139}%
 \medskip
 \ocwbegincode{}\ocwindent{0.00em}
 \ocwkw{let}~$\ocwlowerid{put\_join\_template}~((\ocwlowerid{r}:\ocwlowerid{rname}),(\ocwlowerid{pd}:\ocwlowerid{phrase}))~((\ocwlowerid{s}:\ocwlowerid{rname}),(\ocwlowerid{qd}:\ocwlowerid{phrase}))~(\ocwlowerid{t}:\ocwlowerid{rname})~$\ocweol
@@ -3334,190 +3355,192 @@ $\ocwlowerid{dbI'}$\ocweol
 \ocwendcode{}
 
 \ocwbeginindex{}
-\ocwrefindexentry{$\ocwsymbolid{\&:}$}{rellens.ml:57082}{}{\ref{rellens.ml:57082}}{}
-\ocwrefindexentry{$\ocwlowerid{any\_match\_expr}$}{rellens.ml:34502}{rellens.ml:34864}{\ref{rellens.ml:34502}}{\ref{rellens.ml:34864}}
-\ocwrefindexentry{$\ocwlowerid{attr}$ (type)}{rellens_types.ml:29}{rellens_types.ml:49,rellens_types.ml:988,rellens_types.ml:4995}{\ref{rellens_types.ml:29}}{\ref{rellens_types.ml:49}, \ref{rellens_types.ml:988}, \ref{rellens_types.ml:4995}}
+\ocwrefindexentry{$\ocwsymbolid{\&:}$}{rellens.ml:58851}{}{\ref{rellens.ml:58851}}{}
+\ocwrefindexentry{$\ocwlowerid{any\_match\_expr}$}{rellens.ml:36271}{rellens.ml:36633}{\ref{rellens.ml:36271}}{\ref{rellens.ml:36633}}
+\ocwrefindexentry{$\ocwlowerid{attr}$ (type)}{rellens_types.ml:29}{rellens_types.ml:49,rellens_types.ml:988,rellens_types.ml:5505}{\ref{rellens_types.ml:29}}{\ref{rellens_types.ml:49}, \ref{rellens_types.ml:988}, \ref{rellens_types.ml:5505}}
 \ocwrefindexentry{$\ocwupperid{Attr}$ (module)}{rellens_types.ml:49}{rellens_types.ml:258,rellens_types.ml:540}{\ref{rellens_types.ml:49}}{\ref{rellens_types.ml:258}, \ref{rellens_types.ml:540}}
-\ocwrefindexentry{$\ocwlowerid{attribute}$}{rellens.ml:326}{rellens.ml:28272,rellens.ml:31117,rellens.ml:35305}{\ref{rellens.ml:326}}{\ref{rellens.ml:28272}, \ref{rellens.ml:31117}, \ref{rellens.ml:35305}}
-\ocwrefindexentry{$\ocwupperid{Bol}$}{rellens_types.ml:349}{rellens.ml:4432,rellens.ml:27770,rellens.ml:27959,rellens.ml:41157,rellens.ml:54441}{\ref{rellens_types.ml:349}}{\ref{rellens.ml:4432}, \ref{rellens.ml:27770}, \ref{rellens.ml:27959}, \ref{rellens.ml:41157}, \ref{rellens.ml:54441}}
-\ocwrefindexentry{$\ocwlowerid{bwd}$}{rellens.ml:9620}{rellens.ml:9882}{\ref{rellens.ml:9620}}{\ref{rellens.ml:9882}}
-\ocwrefindexentry{$\ocwlowerid{calc\_updated\_var\_expr}$}{rellens.ml:31393}{rellens.ml:31393,rellens.ml:32535}{\ref{rellens.ml:31393}}{\ref{rellens.ml:31393}, \ref{rellens.ml:32535}}
-\ocwrefindexentry{$\ocwupperid{ChangeEntry}$ (module)}{rellens_types.ml:4086}{rellens_types.ml:4180}{\ref{rellens_types.ml:4086}}{\ref{rellens_types.ml:4180}}
-\ocwrefindexentry{$\ocwlowerid{changes\_expr}$}{rellens.ml:48792}{rellens.ml:49269}{\ref{rellens.ml:48792}}{\ref{rellens.ml:49269}}
-\ocwrefindexentry{$\ocwlowerid{change\_entry}$ (type)}{rellens_types.ml:3800}{rellens_types.ml:4086}{\ref{rellens_types.ml:3800}}{\ref{rellens_types.ml:4086}}
-\ocwrefindexentry{$\ocwlowerid{change\_set}$}{rellens.ml:26321}{}{\ref{rellens.ml:26321}}{}
-\ocwrefindexentry{$\ocwlowerid{closure}$}{rellens.ml:47570}{rellens.ml:48124}{\ref{rellens.ml:47570}}{\ref{rellens.ml:48124}}
-\ocwrefindexentry{$\ocwlowerid{cnf}$}{rellens.ml:37904}{rellens.ml:37904,rellens.ml:39905}{\ref{rellens.ml:37904}}{\ref{rellens.ml:37904}, \ref{rellens.ml:39905}}
-\ocwrefindexentry{$\ocwlowerid{compare}$}{rellens_types.ml:49,rellens_types.ml:790,rellens_types.ml:2813,rellens_types.ml:3188,rellens_types.ml:4086,rellens_types.ml:4224,rellens_types.ml:4545}{rellens_types.ml:49,rellens_types.ml:455,rellens_types.ml:790,rellens_types.ml:2630,rellens_types.ml:3188,rellens_types.ml:3833,rellens_types.ml:4224,rellens_types.ml:4545}{\ref{rellens_types.ml:49}, \ref{rellens_types.ml:790}, \ref{rellens_types.ml:2813}, \ref{rellens_types.ml:3188}, \ref{rellens_types.ml:4086}, \ref{rellens_types.ml:4224}, \ref{rellens_types.ml:4545}}{\ref{rellens_types.ml:49}, \ref{rellens_types.ml:455}, \ref{rellens_types.ml:790}, \ref{rellens_types.ml:2630}, \ref{rellens_types.ml:3188}, \ref{rellens_types.ml:3833}, \ref{rellens_types.ml:4224}, \ref{rellens_types.ml:4545}}
-\ocwrefindexentry{$\ocwlowerid{compare\_change\_entry}$}{rellens_types.ml:3833}{rellens_types.ml:4086}{\ref{rellens_types.ml:3833}}{\ref{rellens_types.ml:4086}}
-\ocwrefindexentry{$\ocwlowerid{compare\_fd}$}{rellens_types.ml:2630}{rellens_types.ml:2813,rellens_types.ml:4545,rellens.ml:48792}{\ref{rellens_types.ml:2630}}{\ref{rellens_types.ml:2813}, \ref{rellens_types.ml:4545}, \ref{rellens.ml:48792}}
-\ocwrefindexentry{$\ocwlowerid{compare\_value}$}{rellens_types.ml:455}{rellens_types.ml:790,rellens_types.ml:3833,rellens_types.ml:4224}{\ref{rellens_types.ml:455}}{\ref{rellens_types.ml:790}, \ref{rellens_types.ml:3833}, \ref{rellens_types.ml:4224}}
-\ocwrefindexentry{$\ocwlowerid{compl\_exists\_left}$}{rellens.ml:43977}{rellens.ml:44659,rellens.ml:45280,rellens.ml:49487,rellens.ml:51214}{\ref{rellens.ml:43977}}{\ref{rellens.ml:44659}, \ref{rellens.ml:45280}, \ref{rellens.ml:49487}, \ref{rellens.ml:51214}}
-\ocwrefindexentry{$\ocwlowerid{compl\_exists\_right}$}{rellens.ml:44273}{rellens.ml:45063,rellens.ml:45422,rellens.ml:50797,rellens.ml:52116}{\ref{rellens.ml:44273}}{\ref{rellens.ml:45063}, \ref{rellens.ml:45422}, \ref{rellens.ml:50797}, \ref{rellens.ml:52116}}
-\ocwrefindexentry{$\ocwlowerid{compl\_rows}$}{rellens.ml:28786}{rellens.ml:46165,rellens.ml:46522}{\ref{rellens.ml:28786}}{\ref{rellens.ml:46165}, \ref{rellens.ml:46522}}
-\ocwrefindexentry{$\ocwlowerid{compose}$}{rellens.ml:57008}{rellens.ml:57082}{\ref{rellens.ml:57008}}{\ref{rellens.ml:57082}}
-\ocwrefindexentry{$\ocwupperid{Compose}$}{rellens_types.ml:4995}{rellens.ml:57008}{\ref{rellens_types.ml:4995}}{\ref{rellens.ml:57008}}
-\ocwrefindexentry{$\ocwlowerid{create\_query\_expr}$}{rellens.ml:49269}{rellens.ml:50797}{\ref{rellens.ml:49269}}{\ref{rellens.ml:50797}}
-\ocwrefindexentry{$\ocwlowerid{database}$ (type)}{rellens_types.ml:3543}{rellens.ml:17311,rellens.ml:17924,rellens.ml:20907,rellens.ml:21776,rellens.ml:24704,rellens.ml:25182,rellens.ml:41869,rellens.ml:42566,rellens.ml:54441,rellens.ml:58370}{\ref{rellens_types.ml:3543}}{\ref{rellens.ml:17311}, \ref{rellens.ml:17924}, \ref{rellens.ml:20907}, \ref{rellens.ml:21776}, \ref{rellens.ml:24704}, \ref{rellens.ml:25182}, \ref{rellens.ml:41869}, \ref{rellens.ml:42566}, \ref{rellens.ml:54441}, \ref{rellens.ml:58370}}
-\ocwrefindexentry{$\ocwlowerid{decompose\_fd}$}{rellens.ml:36155,rellens.ml:36820}{rellens.ml:41157}{\ref{rellens.ml:36155}, \ref{rellens.ml:36820}}{\ref{rellens.ml:41157}}
-\ocwrefindexentry{$\ocwlowerid{defining\_fds}$}{rellens.ml:48124}{rellens.ml:48792}{\ref{rellens.ml:48124}}{\ref{rellens.ml:48792}}
-\ocwrefindexentry{$\ocwupperid{Delete}$}{rellens_types.ml:3654}{rellens.ml:26321,rellens.ml:27096,rellens.ml:28544,rellens.ml:34066,rellens.ml:46165,rellens.ml:46522,rellens.ml:49487,rellens.ml:50797,rellens.ml:51214,rellens.ml:52116}{\ref{rellens_types.ml:3654}}{\ref{rellens.ml:26321}, \ref{rellens.ml:27096}, \ref{rellens.ml:28544}, \ref{rellens.ml:34066}, \ref{rellens.ml:46165}, \ref{rellens.ml:46522}, \ref{rellens.ml:49487}, \ref{rellens.ml:50797}, \ref{rellens.ml:51214}, \ref{rellens.ml:52116}}
-\ocwrefindexentry{$\ocwlowerid{delta\_put}$}{rellens.ml:54441}{rellens.ml:54441}{\ref{rellens.ml:54441}}{\ref{rellens.ml:54441}}
-\ocwrefindexentry{$\ocwlowerid{delta\_put\_drop}$}{rellens.ml:35766}{rellens.ml:54441}{\ref{rellens.ml:35766}}{\ref{rellens.ml:54441}}
-\ocwrefindexentry{$\ocwlowerid{delta\_put\_join}$}{rellens.ml:53994}{rellens.ml:54441}{\ref{rellens.ml:53994}}{\ref{rellens.ml:54441}}
-\ocwrefindexentry{$\ocwlowerid{delta\_put\_map}$}{rellens.ml:54441}{rellens.ml:54441}{\ref{rellens.ml:54441}}{\ref{rellens.ml:54441}}
-\ocwrefindexentry{$\ocwlowerid{delta\_put\_select}$}{rellens.ml:34066}{rellens.ml:54441}{\ref{rellens.ml:34066}}{\ref{rellens.ml:54441}}
+\ocwrefindexentry{$\ocwlowerid{attribute}$}{rellens.ml:326}{rellens.ml:30041,rellens.ml:32886,rellens.ml:37074}{\ref{rellens.ml:326}}{\ref{rellens.ml:30041}, \ref{rellens.ml:32886}, \ref{rellens.ml:37074}}
+\ocwrefindexentry{$\ocwupperid{Bol}$}{rellens_types.ml:349}{rellens.ml:4431,rellens.ml:29539,rellens.ml:29728,rellens.ml:42926,rellens.ml:56210}{\ref{rellens_types.ml:349}}{\ref{rellens.ml:4431}, \ref{rellens.ml:29539}, \ref{rellens.ml:29728}, \ref{rellens.ml:42926}, \ref{rellens.ml:56210}}
+\ocwrefindexentry{$\ocwlowerid{bwd}$}{rellens.ml:9844}{rellens.ml:10106}{\ref{rellens.ml:9844}}{\ref{rellens.ml:10106}}
+\ocwrefindexentry{$\ocwlowerid{calc\_updated\_var\_expr}$}{rellens.ml:33162}{rellens.ml:33162,rellens.ml:34304}{\ref{rellens.ml:33162}}{\ref{rellens.ml:33162}, \ref{rellens.ml:34304}}
+\ocwrefindexentry{$\ocwupperid{ChangeEntry}$ (module)}{rellens_types.ml:4596}{rellens_types.ml:4690}{\ref{rellens_types.ml:4596}}{\ref{rellens_types.ml:4690}}
+\ocwrefindexentry{$\ocwlowerid{changes\_expr}$}{rellens.ml:50561}{rellens.ml:51038}{\ref{rellens.ml:50561}}{\ref{rellens.ml:51038}}
+\ocwrefindexentry{$\ocwlowerid{change\_entry}$ (type)}{rellens_types.ml:4310}{rellens_types.ml:4596}{\ref{rellens_types.ml:4310}}{\ref{rellens_types.ml:4596}}
+\ocwrefindexentry{$\ocwlowerid{change\_set}$}{rellens.ml:28090}{}{\ref{rellens.ml:28090}}{}
+\ocwrefindexentry{$\ocwlowerid{closure}$}{rellens.ml:49339}{rellens.ml:49893}{\ref{rellens.ml:49339}}{\ref{rellens.ml:49893}}
+\ocwrefindexentry{$\ocwlowerid{cnf}$}{rellens.ml:39673}{rellens.ml:39673,rellens.ml:41674}{\ref{rellens.ml:39673}}{\ref{rellens.ml:39673}, \ref{rellens.ml:41674}}
+\ocwrefindexentry{$\ocwlowerid{compare}$}{rellens_types.ml:49,rellens_types.ml:790,rellens_types.ml:2813,rellens_types.ml:3698,rellens_types.ml:4596,rellens_types.ml:4734,rellens_types.ml:5055}{rellens_types.ml:49,rellens_types.ml:455,rellens_types.ml:790,rellens_types.ml:2630,rellens_types.ml:3698,rellens_types.ml:4343,rellens_types.ml:4734,rellens_types.ml:5055}{\ref{rellens_types.ml:49}, \ref{rellens_types.ml:790}, \ref{rellens_types.ml:2813}, \ref{rellens_types.ml:3698}, \ref{rellens_types.ml:4596}, \ref{rellens_types.ml:4734}, \ref{rellens_types.ml:5055}}{\ref{rellens_types.ml:49}, \ref{rellens_types.ml:455}, \ref{rellens_types.ml:790}, \ref{rellens_types.ml:2630}, \ref{rellens_types.ml:3698}, \ref{rellens_types.ml:4343}, \ref{rellens_types.ml:4734}, \ref{rellens_types.ml:5055}}
+\ocwrefindexentry{$\ocwlowerid{compare\_change\_entry}$}{rellens_types.ml:4343}{rellens_types.ml:4596}{\ref{rellens_types.ml:4343}}{\ref{rellens_types.ml:4596}}
+\ocwrefindexentry{$\ocwlowerid{compare\_fd}$}{rellens_types.ml:2630}{rellens_types.ml:2813,rellens_types.ml:5055,rellens.ml:50561}{\ref{rellens_types.ml:2630}}{\ref{rellens_types.ml:2813}, \ref{rellens_types.ml:5055}, \ref{rellens.ml:50561}}
+\ocwrefindexentry{$\ocwlowerid{compare\_value}$}{rellens_types.ml:455}{rellens_types.ml:790,rellens_types.ml:4343,rellens_types.ml:4734}{\ref{rellens_types.ml:455}}{\ref{rellens_types.ml:790}, \ref{rellens_types.ml:4343}, \ref{rellens_types.ml:4734}}
+\ocwrefindexentry{$\ocwlowerid{compl\_exists\_left}$}{rellens.ml:45746}{rellens.ml:46428,rellens.ml:47049,rellens.ml:51256,rellens.ml:52983}{\ref{rellens.ml:45746}}{\ref{rellens.ml:46428}, \ref{rellens.ml:47049}, \ref{rellens.ml:51256}, \ref{rellens.ml:52983}}
+\ocwrefindexentry{$\ocwlowerid{compl\_exists\_right}$}{rellens.ml:46042}{rellens.ml:46832,rellens.ml:47191,rellens.ml:52566,rellens.ml:53885}{\ref{rellens.ml:46042}}{\ref{rellens.ml:46832}, \ref{rellens.ml:47191}, \ref{rellens.ml:52566}, \ref{rellens.ml:53885}}
+\ocwrefindexentry{$\ocwlowerid{compl\_rows}$}{rellens.ml:30555}{rellens.ml:47934,rellens.ml:48291}{\ref{rellens.ml:30555}}{\ref{rellens.ml:47934}, \ref{rellens.ml:48291}}
+\ocwrefindexentry{$\ocwlowerid{compose}$}{rellens.ml:58777}{rellens.ml:58851}{\ref{rellens.ml:58777}}{\ref{rellens.ml:58851}}
+\ocwrefindexentry{$\ocwupperid{Compose}$}{rellens_types.ml:5505}{rellens.ml:58777}{\ref{rellens_types.ml:5505}}{\ref{rellens.ml:58777}}
+\ocwrefindexentry{$\ocwlowerid{create\_query\_expr}$}{rellens.ml:51038}{rellens.ml:52566}{\ref{rellens.ml:51038}}{\ref{rellens.ml:52566}}
+\ocwrefindexentry{$\ocwlowerid{database}$ (type)}{rellens_types.ml:4053}{rellens.ml:19080,rellens.ml:19693,rellens.ml:22676,rellens.ml:23545,rellens.ml:26473,rellens.ml:26951,rellens.ml:43638,rellens.ml:44335,rellens.ml:56210,rellens.ml:60139}{\ref{rellens_types.ml:4053}}{\ref{rellens.ml:19080}, \ref{rellens.ml:19693}, \ref{rellens.ml:22676}, \ref{rellens.ml:23545}, \ref{rellens.ml:26473}, \ref{rellens.ml:26951}, \ref{rellens.ml:43638}, \ref{rellens.ml:44335}, \ref{rellens.ml:56210}, \ref{rellens.ml:60139}}
+\ocwrefindexentry{$\ocwlowerid{decompose\_fd}$}{rellens.ml:37924,rellens.ml:38589}{rellens.ml:42926}{\ref{rellens.ml:37924}, \ref{rellens.ml:38589}}{\ref{rellens.ml:42926}}
+\ocwrefindexentry{$\ocwlowerid{defining\_fds}$}{rellens.ml:49893}{rellens.ml:50561}{\ref{rellens.ml:49893}}{\ref{rellens.ml:50561}}
+\ocwrefindexentry{$\ocwupperid{Delete}$}{rellens_types.ml:4164}{rellens.ml:28090,rellens.ml:28865,rellens.ml:30313,rellens.ml:35835,rellens.ml:47934,rellens.ml:48291,rellens.ml:51256,rellens.ml:52566,rellens.ml:52983,rellens.ml:53885}{\ref{rellens_types.ml:4164}}{\ref{rellens.ml:28090}, \ref{rellens.ml:28865}, \ref{rellens.ml:30313}, \ref{rellens.ml:35835}, \ref{rellens.ml:47934}, \ref{rellens.ml:48291}, \ref{rellens.ml:51256}, \ref{rellens.ml:52566}, \ref{rellens.ml:52983}, \ref{rellens.ml:53885}}
+\ocwrefindexentry{$\ocwlowerid{delta\_put}$}{rellens.ml:56210}{rellens.ml:56210}{\ref{rellens.ml:56210}}{\ref{rellens.ml:56210}}
+\ocwrefindexentry{$\ocwlowerid{delta\_put\_drop}$}{rellens.ml:37535}{rellens.ml:56210}{\ref{rellens.ml:37535}}{\ref{rellens.ml:56210}}
+\ocwrefindexentry{$\ocwlowerid{delta\_put\_join}$}{rellens.ml:55763}{rellens.ml:56210}{\ref{rellens.ml:55763}}{\ref{rellens.ml:56210}}
+\ocwrefindexentry{$\ocwlowerid{delta\_put\_map}$}{rellens.ml:56210}{rellens.ml:56210}{\ref{rellens.ml:56210}}{\ref{rellens.ml:56210}}
+\ocwrefindexentry{$\ocwlowerid{delta\_put\_select}$}{rellens.ml:35835}{rellens.ml:56210}{\ref{rellens.ml:35835}}{\ref{rellens.ml:56210}}
 \ocwrefindexentry{$\ocwlowerid{dom}$}{rellens.ml:201}{rellens.ml:840,rellens.ml:1371}{\ref{rellens.ml:201}}{\ref{rellens.ml:840}, \ref{rellens.ml:1371}}
-\ocwrefindexentry{$\ocwlowerid{drop}$}{rellens.ml:56682}{}{\ref{rellens.ml:56682}}{}
-\ocwrefindexentry{$\ocwupperid{Drop}$}{rellens_types.ml:4995}{rellens.ml:56682}{\ref{rellens_types.ml:4995}}{\ref{rellens.ml:56682}}
-\ocwrefindexentry{$\ocwlowerid{eval}$}{rellens.ml:4432}{rellens.ml:4432,rellens.ml:6052,rellens.ml:41157}{\ref{rellens.ml:4432}}{\ref{rellens.ml:4432}, \ref{rellens.ml:6052}, \ref{rellens.ml:41157}}
-\ocwrefindexentry{$\ocwlowerid{eval\_bool}$}{rellens.ml:6052}{rellens.ml:17311,rellens.ml:17924,rellens.ml:25182,rellens.ml:33565,rellens.ml:34864,rellens.ml:45567,rellens.ml:45719,rellens.ml:50797,rellens.ml:51214,rellens.ml:52116,rellens.ml:58370}{\ref{rellens.ml:6052}}{\ref{rellens.ml:17311}, \ref{rellens.ml:17924}, \ref{rellens.ml:25182}, \ref{rellens.ml:33565}, \ref{rellens.ml:34864}, \ref{rellens.ml:45567}, \ref{rellens.ml:45719}, \ref{rellens.ml:50797}, \ref{rellens.ml:51214}, \ref{rellens.ml:52116}, \ref{rellens.ml:58370}}
-\ocwrefindexentry{$\ocwlowerid{eval\_case}$}{rellens.ml:4432}{rellens.ml:4432}{\ref{rellens.ml:4432}}{\ref{rellens.ml:4432}}
-\ocwrefindexentry{$\ocwlowerid{extend}$}{rellens.ml:477}{rellens.ml:35305}{\ref{rellens.ml:477}}{\ref{rellens.ml:35305}}
-\ocwrefindexentry{$\ocwlowerid{fd}$}{rellens.ml:16098}{}{\ref{rellens.ml:16098}}{}
-\ocwrefindexentry{$\ocwlowerid{fd}$ (type)}{rellens_types.ml:2593}{rellens_types.ml:2813,rellens_types.ml:4545,rellens.ml:29065,rellens.ml:36155,rellens.ml:36820}{\ref{rellens_types.ml:2593}}{\ref{rellens_types.ml:2813}, \ref{rellens_types.ml:4545}, \ref{rellens.ml:29065}, \ref{rellens.ml:36155}, \ref{rellens.ml:36820}}
+\ocwrefindexentry{$\ocwlowerid{drop}$}{rellens.ml:58451}{}{\ref{rellens.ml:58451}}{}
+\ocwrefindexentry{$\ocwupperid{Drop}$}{rellens_types.ml:5505}{rellens.ml:58451}{\ref{rellens_types.ml:5505}}{\ref{rellens.ml:58451}}
+\ocwrefindexentry{$\ocwlowerid{eval}$}{rellens.ml:4431}{rellens.ml:4431,rellens.ml:6276,rellens.ml:42926}{\ref{rellens.ml:4431}}{\ref{rellens.ml:4431}, \ref{rellens.ml:6276}, \ref{rellens.ml:42926}}
+\ocwrefindexentry{$\ocwlowerid{eval\_bool}$}{rellens.ml:6276}{rellens.ml:19080,rellens.ml:19693,rellens.ml:26951,rellens.ml:35334,rellens.ml:36633,rellens.ml:47336,rellens.ml:47488,rellens.ml:52566,rellens.ml:52983,rellens.ml:53885,rellens.ml:60139}{\ref{rellens.ml:6276}}{\ref{rellens.ml:19080}, \ref{rellens.ml:19693}, \ref{rellens.ml:26951}, \ref{rellens.ml:35334}, \ref{rellens.ml:36633}, \ref{rellens.ml:47336}, \ref{rellens.ml:47488}, \ref{rellens.ml:52566}, \ref{rellens.ml:52983}, \ref{rellens.ml:53885}, \ref{rellens.ml:60139}}
+\ocwrefindexentry{$\ocwlowerid{eval\_case}$}{rellens.ml:4431}{rellens.ml:4431}{\ref{rellens.ml:4431}}{\ref{rellens.ml:4431}}
+\ocwrefindexentry{$\ocwlowerid{extend}$}{rellens.ml:477}{rellens.ml:37074}{\ref{rellens.ml:477}}{\ref{rellens.ml:37074}}
+\ocwrefindexentry{$\ocwlowerid{f2map\_PSetofAttr}$}{rellens_types.ml:3355}{rellens.ml:11220}{\ref{rellens_types.ml:3355}}{\ref{rellens.ml:11220}}
+\ocwrefindexentry{$\ocwlowerid{fd}$}{rellens.ml:17867}{}{\ref{rellens.ml:17867}}{}
+\ocwrefindexentry{$\ocwlowerid{fd}$ (type)}{rellens_types.ml:2593}{rellens_types.ml:2813,rellens_types.ml:5055,rellens.ml:30834,rellens.ml:37924,rellens.ml:38589}{\ref{rellens_types.ml:2593}}{\ref{rellens_types.ml:2813}, \ref{rellens_types.ml:5055}, \ref{rellens.ml:30834}, \ref{rellens.ml:37924}, \ref{rellens.ml:38589}}
 \ocwrefindexentry{$\ocwupperid{FD}$ (module)}{rellens_types.ml:2813}{rellens_types.ml:2878}{\ref{rellens_types.ml:2813}}{\ref{rellens_types.ml:2878}}
-\ocwrefindexentry{$\ocwupperid{FDSPRecord}$ (module)}{rellens_types.ml:4545}{rellens_types.ml:4798}{\ref{rellens_types.ml:4545}}{\ref{rellens_types.ml:4798}}
-\ocwrefindexentry{$\ocwlowerid{fd\_changes\_expr}$}{rellens.ml:48446}{rellens.ml:48792}{\ref{rellens.ml:48446}}{\ref{rellens.ml:48792}}
-\ocwrefindexentry{$\ocwlowerid{find\_changed\_rows}$}{rellens.ml:46522}{}{\ref{rellens.ml:46522}}{}
+\ocwrefindexentry{$\ocwupperid{FDSPRecord}$ (module)}{rellens_types.ml:5055}{rellens_types.ml:5308}{\ref{rellens_types.ml:5055}}{\ref{rellens_types.ml:5308}}
+\ocwrefindexentry{$\ocwlowerid{fd\_changes\_expr}$}{rellens.ml:50215}{rellens.ml:50561}{\ref{rellens.ml:50215}}{\ref{rellens.ml:50561}}
+\ocwrefindexentry{$\ocwlowerid{find\_changed\_rows}$}{rellens.ml:48291}{}{\ref{rellens.ml:48291}}{}
 \ocwrefindexentry{$\ocwupperid{Flt}$}{rellens_types.ml:349}{}{\ref{rellens_types.ml:349}}{}
-\ocwrefindexentry{$\ocwlowerid{found\_any\_right}$}{rellens.ml:45567}{rellens.ml:45872,rellens.ml:52116}{\ref{rellens.ml:45567}}{\ref{rellens.ml:45872}, \ref{rellens.ml:52116}}
-\ocwrefindexentry{$\ocwlowerid{found\_same\_right}$}{rellens.ml:45719}{rellens.ml:45872,rellens.ml:52116}{\ref{rellens.ml:45719}}{\ref{rellens.ml:45872}, \ref{rellens.ml:52116}}
-\ocwrefindexentry{$\ocwlowerid{found\_upd\_right}$}{rellens.ml:45872}{rellens.ml:52116}{\ref{rellens.ml:45872}}{\ref{rellens.ml:52116}}
-\ocwrefindexentry{$\ocwlowerid{freevars}$}{rellens.ml:39292}{rellens.ml:39292,rellens.ml:39905}{\ref{rellens.ml:39292}}{\ref{rellens.ml:39292}, \ref{rellens.ml:39905}}
-\ocwrefindexentry{$\ocwlowerid{fwd}$}{rellens.ml:9419}{rellens.ml:9882}{\ref{rellens.ml:9419}}{\ref{rellens.ml:9882}}
-\ocwrefindexentry{$\ocwlowerid{fwd\_fds}$}{rellens.ml:47243}{rellens.ml:47570}{\ref{rellens.ml:47243}}{\ref{rellens.ml:47570}}
-\ocwrefindexentry{$\ocwlowerid{get}$}{rellens.ml:54441}{rellens.ml:54441}{\ref{rellens.ml:54441}}{\ref{rellens.ml:54441}}
-\ocwrefindexentry{$\ocwlowerid{get\_drop}$}{rellens.ml:41869}{rellens.ml:54441}{\ref{rellens.ml:41869}}{\ref{rellens.ml:54441}}
-\ocwrefindexentry{$\ocwlowerid{get\_fd\_updates}$}{rellens.ml:29065}{rellens.ml:29388}{\ref{rellens.ml:29065}}{\ref{rellens.ml:29388}}
-\ocwrefindexentry{$\ocwlowerid{get\_join\_dl}$}{rellens.ml:20907}{rellens.ml:54441}{\ref{rellens.ml:20907}}{\ref{rellens.ml:54441}}
-\ocwrefindexentry{$\ocwlowerid{get\_select}$}{rellens.ml:17311}{rellens.ml:54441}{\ref{rellens.ml:17311}}{\ref{rellens.ml:54441}}
-\ocwrefindexentry{$\ocwlowerid{get\_union}$}{rellens.ml:24704}{}{\ref{rellens.ml:24704}}{}
-\ocwrefindexentry{$\ocwlowerid{get\_updateset}$}{rellens.ml:29388}{rellens.ml:32747,rellens.ml:48792}{\ref{rellens.ml:29388}}{\ref{rellens.ml:32747}, \ref{rellens.ml:48792}}
-\ocwrefindexentry{$\ocwlowerid{idom}$}{rellens.ml:43400}{rellens.ml:44659,rellens.ml:45063,rellens.ml:45719,rellens.ml:51214,rellens.ml:52116}{\ref{rellens.ml:43400}}{\ref{rellens.ml:44659}, \ref{rellens.ml:45063}, \ref{rellens.ml:45719}, \ref{rellens.ml:51214}, \ref{rellens.ml:52116}}
-\ocwrefindexentry{$\ocwlowerid{ignores}$}{rellens.ml:6529}{rellens.ml:6529,rellens.ml:16642,rellens.ml:19636,rellens.ml:23109}{\ref{rellens.ml:6529}}{\ref{rellens.ml:6529}, \ref{rellens.ml:16642}, \ref{rellens.ml:19636}, \ref{rellens.ml:23109}}
-\ocwrefindexentry{$\ocwlowerid{ilens}$ (type)}{rellens_types.ml:4900}{rellens.ml:49680}{\ref{rellens_types.ml:4900}}{\ref{rellens.ml:49680}}
-\ocwrefindexentry{$\ocwupperid{Insert}$}{rellens_types.ml:3654}{rellens.ml:26321,rellens.ml:27096,rellens.ml:28544,rellens.ml:29065,rellens.ml:51214,rellens.ml:52116}{\ref{rellens_types.ml:3654}}{\ref{rellens.ml:26321}, \ref{rellens.ml:27096}, \ref{rellens.ml:28544}, \ref{rellens.ml:29065}, \ref{rellens.ml:51214}, \ref{rellens.ml:52116}}
-\ocwrefindexentry{$\ocwlowerid{instance}$}{rellens.ml:15953}{rellens.ml:34864,rellens.ml:42566}{\ref{rellens.ml:15953}}{\ref{rellens.ml:34864}, \ref{rellens.ml:42566}}
+\ocwrefindexentry{$\ocwlowerid{found\_any\_right}$}{rellens.ml:47336}{rellens.ml:47641,rellens.ml:53885}{\ref{rellens.ml:47336}}{\ref{rellens.ml:47641}, \ref{rellens.ml:53885}}
+\ocwrefindexentry{$\ocwlowerid{found\_same\_right}$}{rellens.ml:47488}{rellens.ml:47641,rellens.ml:53885}{\ref{rellens.ml:47488}}{\ref{rellens.ml:47641}, \ref{rellens.ml:53885}}
+\ocwrefindexentry{$\ocwlowerid{found\_upd\_right}$}{rellens.ml:47641}{rellens.ml:53885}{\ref{rellens.ml:47641}}{\ref{rellens.ml:53885}}
+\ocwrefindexentry{$\ocwlowerid{freevars}$}{rellens.ml:41061}{rellens.ml:41061,rellens.ml:41674}{\ref{rellens.ml:41061}}{\ref{rellens.ml:41061}, \ref{rellens.ml:41674}}
+\ocwrefindexentry{$\ocwlowerid{fwd}$}{rellens.ml:9643}{rellens.ml:11220}{\ref{rellens.ml:9643}}{\ref{rellens.ml:11220}}
+\ocwrefindexentry{$\ocwlowerid{fwd\_fds}$}{rellens.ml:49012}{rellens.ml:49339}{\ref{rellens.ml:49012}}{\ref{rellens.ml:49339}}
+\ocwrefindexentry{$\ocwlowerid{get}$}{rellens.ml:56210}{rellens.ml:56210}{\ref{rellens.ml:56210}}{\ref{rellens.ml:56210}}
+\ocwrefindexentry{$\ocwlowerid{get\_drop}$}{rellens.ml:43638}{rellens.ml:56210}{\ref{rellens.ml:43638}}{\ref{rellens.ml:56210}}
+\ocwrefindexentry{$\ocwlowerid{get\_fd\_updates}$}{rellens.ml:30834}{rellens.ml:31157}{\ref{rellens.ml:30834}}{\ref{rellens.ml:31157}}
+\ocwrefindexentry{$\ocwlowerid{get\_join\_dl}$}{rellens.ml:22676}{rellens.ml:56210}{\ref{rellens.ml:22676}}{\ref{rellens.ml:56210}}
+\ocwrefindexentry{$\ocwlowerid{get\_select}$}{rellens.ml:19080}{rellens.ml:56210}{\ref{rellens.ml:19080}}{\ref{rellens.ml:56210}}
+\ocwrefindexentry{$\ocwlowerid{get\_union}$}{rellens.ml:26473}{}{\ref{rellens.ml:26473}}{}
+\ocwrefindexentry{$\ocwlowerid{get\_updateset}$}{rellens.ml:31157}{rellens.ml:34516,rellens.ml:50561}{\ref{rellens.ml:31157}}{\ref{rellens.ml:34516}, \ref{rellens.ml:50561}}
+\ocwrefindexentry{$\ocwlowerid{idom}$}{rellens.ml:45169}{rellens.ml:46428,rellens.ml:46832,rellens.ml:47488,rellens.ml:52983,rellens.ml:53885}{\ref{rellens.ml:45169}}{\ref{rellens.ml:46428}, \ref{rellens.ml:46832}, \ref{rellens.ml:47488}, \ref{rellens.ml:52983}, \ref{rellens.ml:53885}}
+\ocwrefindexentry{$\ocwlowerid{ignores}$}{rellens.ml:6753}{rellens.ml:6753,rellens.ml:18411,rellens.ml:21405,rellens.ml:24878}{\ref{rellens.ml:6753}}{\ref{rellens.ml:6753}, \ref{rellens.ml:18411}, \ref{rellens.ml:21405}, \ref{rellens.ml:24878}}
+\ocwrefindexentry{$\ocwlowerid{ilens}$ (type)}{rellens_types.ml:5410}{rellens.ml:51449}{\ref{rellens_types.ml:5410}}{\ref{rellens.ml:51449}}
+\ocwrefindexentry{$\ocwupperid{Insert}$}{rellens_types.ml:4164}{rellens.ml:28090,rellens.ml:28865,rellens.ml:30313,rellens.ml:30834,rellens.ml:52983,rellens.ml:53885}{\ref{rellens_types.ml:4164}}{\ref{rellens.ml:28090}, \ref{rellens.ml:28865}, \ref{rellens.ml:30313}, \ref{rellens.ml:30834}, \ref{rellens.ml:52983}, \ref{rellens.ml:53885}}
+\ocwrefindexentry{$\ocwlowerid{instance}$}{rellens.ml:17722}{rellens.ml:36633,rellens.ml:44335}{\ref{rellens.ml:17722}}{\ref{rellens.ml:36633}, \ref{rellens.ml:44335}}
 \ocwrefindexentry{$\ocwupperid{Int}$}{rellens_types.ml:349}{}{\ref{rellens_types.ml:349}}{}
-\ocwrefindexentry{$\ocwlowerid{irel}$}{rellens.ml:43466}{rellens.ml:45567,rellens.ml:45719}{\ref{rellens.ml:43466}}{\ref{rellens.ml:45567}, \ref{rellens.ml:45719}}
-\ocwrefindexentry{$\ocwlowerid{is\_compl}$}{rellens.ml:28544}{rellens.ml:28786,rellens.ml:43977,rellens.ml:44273}{\ref{rellens.ml:28544}}{\ref{rellens.ml:28786}, \ref{rellens.ml:43977}, \ref{rellens.ml:44273}}
-\ocwrefindexentry{$\ocwupperid{Is\_Cyclic}$ (exn)}{rellens.ml:9189}{}{\ref{rellens.ml:9189}}{}
-\ocwrefindexentry{$\ocwlowerid{is\_neutral}$}{rellens.ml:43528}{rellens.ml:43686,rellens.ml:43977,rellens.ml:44273,rellens.ml:51214,rellens.ml:52116}{\ref{rellens.ml:43528}}{\ref{rellens.ml:43686}, \ref{rellens.ml:43977}, \ref{rellens.ml:44273}, \ref{rellens.ml:51214}, \ref{rellens.ml:52116}}
-\ocwrefindexentry{$\ocwlowerid{is\_tree}$}{rellens.ml:9882}{rellens.ml:11542,rellens.ml:11990,rellens.ml:14340,rellens.ml:16642,rellens.ml:19636,rellens.ml:23109}{\ref{rellens.ml:9882}}{\ref{rellens.ml:11542}, \ref{rellens.ml:11990}, \ref{rellens.ml:14340}, \ref{rellens.ml:16642}, \ref{rellens.ml:19636}, \ref{rellens.ml:23109}}
-\ocwrefindexentry{$\ocwupperid{JoinDL}$}{rellens_types.ml:4995}{rellens.ml:56682}{\ref{rellens_types.ml:4995}}{\ref{rellens.ml:56682}}
-\ocwrefindexentry{$\ocwlowerid{join\_dl}$}{rellens.ml:56682}{}{\ref{rellens.ml:56682}}{}
-\ocwrefindexentry{$\ocwlowerid{join\_left\_row}$}{rellens.ml:51214}{rellens.ml:53994}{\ref{rellens.ml:51214}}{\ref{rellens.ml:53994}}
-\ocwrefindexentry{$\ocwlowerid{join\_right\_row}$}{rellens.ml:52116}{rellens.ml:53994}{\ref{rellens.ml:52116}}{\ref{rellens.ml:53994}}
-\ocwrefindexentry{$\ocwlowerid{join\_with\_columns}$}{rellens.ml:49680}{rellens.ml:50797}{\ref{rellens.ml:49680}}{\ref{rellens.ml:50797}}
-\ocwrefindexentry{$\ocwupperid{Keep}$}{rellens_types.ml:3654}{rellens.ml:26321,rellens.ml:43528,rellens.ml:43686,rellens.ml:51214,rellens.ml:52116}{\ref{rellens_types.ml:3654}}{\ref{rellens.ml:26321}, \ref{rellens.ml:43528}, \ref{rellens.ml:43686}, \ref{rellens.ml:51214}, \ref{rellens.ml:52116}}
-\ocwrefindexentry{$\ocwlowerid{key}$}{rellens.ml:43233}{rellens.ml:43686,rellens.ml:43977,rellens.ml:44273,rellens.ml:44659,rellens.ml:45063,rellens.ml:45567,rellens.ml:50797,rellens.ml:52116}{\ref{rellens.ml:43233}}{\ref{rellens.ml:43686}, \ref{rellens.ml:43977}, \ref{rellens.ml:44273}, \ref{rellens.ml:44659}, \ref{rellens.ml:45063}, \ref{rellens.ml:45567}, \ref{rellens.ml:50797}, \ref{rellens.ml:52116}}
-\ocwrefindexentry{$\ocwlowerid{leaves}$}{rellens.ml:11542}{}{\ref{rellens.ml:11542}}{}
-\ocwrefindexentry{$\ocwlowerid{left}$}{rellens.ml:7836}{rellens.ml:8226,rellens.ml:11542}{\ref{rellens.ml:7836}}{\ref{rellens.ml:8226}, \ref{rellens.ml:11542}}
-\ocwrefindexentry{$\ocwlowerid{lefts}$}{rellens.ml:47448}{}{\ref{rellens.ml:47448}}{}
-\ocwrefindexentry{$\ocwlowerid{lens}$ (type)}{rellens_types.ml:4995}{rellens_types.ml:4995,rellens.ml:57082}{\ref{rellens_types.ml:4995}}{\ref{rellens_types.ml:4995}, \ref{rellens.ml:57082}}
-\ocwrefindexentry{$\ocwlowerid{list\_pairs}$}{rellens.ml:7050}{rellens.ml:7289}{\ref{rellens.ml:7050}}{\ref{rellens.ml:7289}}
-\ocwrefindexentry{$\ocwlowerid{lookup\_col}$}{rellens.ml:35305}{rellens.ml:35766}{\ref{rellens.ml:35305}}{\ref{rellens.ml:35766}}
+\ocwrefindexentry{$\ocwlowerid{irel}$}{rellens.ml:45235}{rellens.ml:47336,rellens.ml:47488}{\ref{rellens.ml:45235}}{\ref{rellens.ml:47336}, \ref{rellens.ml:47488}}
+\ocwrefindexentry{$\ocwlowerid{is\_compl}$}{rellens.ml:30313}{rellens.ml:30555,rellens.ml:45746,rellens.ml:46042}{\ref{rellens.ml:30313}}{\ref{rellens.ml:30555}, \ref{rellens.ml:45746}, \ref{rellens.ml:46042}}
+\ocwrefindexentry{$\ocwupperid{Is\_Cyclic}$ (exn)}{rellens.ml:9413}{}{\ref{rellens.ml:9413}}{}
+\ocwrefindexentry{$\ocwlowerid{is\_neutral}$}{rellens.ml:45297}{rellens.ml:45455,rellens.ml:45746,rellens.ml:46042,rellens.ml:52983,rellens.ml:53885}{\ref{rellens.ml:45297}}{\ref{rellens.ml:45455}, \ref{rellens.ml:45746}, \ref{rellens.ml:46042}, \ref{rellens.ml:52983}, \ref{rellens.ml:53885}}
+\ocwrefindexentry{$\ocwlowerid{is\_tree}$}{rellens.ml:10106}{rellens.ml:13311,rellens.ml:13759,rellens.ml:16109,rellens.ml:18411,rellens.ml:21405,rellens.ml:24878}{\ref{rellens.ml:10106}}{\ref{rellens.ml:13311}, \ref{rellens.ml:13759}, \ref{rellens.ml:16109}, \ref{rellens.ml:18411}, \ref{rellens.ml:21405}, \ref{rellens.ml:24878}}
+\ocwrefindexentry{$\ocwupperid{JoinDL}$}{rellens_types.ml:5505}{rellens.ml:58451}{\ref{rellens_types.ml:5505}}{\ref{rellens.ml:58451}}
+\ocwrefindexentry{$\ocwlowerid{join\_dl}$}{rellens.ml:58451}{}{\ref{rellens.ml:58451}}{}
+\ocwrefindexentry{$\ocwlowerid{join\_left\_row}$}{rellens.ml:52983}{rellens.ml:55763}{\ref{rellens.ml:52983}}{\ref{rellens.ml:55763}}
+\ocwrefindexentry{$\ocwlowerid{join\_right\_row}$}{rellens.ml:53885}{rellens.ml:55763}{\ref{rellens.ml:53885}}{\ref{rellens.ml:55763}}
+\ocwrefindexentry{$\ocwlowerid{join\_with\_columns}$}{rellens.ml:51449}{rellens.ml:52566}{\ref{rellens.ml:51449}}{\ref{rellens.ml:52566}}
+\ocwrefindexentry{$\ocwupperid{Keep}$}{rellens_types.ml:4164}{rellens.ml:28090,rellens.ml:45297,rellens.ml:45455,rellens.ml:52983,rellens.ml:53885}{\ref{rellens_types.ml:4164}}{\ref{rellens.ml:28090}, \ref{rellens.ml:45297}, \ref{rellens.ml:45455}, \ref{rellens.ml:52983}, \ref{rellens.ml:53885}}
+\ocwrefindexentry{$\ocwlowerid{key}$}{rellens.ml:45002}{rellens.ml:45455,rellens.ml:45746,rellens.ml:46042,rellens.ml:46428,rellens.ml:46832,rellens.ml:47336,rellens.ml:52566,rellens.ml:53885}{\ref{rellens.ml:45002}}{\ref{rellens.ml:45455}, \ref{rellens.ml:45746}, \ref{rellens.ml:46042}, \ref{rellens.ml:46428}, \ref{rellens.ml:46832}, \ref{rellens.ml:47336}, \ref{rellens.ml:52566}, \ref{rellens.ml:53885}}
+\ocwrefindexentry{$\ocwlowerid{leaves}$}{rellens.ml:13311}{}{\ref{rellens.ml:13311}}{}
+\ocwrefindexentry{$\ocwlowerid{left}$}{rellens.ml:8060}{rellens.ml:8450,rellens.ml:13311}{\ref{rellens.ml:8060}}{\ref{rellens.ml:8450}, \ref{rellens.ml:13311}}
+\ocwrefindexentry{$\ocwlowerid{lefts}$}{rellens.ml:49217}{}{\ref{rellens.ml:49217}}{}
+\ocwrefindexentry{$\ocwlowerid{lens}$ (type)}{rellens_types.ml:5505}{rellens_types.ml:5505,rellens.ml:58851}{\ref{rellens_types.ml:5505}}{\ref{rellens_types.ml:5505}, \ref{rellens.ml:58851}}
+\ocwrefindexentry{$\ocwlowerid{list\_pairs}$}{rellens.ml:7274}{rellens.ml:7513}{\ref{rellens.ml:7274}}{\ref{rellens.ml:7513}}
+\ocwrefindexentry{$\ocwlowerid{lookup\_col}$}{rellens.ml:37074}{rellens.ml:37535}{\ref{rellens.ml:37074}}{\ref{rellens.ml:37535}}
 \ocwrefindexentry{$\ocwlowerid{lookup\_type}$}{rellens.ml:2279}{rellens.ml:2830}{\ref{rellens.ml:2279}}{\ref{rellens.ml:2830}}
-\ocwrefindexentry{$\ocwupperid{MapofAttr}$ (module)}{rellens_types.ml:540}{rellens_types.ml:695,rellens_types.ml:790,rellens_types.ml:2502,rellens_types.ml:3833,rellens_types.ml:4224,rellens.ml:201,rellens.ml:326,rellens.ml:477,rellens.ml:667,rellens.ml:1234,rellens.ml:1371,rellens.ml:2279,rellens.ml:2516,rellens.ml:4432,rellens.ml:12776,rellens.ml:23109,rellens.ml:41157,rellens.ml:42566,rellens.ml:49680}{\ref{rellens_types.ml:540}}{\ref{rellens_types.ml:695}, \ref{rellens_types.ml:790}, \ref{rellens_types.ml:2502}, \ref{rellens_types.ml:3833}, \ref{rellens_types.ml:4224}, \ref{rellens.ml:201}, \ref{rellens.ml:326}, \ref{rellens.ml:477}, \ref{rellens.ml:667}, \ref{rellens.ml:1234}, \ref{rellens.ml:1371}, \ref{rellens.ml:2279}, \ref{rellens.ml:2516}, \ref{rellens.ml:4432}, \ref{rellens.ml:12776}, \ref{rellens.ml:23109}, \ref{rellens.ml:41157}, \ref{rellens.ml:42566}, \ref{rellens.ml:49680}}
-\ocwrefindexentry{$\ocwupperid{MapofRname}$ (module)}{rellens_types.ml:3279}{rellens_types.ml:3543,rellens.ml:15858,rellens.ml:15953,rellens.ml:16098,rellens.ml:17311,rellens.ml:17924,rellens.ml:20907,rellens.ml:21776,rellens.ml:24704,rellens.ml:25182,rellens.ml:33565,rellens.ml:41869,rellens.ml:42566,rellens.ml:54441,rellens.ml:57188,rellens.ml:58370}{\ref{rellens_types.ml:3279}}{\ref{rellens_types.ml:3543}, \ref{rellens.ml:15858}, \ref{rellens.ml:15953}, \ref{rellens.ml:16098}, \ref{rellens.ml:17311}, \ref{rellens.ml:17924}, \ref{rellens.ml:20907}, \ref{rellens.ml:21776}, \ref{rellens.ml:24704}, \ref{rellens.ml:25182}, \ref{rellens.ml:33565}, \ref{rellens.ml:41869}, \ref{rellens.ml:42566}, \ref{rellens.ml:54441}, \ref{rellens.ml:57188}, \ref{rellens.ml:58370}}
-\ocwrefindexentry{$\ocwupperid{MapofSetofAttr}$ (module)}{rellens_types.ml:3000}{rellens.ml:9882}{\ref{rellens_types.ml:3000}}{\ref{rellens.ml:9882}}
-\ocwrefindexentry{$\ocwlowerid{match\_changes\_expr}$}{rellens.ml:46961}{}{\ref{rellens.ml:46961}}{}
-\ocwrefindexentry{$\ocwlowerid{match\_on}$}{rellens.ml:27606}{rellens.ml:28786,rellens.ml:35305,rellens.ml:43686,rellens.ml:43977,rellens.ml:44273,rellens.ml:44659,rellens.ml:45063,rellens.ml:46961}{\ref{rellens.ml:27606}}{\ref{rellens.ml:28786}, \ref{rellens.ml:35305}, \ref{rellens.ml:43686}, \ref{rellens.ml:43977}, \ref{rellens.ml:44273}, \ref{rellens.ml:44659}, \ref{rellens.ml:45063}, \ref{rellens.ml:46961}}
-\ocwrefindexentry{$\ocwlowerid{match\_on\_expr}$}{rellens.ml:28272}{rellens.ml:31117,rellens.ml:34502,rellens.ml:45567,rellens.ml:45719,rellens.ml:46165,rellens.ml:46961,rellens.ml:48446,rellens.ml:49269,rellens.ml:52116}{\ref{rellens.ml:28272}}{\ref{rellens.ml:31117}, \ref{rellens.ml:34502}, \ref{rellens.ml:45567}, \ref{rellens.ml:45719}, \ref{rellens.ml:46165}, \ref{rellens.ml:46961}, \ref{rellens.ml:48446}, \ref{rellens.ml:49269}, \ref{rellens.ml:52116}}
-\ocwrefindexentry{$\ocwlowerid{merge\_attrs}$}{rellens.ml:8791}{rellens.ml:9277}{\ref{rellens.ml:8791}}{\ref{rellens.ml:9277}}
-\ocwrefindexentry{$\ocwlowerid{merge\_tenv}$}{rellens.ml:2516}{rellens.ml:19636,rellens.ml:49680}{\ref{rellens.ml:2516}}{\ref{rellens.ml:19636}, \ref{rellens.ml:49680}}
-\ocwrefindexentry{$\ocwlowerid{models}$}{rellens.ml:7289}{rellens.ml:7651,rellens.ml:13424}{\ref{rellens.ml:7289}}{\ref{rellens.ml:7651}, \ref{rellens.ml:13424}}
-\ocwrefindexentry{$\ocwlowerid{models\_fds}$}{rellens.ml:7651}{rellens.ml:14340}{\ref{rellens.ml:7651}}{\ref{rellens.ml:14340}}
-\ocwrefindexentry{$\ocwlowerid{mult}$ (type)}{rellens_types.ml:3654}{rellens_types.ml:3800}{\ref{rellens_types.ml:3654}}{\ref{rellens_types.ml:3800}}
-\ocwrefindexentry{$\ocwupperid{Multiple\_Indegree}$ (exn)}{rellens.ml:9189}{}{\ref{rellens.ml:9189}}{}
-\ocwrefindexentry{$\ocwlowerid{names}$}{rellens.ml:8226}{}{\ref{rellens.ml:8226}}{}
-\ocwrefindexentry{$\ocwlowerid{nat\_join}$}{rellens.ml:1371}{rellens.ml:20907,rellens.ml:21776,rellens.ml:42566,rellens.ml:58370}{\ref{rellens.ml:1371}}{\ref{rellens.ml:20907}, \ref{rellens.ml:21776}, \ref{rellens.ml:42566}, \ref{rellens.ml:58370}}
-\ocwrefindexentry{$\ocwlowerid{nodes}$}{rellens.ml:9277}{rellens.ml:9882}{\ref{rellens.ml:9277}}{\ref{rellens.ml:9882}}
-\ocwrefindexentry{$\ocwlowerid{non\_upd\_left}$}{rellens.ml:45280}{rellens.ml:51214}{\ref{rellens.ml:45280}}{\ref{rellens.ml:51214}}
-\ocwrefindexentry{$\ocwlowerid{non\_upd\_right}$}{rellens.ml:45422}{rellens.ml:52116}{\ref{rellens.ml:45422}}{\ref{rellens.ml:52116}}
-\ocwrefindexentry{$\ocwupperid{Not\_in\_Tree\_Form}$ (exn)}{rellens.ml:11351}{}{\ref{rellens.ml:11351}}{}
-\ocwrefindexentry{$\ocwlowerid{ntrl\_exists\_right}$}{rellens.ml:43686}{rellens.ml:50797,rellens.ml:52116}{\ref{rellens.ml:43686}}{\ref{rellens.ml:50797}, \ref{rellens.ml:52116}}
+\ocwrefindexentry{$\ocwupperid{MapofAttr}$ (module)}{rellens_types.ml:540}{rellens_types.ml:695,rellens_types.ml:790,rellens_types.ml:2502,rellens_types.ml:4343,rellens_types.ml:4734,rellens.ml:201,rellens.ml:326,rellens.ml:477,rellens.ml:667,rellens.ml:1234,rellens.ml:1371,rellens.ml:2279,rellens.ml:2516,rellens.ml:4431,rellens.ml:14545,rellens.ml:24878,rellens.ml:42926,rellens.ml:44335,rellens.ml:51449}{\ref{rellens_types.ml:540}}{\ref{rellens_types.ml:695}, \ref{rellens_types.ml:790}, \ref{rellens_types.ml:2502}, \ref{rellens_types.ml:4343}, \ref{rellens_types.ml:4734}, \ref{rellens.ml:201}, \ref{rellens.ml:326}, \ref{rellens.ml:477}, \ref{rellens.ml:667}, \ref{rellens.ml:1234}, \ref{rellens.ml:1371}, \ref{rellens.ml:2279}, \ref{rellens.ml:2516}, \ref{rellens.ml:4431}, \ref{rellens.ml:14545}, \ref{rellens.ml:24878}, \ref{rellens.ml:42926}, \ref{rellens.ml:44335}, \ref{rellens.ml:51449}}
+\ocwrefindexentry{$\ocwupperid{MapofRname}$ (module)}{rellens_types.ml:3789}{rellens_types.ml:4053,rellens.ml:17627,rellens.ml:17722,rellens.ml:17867,rellens.ml:19080,rellens.ml:19693,rellens.ml:22676,rellens.ml:23545,rellens.ml:26473,rellens.ml:26951,rellens.ml:35334,rellens.ml:43638,rellens.ml:44335,rellens.ml:56210,rellens.ml:58957,rellens.ml:60139}{\ref{rellens_types.ml:3789}}{\ref{rellens_types.ml:4053}, \ref{rellens.ml:17627}, \ref{rellens.ml:17722}, \ref{rellens.ml:17867}, \ref{rellens.ml:19080}, \ref{rellens.ml:19693}, \ref{rellens.ml:22676}, \ref{rellens.ml:23545}, \ref{rellens.ml:26473}, \ref{rellens.ml:26951}, \ref{rellens.ml:35334}, \ref{rellens.ml:43638}, \ref{rellens.ml:44335}, \ref{rellens.ml:56210}, \ref{rellens.ml:58957}, \ref{rellens.ml:60139}}
+\ocwrefindexentry{$\ocwupperid{MapofSetofAttr}$ (module)}{rellens_types.ml:3167}{rellens_types.ml:3355,rellens.ml:11220}{\ref{rellens_types.ml:3167}}{\ref{rellens_types.ml:3355}, \ref{rellens.ml:11220}}
+\ocwrefindexentry{$\ocwlowerid{match\_changes\_expr}$}{rellens.ml:48730}{}{\ref{rellens.ml:48730}}{}
+\ocwrefindexentry{$\ocwlowerid{match\_on}$}{rellens.ml:29375}{rellens.ml:30555,rellens.ml:37074,rellens.ml:45455,rellens.ml:45746,rellens.ml:46042,rellens.ml:46428,rellens.ml:46832,rellens.ml:48730}{\ref{rellens.ml:29375}}{\ref{rellens.ml:30555}, \ref{rellens.ml:37074}, \ref{rellens.ml:45455}, \ref{rellens.ml:45746}, \ref{rellens.ml:46042}, \ref{rellens.ml:46428}, \ref{rellens.ml:46832}, \ref{rellens.ml:48730}}
+\ocwrefindexentry{$\ocwlowerid{match\_on\_expr}$}{rellens.ml:30041}{rellens.ml:32886,rellens.ml:36271,rellens.ml:47336,rellens.ml:47488,rellens.ml:47934,rellens.ml:48730,rellens.ml:50215,rellens.ml:51038,rellens.ml:53885}{\ref{rellens.ml:30041}}{\ref{rellens.ml:32886}, \ref{rellens.ml:36271}, \ref{rellens.ml:47336}, \ref{rellens.ml:47488}, \ref{rellens.ml:47934}, \ref{rellens.ml:48730}, \ref{rellens.ml:50215}, \ref{rellens.ml:51038}, \ref{rellens.ml:53885}}
+\ocwrefindexentry{$\ocwlowerid{merge\_attrs}$}{rellens.ml:9015}{rellens.ml:9501}{\ref{rellens.ml:9015}}{\ref{rellens.ml:9501}}
+\ocwrefindexentry{$\ocwlowerid{merge\_tenv}$}{rellens.ml:2516}{rellens.ml:21405,rellens.ml:51449}{\ref{rellens.ml:2516}}{\ref{rellens.ml:21405}, \ref{rellens.ml:51449}}
+\ocwrefindexentry{$\ocwlowerid{models}$}{rellens.ml:7513}{rellens.ml:7875,rellens.ml:15193}{\ref{rellens.ml:7513}}{\ref{rellens.ml:7875}, \ref{rellens.ml:15193}}
+\ocwrefindexentry{$\ocwlowerid{models\_fds}$}{rellens.ml:7875}{rellens.ml:16109}{\ref{rellens.ml:7875}}{\ref{rellens.ml:16109}}
+\ocwrefindexentry{$\ocwlowerid{mult}$ (type)}{rellens_types.ml:4164}{rellens_types.ml:4310}{\ref{rellens_types.ml:4164}}{\ref{rellens_types.ml:4310}}
+\ocwrefindexentry{$\ocwupperid{Multiple\_Indegree}$ (exn)}{rellens.ml:9413}{}{\ref{rellens.ml:9413}}{}
+\ocwrefindexentry{$\ocwlowerid{names}$}{rellens.ml:8450}{}{\ref{rellens.ml:8450}}{}
+\ocwrefindexentry{$\ocwlowerid{nat\_join}$}{rellens.ml:1371}{rellens.ml:22676,rellens.ml:23545,rellens.ml:44335,rellens.ml:60139}{\ref{rellens.ml:1371}}{\ref{rellens.ml:22676}, \ref{rellens.ml:23545}, \ref{rellens.ml:44335}, \ref{rellens.ml:60139}}
+\ocwrefindexentry{$\ocwlowerid{nodes}$}{rellens.ml:9501}{rellens.ml:10106}{\ref{rellens.ml:9501}}{\ref{rellens.ml:10106}}
+\ocwrefindexentry{$\ocwlowerid{non\_upd\_left}$}{rellens.ml:47049}{rellens.ml:52983}{\ref{rellens.ml:47049}}{\ref{rellens.ml:52983}}
+\ocwrefindexentry{$\ocwlowerid{non\_upd\_right}$}{rellens.ml:47191}{rellens.ml:53885}{\ref{rellens.ml:47191}}{\ref{rellens.ml:53885}}
+\ocwrefindexentry{$\ocwupperid{Not\_in\_Tree\_Form}$ (exn)}{rellens.ml:13120}{}{\ref{rellens.ml:13120}}{}
+\ocwrefindexentry{$\ocwlowerid{ntrl\_exists\_right}$}{rellens.ml:45455}{rellens.ml:52566,rellens.ml:53885}{\ref{rellens.ml:45455}}{\ref{rellens.ml:52566}, \ref{rellens.ml:53885}}
 \ocwrefindexentry{$\ocwlowerid{of\_domain}$}{rellens.ml:840}{rellens.ml:1371}{\ref{rellens.ml:840}}{\ref{rellens.ml:1371}}
-\ocwrefindexentry{$\ocwlowerid{outputs}$}{rellens.ml:8441}{rellens.ml:16642,rellens.ml:19636,rellens.ml:23109}{\ref{rellens.ml:8441}}{\ref{rellens.ml:16642}, \ref{rellens.ml:19636}, \ref{rellens.ml:23109}}
-\ocwrefindexentry{$\ocwupperid{Overlap\_Between\_Attributes}$ (exn)}{rellens.ml:8712}{}{\ref{rellens.ml:8712}}{}
-\ocwrefindexentry{$\ocwupperid{PAnd}$}{rellens_types.ml:988}{rellens_types.ml:1605,rellens.ml:16642,rellens.ml:19636,rellens.ml:27770,rellens.ml:33565,rellens.ml:37904,rellens.ml:49269,rellens.ml:49680}{\ref{rellens_types.ml:988}}{\ref{rellens_types.ml:1605}, \ref{rellens.ml:16642}, \ref{rellens.ml:19636}, \ref{rellens.ml:27770}, \ref{rellens.ml:33565}, \ref{rellens.ml:37904}, \ref{rellens.ml:49269}, \ref{rellens.ml:49680}}
-\ocwrefindexentry{$\ocwupperid{PCase}$}{rellens_types.ml:988}{rellens_types.ml:1605,rellens.ml:31117}{\ref{rellens_types.ml:988}}{\ref{rellens_types.ml:1605}, \ref{rellens.ml:31117}}
-\ocwrefindexentry{$\ocwupperid{PCns}$}{rellens_types.ml:988}{rellens.ml:27770,rellens.ml:27959,rellens.ml:28272,rellens.ml:31117,rellens.ml:54441}{\ref{rellens_types.ml:988}}{\ref{rellens.ml:27770}, \ref{rellens.ml:27959}, \ref{rellens.ml:28272}, \ref{rellens.ml:31117}, \ref{rellens.ml:54441}}
-\ocwrefindexentry{$\ocwupperid{PEq}$}{rellens_types.ml:988}{rellens_types.ml:1605,rellens.ml:28272}{\ref{rellens_types.ml:988}}{\ref{rellens_types.ml:1605}, \ref{rellens.ml:28272}}
+\ocwrefindexentry{$\ocwlowerid{outputs}$}{rellens.ml:8665}{rellens.ml:18411,rellens.ml:21405,rellens.ml:24878}{\ref{rellens.ml:8665}}{\ref{rellens.ml:18411}, \ref{rellens.ml:21405}, \ref{rellens.ml:24878}}
+\ocwrefindexentry{$\ocwupperid{Overlap\_Between\_Attributes}$ (exn)}{rellens.ml:8936}{}{\ref{rellens.ml:8936}}{}
+\ocwrefindexentry{$\ocwupperid{PAnd}$}{rellens_types.ml:988}{rellens_types.ml:1605,rellens.ml:18411,rellens.ml:21405,rellens.ml:29539,rellens.ml:35334,rellens.ml:39673,rellens.ml:51038,rellens.ml:51449}{\ref{rellens_types.ml:988}}{\ref{rellens_types.ml:1605}, \ref{rellens.ml:18411}, \ref{rellens.ml:21405}, \ref{rellens.ml:29539}, \ref{rellens.ml:35334}, \ref{rellens.ml:39673}, \ref{rellens.ml:51038}, \ref{rellens.ml:51449}}
+\ocwrefindexentry{$\ocwupperid{PCase}$}{rellens_types.ml:988}{rellens_types.ml:1605,rellens.ml:32886}{\ref{rellens_types.ml:988}}{\ref{rellens_types.ml:1605}, \ref{rellens.ml:32886}}
+\ocwrefindexentry{$\ocwupperid{PCns}$}{rellens_types.ml:988}{rellens.ml:29539,rellens.ml:29728,rellens.ml:30041,rellens.ml:32886,rellens.ml:56210}{\ref{rellens_types.ml:988}}{\ref{rellens.ml:29539}, \ref{rellens.ml:29728}, \ref{rellens.ml:30041}, \ref{rellens.ml:32886}, \ref{rellens.ml:56210}}
+\ocwrefindexentry{$\ocwupperid{PEq}$}{rellens_types.ml:988}{rellens_types.ml:1605,rellens.ml:30041}{\ref{rellens_types.ml:988}}{\ref{rellens_types.ml:1605}, \ref{rellens.ml:30041}}
 \ocwrefindexentry{$\ocwupperid{PGt}$}{rellens_types.ml:988}{rellens_types.ml:1605}{\ref{rellens_types.ml:988}}{\ref{rellens_types.ml:1605}}
 \ocwrefindexentry{$\ocwupperid{PGte}$}{rellens_types.ml:988}{rellens_types.ml:1605}{\ref{rellens_types.ml:988}}{\ref{rellens_types.ml:1605}}
-\ocwrefindexentry{$\ocwlowerid{phrase}$ (type)}{rellens_types.ml:988}{rellens_types.ml:988,rellens_types.ml:1605,rellens_types.ml:3430,rellens_types.ml:4995,rellens.ml:27770,rellens.ml:27959,rellens.ml:28272,rellens.ml:31117,rellens.ml:31393,rellens.ml:32535,rellens.ml:32747,rellens.ml:34502,rellens.ml:37904,rellens.ml:39905,rellens.ml:46165,rellens.ml:46961,rellens.ml:48446,rellens.ml:48792,rellens.ml:49269}{\ref{rellens_types.ml:988}}{\ref{rellens_types.ml:988}, \ref{rellens_types.ml:1605}, \ref{rellens_types.ml:3430}, \ref{rellens_types.ml:4995}, \ref{rellens.ml:27770}, \ref{rellens.ml:27959}, \ref{rellens.ml:28272}, \ref{rellens.ml:31117}, \ref{rellens.ml:31393}, \ref{rellens.ml:32535}, \ref{rellens.ml:32747}, \ref{rellens.ml:34502}, \ref{rellens.ml:37904}, \ref{rellens.ml:39905}, \ref{rellens.ml:46165}, \ref{rellens.ml:46961}, \ref{rellens.ml:48446}, \ref{rellens.ml:48792}, \ref{rellens.ml:49269}}
-\ocwrefindexentry{$\ocwlowerid{phrase\_map}$}{rellens_types.ml:1605}{rellens_types.ml:1605,rellens.ml:32747}{\ref{rellens_types.ml:1605}}{\ref{rellens_types.ml:1605}, \ref{rellens.ml:32747}}
+\ocwrefindexentry{$\ocwlowerid{phrase}$ (type)}{rellens_types.ml:988}{rellens_types.ml:988,rellens_types.ml:1605,rellens_types.ml:3940,rellens_types.ml:5505,rellens.ml:29539,rellens.ml:29728,rellens.ml:30041,rellens.ml:32886,rellens.ml:33162,rellens.ml:34304,rellens.ml:34516,rellens.ml:36271,rellens.ml:39673,rellens.ml:41674,rellens.ml:47934,rellens.ml:48730,rellens.ml:50215,rellens.ml:50561,rellens.ml:51038}{\ref{rellens_types.ml:988}}{\ref{rellens_types.ml:988}, \ref{rellens_types.ml:1605}, \ref{rellens_types.ml:3940}, \ref{rellens_types.ml:5505}, \ref{rellens.ml:29539}, \ref{rellens.ml:29728}, \ref{rellens.ml:30041}, \ref{rellens.ml:32886}, \ref{rellens.ml:33162}, \ref{rellens.ml:34304}, \ref{rellens.ml:34516}, \ref{rellens.ml:36271}, \ref{rellens.ml:39673}, \ref{rellens.ml:41674}, \ref{rellens.ml:47934}, \ref{rellens.ml:48730}, \ref{rellens.ml:50215}, \ref{rellens.ml:50561}, \ref{rellens.ml:51038}}
+\ocwrefindexentry{$\ocwlowerid{phrase\_map}$}{rellens_types.ml:1605}{rellens_types.ml:1605,rellens.ml:34516}{\ref{rellens_types.ml:1605}}{\ref{rellens_types.ml:1605}, \ref{rellens.ml:34516}}
 \ocwrefindexentry{$\ocwupperid{PLt}$}{rellens_types.ml:988}{rellens_types.ml:1605}{\ref{rellens_types.ml:988}}{\ref{rellens_types.ml:1605}}
 \ocwrefindexentry{$\ocwupperid{PLte}$}{rellens_types.ml:988}{rellens_types.ml:1605}{\ref{rellens_types.ml:988}}{\ref{rellens_types.ml:1605}}
-\ocwrefindexentry{$\ocwupperid{PNot}$}{rellens_types.ml:988}{rellens_types.ml:1605,rellens.ml:17924,rellens.ml:33565,rellens.ml:37904,rellens.ml:49269}{\ref{rellens_types.ml:988}}{\ref{rellens_types.ml:1605}, \ref{rellens.ml:17924}, \ref{rellens.ml:33565}, \ref{rellens.ml:37904}, \ref{rellens.ml:49269}}
-\ocwrefindexentry{$\ocwupperid{POr}$}{rellens_types.ml:988}{rellens_types.ml:1605,rellens.ml:23109,rellens.ml:27959,rellens.ml:37904}{\ref{rellens_types.ml:988}}{\ref{rellens_types.ml:1605}, \ref{rellens.ml:23109}, \ref{rellens.ml:27959}, \ref{rellens.ml:37904}}
-\ocwrefindexentry{$\ocwupperid{PRecord}$ (module)}{rellens_types.ml:4224}{rellens_types.ml:4460}{\ref{rellens_types.ml:4224}}{\ref{rellens_types.ml:4460}}
-\ocwrefindexentry{$\ocwupperid{PSetofAttr}$ (module)}{rellens_types.ml:2940}{rellens.ml:8791,rellens.ml:9277,rellens.ml:9419,rellens.ml:9620,rellens.ml:9882,rellens.ml:11542,rellens.ml:11990,rellens.ml:14340,rellens.ml:32747,rellens.ml:43233,rellens.ml:47448}{\ref{rellens_types.ml:2940}}{\ref{rellens.ml:8791}, \ref{rellens.ml:9277}, \ref{rellens.ml:9419}, \ref{rellens.ml:9620}, \ref{rellens.ml:9882}, \ref{rellens.ml:11542}, \ref{rellens.ml:11990}, \ref{rellens.ml:14340}, \ref{rellens.ml:32747}, \ref{rellens.ml:43233}, \ref{rellens.ml:47448}}
+\ocwrefindexentry{$\ocwupperid{PNot}$}{rellens_types.ml:988}{rellens_types.ml:1605,rellens.ml:19693,rellens.ml:35334,rellens.ml:39673,rellens.ml:51038}{\ref{rellens_types.ml:988}}{\ref{rellens_types.ml:1605}, \ref{rellens.ml:19693}, \ref{rellens.ml:35334}, \ref{rellens.ml:39673}, \ref{rellens.ml:51038}}
+\ocwrefindexentry{$\ocwupperid{POr}$}{rellens_types.ml:988}{rellens_types.ml:1605,rellens.ml:24878,rellens.ml:29728,rellens.ml:39673}{\ref{rellens_types.ml:988}}{\ref{rellens_types.ml:1605}, \ref{rellens.ml:24878}, \ref{rellens.ml:29728}, \ref{rellens.ml:39673}}
+\ocwrefindexentry{$\ocwupperid{PRecord}$ (module)}{rellens_types.ml:4734}{rellens_types.ml:4970}{\ref{rellens_types.ml:4734}}{\ref{rellens_types.ml:4970}}
+\ocwrefindexentry{$\ocwupperid{PSetofAttr}$ (module)}{rellens_types.ml:2940}{rellens_types.ml:2995,rellens_types.ml:3355,rellens.ml:9015,rellens.ml:9501,rellens.ml:9643,rellens.ml:9844,rellens.ml:10106,rellens.ml:11220,rellens.ml:13311,rellens.ml:13759,rellens.ml:16109,rellens.ml:34516,rellens.ml:45002,rellens.ml:49217}{\ref{rellens_types.ml:2940}}{\ref{rellens_types.ml:2995}, \ref{rellens_types.ml:3355}, \ref{rellens.ml:9015}, \ref{rellens.ml:9501}, \ref{rellens.ml:9643}, \ref{rellens.ml:9844}, \ref{rellens.ml:10106}, \ref{rellens.ml:11220}, \ref{rellens.ml:13311}, \ref{rellens.ml:13759}, \ref{rellens.ml:16109}, \ref{rellens.ml:34516}, \ref{rellens.ml:45002}, \ref{rellens.ml:49217}}
 \ocwrefindexentry{$\ocwlowerid{ptype}$ (type)}{rellens_types.ml:2362}{rellens_types.ml:2502,rellens.ml:2279,rellens.ml:2830}{\ref{rellens_types.ml:2362}}{\ref{rellens_types.ml:2502}, \ref{rellens.ml:2279}, \ref{rellens.ml:2830}}
-\ocwrefindexentry{$\ocwlowerid{put}$}{rellens.ml:54441}{rellens.ml:54441}{\ref{rellens.ml:54441}}{\ref{rellens.ml:54441}}
-\ocwrefindexentry{$\ocwlowerid{put\_drop}$}{rellens.ml:42566}{rellens.ml:54441}{\ref{rellens.ml:42566}}{\ref{rellens.ml:54441}}
-\ocwrefindexentry{$\ocwlowerid{put\_join\_dl}$}{rellens.ml:21776}{rellens.ml:54441}{\ref{rellens.ml:21776}}{\ref{rellens.ml:54441}}
-\ocwrefindexentry{$\ocwlowerid{put\_join\_template}$}{rellens.ml:58370}{}{\ref{rellens.ml:58370}}{}
-\ocwrefindexentry{$\ocwlowerid{put\_select}$}{rellens.ml:17924}{rellens.ml:54441}{\ref{rellens.ml:17924}}{\ref{rellens.ml:54441}}
-\ocwrefindexentry{$\ocwlowerid{put\_union}$}{rellens.ml:25182}{}{\ref{rellens.ml:25182}}{}
-\ocwrefindexentry{$\ocwupperid{PVar}$}{rellens_types.ml:988}{rellens.ml:28272,rellens.ml:32535}{\ref{rellens_types.ml:988}}{\ref{rellens.ml:28272}, \ref{rellens.ml:32535}}
-\ocwrefindexentry{$\ocwlowerid{qtype}$}{rellens.ml:2830}{rellens.ml:2830,rellens.ml:16642,rellens.ml:33565,rellens.ml:34864}{\ref{rellens.ml:2830}}{\ref{rellens.ml:2830}, \ref{rellens.ml:16642}, \ref{rellens.ml:33565}, \ref{rellens.ml:34864}}
-\ocwrefindexentry{$\ocwlowerid{qt\_lens}$}{rellens.ml:57188}{rellens.ml:57188}{\ref{rellens.ml:57188}}{\ref{rellens.ml:57188}}
-\ocwrefindexentry{$\ocwlowerid{query\_deleted\_rows}$}{rellens.ml:33565}{rellens.ml:34066}{\ref{rellens.ml:33565}}{\ref{rellens.ml:34066}}
-\ocwrefindexentry{$\ocwlowerid{query\_lookup\_table}$}{rellens.ml:34864}{rellens.ml:35766}{\ref{rellens.ml:34864}}{\ref{rellens.ml:35766}}
-\ocwrefindexentry{$\ocwlowerid{rbcr}$}{rellens.ml:12776}{rellens.ml:13424}{\ref{rellens.ml:12776}}{\ref{rellens.ml:13424}}
-\ocwrefindexentry{$\ocwlowerid{record}$ (type)}{rellens_types.ml:695}{rellens_types.ml:790,rellens_types.ml:3800,rellens_types.ml:4224,rellens.ml:477,rellens.ml:667,rellens.ml:12776,rellens.ml:13424,rellens.ml:14340}{\ref{rellens_types.ml:695}}{\ref{rellens_types.ml:790}, \ref{rellens_types.ml:3800}, \ref{rellens_types.ml:4224}, \ref{rellens.ml:477}, \ref{rellens.ml:667}, \ref{rellens.ml:12776}, \ref{rellens.ml:13424}, \ref{rellens.ml:14340}}
+\ocwrefindexentry{$\ocwlowerid{put}$}{rellens.ml:56210}{rellens.ml:56210}{\ref{rellens.ml:56210}}{\ref{rellens.ml:56210}}
+\ocwrefindexentry{$\ocwlowerid{put\_drop}$}{rellens.ml:44335}{rellens.ml:56210}{\ref{rellens.ml:44335}}{\ref{rellens.ml:56210}}
+\ocwrefindexentry{$\ocwlowerid{put\_join\_dl}$}{rellens.ml:23545}{rellens.ml:56210}{\ref{rellens.ml:23545}}{\ref{rellens.ml:56210}}
+\ocwrefindexentry{$\ocwlowerid{put\_join\_template}$}{rellens.ml:60139}{}{\ref{rellens.ml:60139}}{}
+\ocwrefindexentry{$\ocwlowerid{put\_select}$}{rellens.ml:19693}{rellens.ml:56210}{\ref{rellens.ml:19693}}{\ref{rellens.ml:56210}}
+\ocwrefindexentry{$\ocwlowerid{put\_union}$}{rellens.ml:26951}{}{\ref{rellens.ml:26951}}{}
+\ocwrefindexentry{$\ocwupperid{PVar}$}{rellens_types.ml:988}{rellens.ml:30041,rellens.ml:34304}{\ref{rellens_types.ml:988}}{\ref{rellens.ml:30041}, \ref{rellens.ml:34304}}
+\ocwrefindexentry{$\ocwlowerid{qtype}$}{rellens.ml:2830}{rellens.ml:2830,rellens.ml:18411,rellens.ml:35334,rellens.ml:36633}{\ref{rellens.ml:2830}}{\ref{rellens.ml:2830}, \ref{rellens.ml:18411}, \ref{rellens.ml:35334}, \ref{rellens.ml:36633}}
+\ocwrefindexentry{$\ocwlowerid{qt\_lens}$}{rellens.ml:58957}{rellens.ml:58957}{\ref{rellens.ml:58957}}{\ref{rellens.ml:58957}}
+\ocwrefindexentry{$\ocwlowerid{query\_deleted\_rows}$}{rellens.ml:35334}{rellens.ml:35835}{\ref{rellens.ml:35334}}{\ref{rellens.ml:35835}}
+\ocwrefindexentry{$\ocwlowerid{query\_lookup\_table}$}{rellens.ml:36633}{rellens.ml:37535}{\ref{rellens.ml:36633}}{\ref{rellens.ml:37535}}
+\ocwrefindexentry{$\ocwlowerid{rbcr}$}{rellens.ml:14545}{rellens.ml:15193}{\ref{rellens.ml:14545}}{\ref{rellens.ml:15193}}
+\ocwrefindexentry{$\ocwlowerid{record}$ (type)}{rellens_types.ml:695}{rellens_types.ml:790,rellens_types.ml:4310,rellens_types.ml:4734,rellens.ml:477,rellens.ml:667,rellens.ml:14545,rellens.ml:15193,rellens.ml:16109}{\ref{rellens_types.ml:695}}{\ref{rellens_types.ml:790}, \ref{rellens_types.ml:4310}, \ref{rellens_types.ml:4734}, \ref{rellens.ml:477}, \ref{rellens.ml:667}, \ref{rellens.ml:14545}, \ref{rellens.ml:15193}, \ref{rellens.ml:16109}}
 \ocwrefindexentry{$\ocwupperid{Record}$ (module)}{rellens_types.ml:790}{rellens_types.ml:884}{\ref{rellens_types.ml:790}}{\ref{rellens_types.ml:884}}
-\ocwrefindexentry{$\ocwlowerid{record\_equal}$}{rellens.ml:1234}{rellens.ml:1371,rellens.ml:7289,rellens.ml:13424,rellens.ml:27606,rellens.ml:31393,rellens.ml:49680}{\ref{rellens.ml:1234}}{\ref{rellens.ml:1371}, \ref{rellens.ml:7289}, \ref{rellens.ml:13424}, \ref{rellens.ml:27606}, \ref{rellens.ml:31393}, \ref{rellens.ml:49680}}
-\ocwrefindexentry{$\ocwlowerid{record\_revision}$}{rellens.ml:14340}{rellens.ml:14340,rellens.ml:15392}{\ref{rellens.ml:14340}}{\ref{rellens.ml:14340}, \ref{rellens.ml:15392}}
-\ocwrefindexentry{$\ocwlowerid{relation}$ (type)}{rellens_types.ml:923}{rellens_types.ml:3543,rellens_types.ml:4900,rellens.ml:1061,rellens.ml:1371,rellens.ml:15392,rellens.ml:15698,rellens.ml:15953,rellens.ml:27096,rellens.ml:33565,rellens.ml:34864,rellens.ml:43466}{\ref{rellens_types.ml:923}}{\ref{rellens_types.ml:3543}, \ref{rellens_types.ml:4900}, \ref{rellens.ml:1061}, \ref{rellens.ml:1371}, \ref{rellens.ml:15392}, \ref{rellens.ml:15698}, \ref{rellens.ml:15953}, \ref{rellens.ml:27096}, \ref{rellens.ml:33565}, \ref{rellens.ml:34864}, \ref{rellens.ml:43466}}
-\ocwrefindexentry{$\ocwlowerid{relational\_delta\_merge}$}{rellens.ml:27096}{}{\ref{rellens.ml:27096}}{}
-\ocwrefindexentry{$\ocwlowerid{relational\_merge}$}{rellens.ml:15698}{rellens.ml:17924,rellens.ml:21776,rellens.ml:24704,rellens.ml:25182,rellens.ml:27096,rellens.ml:58370}{\ref{rellens.ml:15698}}{\ref{rellens.ml:17924}, \ref{rellens.ml:21776}, \ref{rellens.ml:24704}, \ref{rellens.ml:25182}, \ref{rellens.ml:27096}, \ref{rellens.ml:58370}}
-\ocwrefindexentry{$\ocwlowerid{relation\_revision}$}{rellens.ml:15392}{rellens.ml:15698,rellens.ml:42566}{\ref{rellens.ml:15392}}{\ref{rellens.ml:15698}, \ref{rellens.ml:42566}}
+\ocwrefindexentry{$\ocwlowerid{record\_equal}$}{rellens.ml:1234}{rellens.ml:1371,rellens.ml:7513,rellens.ml:15193,rellens.ml:29375,rellens.ml:33162,rellens.ml:51449}{\ref{rellens.ml:1234}}{\ref{rellens.ml:1371}, \ref{rellens.ml:7513}, \ref{rellens.ml:15193}, \ref{rellens.ml:29375}, \ref{rellens.ml:33162}, \ref{rellens.ml:51449}}
+\ocwrefindexentry{$\ocwlowerid{record\_revision}$}{rellens.ml:16109}{rellens.ml:16109,rellens.ml:17161}{\ref{rellens.ml:16109}}{\ref{rellens.ml:16109}, \ref{rellens.ml:17161}}
+\ocwrefindexentry{$\ocwlowerid{relation}$ (type)}{rellens_types.ml:923}{rellens_types.ml:4053,rellens_types.ml:5410,rellens.ml:1061,rellens.ml:1371,rellens.ml:17161,rellens.ml:17467,rellens.ml:17722,rellens.ml:28865,rellens.ml:35334,rellens.ml:36633,rellens.ml:45235}{\ref{rellens_types.ml:923}}{\ref{rellens_types.ml:4053}, \ref{rellens_types.ml:5410}, \ref{rellens.ml:1061}, \ref{rellens.ml:1371}, \ref{rellens.ml:17161}, \ref{rellens.ml:17467}, \ref{rellens.ml:17722}, \ref{rellens.ml:28865}, \ref{rellens.ml:35334}, \ref{rellens.ml:36633}, \ref{rellens.ml:45235}}
+\ocwrefindexentry{$\ocwlowerid{relational\_delta\_merge}$}{rellens.ml:28865}{}{\ref{rellens.ml:28865}}{}
+\ocwrefindexentry{$\ocwlowerid{relational\_merge}$}{rellens.ml:17467}{rellens.ml:19693,rellens.ml:23545,rellens.ml:26473,rellens.ml:26951,rellens.ml:28865,rellens.ml:60139}{\ref{rellens.ml:17467}}{\ref{rellens.ml:19693}, \ref{rellens.ml:23545}, \ref{rellens.ml:26473}, \ref{rellens.ml:26951}, \ref{rellens.ml:28865}, \ref{rellens.ml:60139}}
+\ocwrefindexentry{$\ocwlowerid{relation\_revision}$}{rellens.ml:17161}{rellens.ml:17467,rellens.ml:44335}{\ref{rellens.ml:17161}}{\ref{rellens.ml:17467}, \ref{rellens.ml:44335}}
 \ocwrefindexentry{$\ocwupperid{Rellens}$ (module)}{rellens.ml:0}{}{\ref{rellens.ml:0}}{}
 \ocwrefindexentry{$\ocwupperid{Rellens\_types}$ (module)}{rellens_types.ml:0}{rellens.ml:81}{\ref{rellens_types.ml:0}}{\ref{rellens.ml:81}}
-\ocwrefindexentry{$\ocwlowerid{removed\_row\_expr}$}{rellens.ml:46165}{rellens.ml:49269}{\ref{rellens.ml:46165}}{\ref{rellens.ml:49269}}
-\ocwrefindexentry{$\ocwlowerid{remove\_entry\_left}$}{rellens.ml:49487}{rellens.ml:51214,rellens.ml:52116}{\ref{rellens.ml:49487}}{\ref{rellens.ml:51214}, \ref{rellens.ml:52116}}
-\ocwrefindexentry{$\ocwlowerid{remove\_entry\_right}$}{rellens.ml:50797}{rellens.ml:51214,rellens.ml:52116}{\ref{rellens.ml:50797}}{\ref{rellens.ml:51214}, \ref{rellens.ml:52116}}
-\ocwrefindexentry{$\ocwlowerid{restrict}$}{rellens.ml:667}{rellens.ml:1061,rellens.ml:1371,rellens.ml:7289,rellens.ml:13424,rellens.ml:27606,rellens.ml:29065,rellens.ml:49680,rellens.ml:51214,rellens.ml:52116}{\ref{rellens.ml:667}}{\ref{rellens.ml:1061}, \ref{rellens.ml:1371}, \ref{rellens.ml:7289}, \ref{rellens.ml:13424}, \ref{rellens.ml:27606}, \ref{rellens.ml:29065}, \ref{rellens.ml:49680}, \ref{rellens.ml:51214}, \ref{rellens.ml:52116}}
-\ocwrefindexentry{$\ocwlowerid{restrict\_relation}$}{rellens.ml:1061}{rellens.ml:13424,rellens.ml:21776,rellens.ml:34864,rellens.ml:41869,rellens.ml:42566,rellens.ml:58370}{\ref{rellens.ml:1061}}{\ref{rellens.ml:13424}, \ref{rellens.ml:21776}, \ref{rellens.ml:34864}, \ref{rellens.ml:41869}, \ref{rellens.ml:42566}, \ref{rellens.ml:58370}}
-\ocwrefindexentry{$\ocwlowerid{right}$}{rellens.ml:8011}{rellens.ml:8226,rellens.ml:8441,rellens.ml:11990,rellens.ml:32747}{\ref{rellens.ml:8011}}{\ref{rellens.ml:8226}, \ref{rellens.ml:8441}, \ref{rellens.ml:11990}, \ref{rellens.ml:32747}}
-\ocwrefindexentry{$\ocwlowerid{rname}$ (type)}{rellens_types.ml:3065}{rellens_types.ml:3188,rellens_types.ml:4995}{\ref{rellens_types.ml:3065}}{\ref{rellens_types.ml:3188}, \ref{rellens_types.ml:4995}}
-\ocwrefindexentry{$\ocwupperid{Rname}$ (module)}{rellens_types.ml:3188}{rellens_types.ml:3279}{\ref{rellens_types.ml:3188}}{\ref{rellens_types.ml:3279}}
-\ocwrefindexentry{$\ocwlowerid{roots}$}{rellens.ml:11990}{rellens.ml:14340,rellens.ml:32747,rellens.ml:43233}{\ref{rellens.ml:11990}}{\ref{rellens.ml:14340}, \ref{rellens.ml:32747}, \ref{rellens.ml:43233}}
-\ocwrefindexentry{$\ocwlowerid{sdrr}$}{rellens.ml:13424}{rellens.ml:14340}{\ref{rellens.ml:13424}}{\ref{rellens.ml:14340}}
-\ocwrefindexentry{$\ocwlowerid{select}$}{rellens.ml:56682}{}{\ref{rellens.ml:56682}}{}
-\ocwrefindexentry{$\ocwupperid{Select}$}{rellens_types.ml:4995}{rellens.ml:56682}{\ref{rellens_types.ml:4995}}{\ref{rellens.ml:56682}}
-\ocwrefindexentry{$\ocwupperid{SetofAttr}$ (module)}{rellens_types.ml:258}{rellens_types.ml:2593,rellens_types.ml:2630,rellens_types.ml:2940,rellens_types.ml:3000,rellens_types.ml:3430,rellens.ml:201,rellens.ml:667,rellens.ml:840,rellens.ml:1371,rellens.ml:6529,rellens.ml:7836,rellens.ml:8011,rellens.ml:8226,rellens.ml:8441,rellens.ml:8791,rellens.ml:9419,rellens.ml:9620,rellens.ml:9882,rellens.ml:11542,rellens.ml:11990,rellens.ml:13424,rellens.ml:19636,rellens.ml:28272,rellens.ml:31393,rellens.ml:32535,rellens.ml:32747,rellens.ml:34864,rellens.ml:36155,rellens.ml:36820,rellens.ml:39292,rellens.ml:39905,rellens.ml:41157,rellens.ml:41869,rellens.ml:42566,rellens.ml:43233,rellens.ml:43400,rellens.ml:47243,rellens.ml:47570,rellens.ml:48124,rellens.ml:49680,rellens.ml:54441,rellens.ml:57188,rellens.ml:58370}{\ref{rellens_types.ml:258}}{\ref{rellens_types.ml:2593}, \ref{rellens_types.ml:2630}, \ref{rellens_types.ml:2940}, \ref{rellens_types.ml:3000}, \ref{rellens_types.ml:3430}, \ref{rellens.ml:201}, \ref{rellens.ml:667}, \ref{rellens.ml:840}, \ref{rellens.ml:1371}, \ref{rellens.ml:6529}, \ref{rellens.ml:7836}, \ref{rellens.ml:8011}, \ref{rellens.ml:8226}, \ref{rellens.ml:8441}, \ref{rellens.ml:8791}, \ref{rellens.ml:9419}, \ref{rellens.ml:9620}, \ref{rellens.ml:9882}, \ref{rellens.ml:11542}, \ref{rellens.ml:11990}, \ref{rellens.ml:13424}, \ref{rellens.ml:19636}, \ref{rellens.ml:28272}, \ref{rellens.ml:31393}, \ref{rellens.ml:32535}, \ref{rellens.ml:32747}, \ref{rellens.ml:34864}, \ref{rellens.ml:36155}, \ref{rellens.ml:36820}, \ref{rellens.ml:39292}, \ref{rellens.ml:39905}, \ref{rellens.ml:41157}, \ref{rellens.ml:41869}, \ref{rellens.ml:42566}, \ref{rellens.ml:43233}, \ref{rellens.ml:43400}, \ref{rellens.ml:47243}, \ref{rellens.ml:47570}, \ref{rellens.ml:48124}, \ref{rellens.ml:49680}, \ref{rellens.ml:54441}, \ref{rellens.ml:57188}, \ref{rellens.ml:58370}}
-\ocwrefindexentry{$\ocwupperid{SetofChange}$ (module)}{rellens_types.ml:4180}{rellens.ml:26321,rellens.ml:27096,rellens.ml:28786,rellens.ml:29065,rellens.ml:34066,rellens.ml:34502,rellens.ml:35766,rellens.ml:43686,rellens.ml:43977,rellens.ml:44273,rellens.ml:44659,rellens.ml:45063,rellens.ml:46165,rellens.ml:46522,rellens.ml:51214,rellens.ml:52116,rellens.ml:53994,rellens.ml:54441}{\ref{rellens_types.ml:4180}}{\ref{rellens.ml:26321}, \ref{rellens.ml:27096}, \ref{rellens.ml:28786}, \ref{rellens.ml:29065}, \ref{rellens.ml:34066}, \ref{rellens.ml:34502}, \ref{rellens.ml:35766}, \ref{rellens.ml:43686}, \ref{rellens.ml:43977}, \ref{rellens.ml:44273}, \ref{rellens.ml:44659}, \ref{rellens.ml:45063}, \ref{rellens.ml:46165}, \ref{rellens.ml:46522}, \ref{rellens.ml:51214}, \ref{rellens.ml:52116}, \ref{rellens.ml:53994}, \ref{rellens.ml:54441}}
-\ocwrefindexentry{$\ocwupperid{SetofFD}$ (module)}{rellens_types.ml:2878}{rellens_types.ml:3430,rellens.ml:7651,rellens.ml:7836,rellens.ml:8011,rellens.ml:8441,rellens.ml:9277,rellens.ml:9419,rellens.ml:9620,rellens.ml:11542,rellens.ml:11990,rellens.ml:14340,rellens.ml:16098,rellens.ml:19636,rellens.ml:23109,rellens.ml:29388,rellens.ml:36155,rellens.ml:36820,rellens.ml:42566,rellens.ml:46961,rellens.ml:47243,rellens.ml:47448,rellens.ml:48124,rellens.ml:48792,rellens.ml:49680,rellens.ml:54441}{\ref{rellens_types.ml:2878}}{\ref{rellens_types.ml:3430}, \ref{rellens.ml:7651}, \ref{rellens.ml:7836}, \ref{rellens.ml:8011}, \ref{rellens.ml:8441}, \ref{rellens.ml:9277}, \ref{rellens.ml:9419}, \ref{rellens.ml:9620}, \ref{rellens.ml:11542}, \ref{rellens.ml:11990}, \ref{rellens.ml:14340}, \ref{rellens.ml:16098}, \ref{rellens.ml:19636}, \ref{rellens.ml:23109}, \ref{rellens.ml:29388}, \ref{rellens.ml:36155}, \ref{rellens.ml:36820}, \ref{rellens.ml:42566}, \ref{rellens.ml:46961}, \ref{rellens.ml:47243}, \ref{rellens.ml:47448}, \ref{rellens.ml:48124}, \ref{rellens.ml:48792}, \ref{rellens.ml:49680}, \ref{rellens.ml:54441}}
-\ocwrefindexentry{$\ocwupperid{SetofFDSPRecord}$ (module)}{rellens_types.ml:4798}{rellens.ml:29388,rellens.ml:31393,rellens.ml:48792}{\ref{rellens_types.ml:4798}}{\ref{rellens.ml:29388}, \ref{rellens.ml:31393}, \ref{rellens.ml:48792}}
-\ocwrefindexentry{$\ocwupperid{SetofPRecord}$ (module)}{rellens_types.ml:4460}{rellens_types.ml:4545,rellens.ml:29065,rellens.ml:31117,rellens.ml:31393,rellens.ml:46522,rellens.ml:48446}{\ref{rellens_types.ml:4460}}{\ref{rellens_types.ml:4545}, \ref{rellens.ml:29065}, \ref{rellens.ml:31117}, \ref{rellens.ml:31393}, \ref{rellens.ml:46522}, \ref{rellens.ml:48446}}
-\ocwrefindexentry{$\ocwupperid{SetofRecord}$ (module)}{rellens_types.ml:884}{rellens_types.ml:923,rellens.ml:840,rellens.ml:1061,rellens.ml:1371,rellens.ml:7289,rellens.ml:13424,rellens.ml:15392,rellens.ml:15698,rellens.ml:17311,rellens.ml:17924,rellens.ml:21776,rellens.ml:25182,rellens.ml:26321,rellens.ml:27096,rellens.ml:33565,rellens.ml:34066,rellens.ml:34864,rellens.ml:35305,rellens.ml:42566,rellens.ml:45567,rellens.ml:45719,rellens.ml:49680,rellens.ml:50797,rellens.ml:52116,rellens.ml:58370}{\ref{rellens_types.ml:884}}{\ref{rellens_types.ml:923}, \ref{rellens.ml:840}, \ref{rellens.ml:1061}, \ref{rellens.ml:1371}, \ref{rellens.ml:7289}, \ref{rellens.ml:13424}, \ref{rellens.ml:15392}, \ref{rellens.ml:15698}, \ref{rellens.ml:17311}, \ref{rellens.ml:17924}, \ref{rellens.ml:21776}, \ref{rellens.ml:25182}, \ref{rellens.ml:26321}, \ref{rellens.ml:27096}, \ref{rellens.ml:33565}, \ref{rellens.ml:34066}, \ref{rellens.ml:34864}, \ref{rellens.ml:35305}, \ref{rellens.ml:42566}, \ref{rellens.ml:45567}, \ref{rellens.ml:45719}, \ref{rellens.ml:49680}, \ref{rellens.ml:50797}, \ref{rellens.ml:52116}, \ref{rellens.ml:58370}}
-\ocwrefindexentry{$\ocwlowerid{sort}$}{rellens.ml:15858}{rellens.ml:34864}{\ref{rellens.ml:15858}}{\ref{rellens.ml:34864}}
-\ocwrefindexentry{$\ocwlowerid{sort}$ (type)}{rellens_types.ml:3430}{rellens_types.ml:3543,rellens_types.ml:4900,rellens.ml:15858,rellens.ml:16642,rellens.ml:19636,rellens.ml:23109,rellens.ml:41157,rellens.ml:57188}{\ref{rellens_types.ml:3430}}{\ref{rellens_types.ml:3543}, \ref{rellens_types.ml:4900}, \ref{rellens.ml:15858}, \ref{rellens.ml:16642}, \ref{rellens.ml:19636}, \ref{rellens.ml:23109}, \ref{rellens.ml:41157}, \ref{rellens.ml:57188}}
-\ocwrefindexentry{$\ocwlowerid{split\_phrase}$}{rellens.ml:39905}{rellens.ml:41157}{\ref{rellens.ml:39905}}{\ref{rellens.ml:41157}}
+\ocwrefindexentry{$\ocwlowerid{removed\_row\_expr}$}{rellens.ml:47934}{rellens.ml:51038}{\ref{rellens.ml:47934}}{\ref{rellens.ml:51038}}
+\ocwrefindexentry{$\ocwlowerid{remove\_entry\_left}$}{rellens.ml:51256}{rellens.ml:52983,rellens.ml:53885}{\ref{rellens.ml:51256}}{\ref{rellens.ml:52983}, \ref{rellens.ml:53885}}
+\ocwrefindexentry{$\ocwlowerid{remove\_entry\_right}$}{rellens.ml:52566}{rellens.ml:52983,rellens.ml:53885}{\ref{rellens.ml:52566}}{\ref{rellens.ml:52983}, \ref{rellens.ml:53885}}
+\ocwrefindexentry{$\ocwlowerid{restrict}$}{rellens.ml:667}{rellens.ml:1061,rellens.ml:1371,rellens.ml:7513,rellens.ml:15193,rellens.ml:29375,rellens.ml:30834,rellens.ml:51449,rellens.ml:52983,rellens.ml:53885}{\ref{rellens.ml:667}}{\ref{rellens.ml:1061}, \ref{rellens.ml:1371}, \ref{rellens.ml:7513}, \ref{rellens.ml:15193}, \ref{rellens.ml:29375}, \ref{rellens.ml:30834}, \ref{rellens.ml:51449}, \ref{rellens.ml:52983}, \ref{rellens.ml:53885}}
+\ocwrefindexentry{$\ocwlowerid{restrict\_relation}$}{rellens.ml:1061}{rellens.ml:15193,rellens.ml:23545,rellens.ml:36633,rellens.ml:43638,rellens.ml:44335,rellens.ml:60139}{\ref{rellens.ml:1061}}{\ref{rellens.ml:15193}, \ref{rellens.ml:23545}, \ref{rellens.ml:36633}, \ref{rellens.ml:43638}, \ref{rellens.ml:44335}, \ref{rellens.ml:60139}}
+\ocwrefindexentry{$\ocwlowerid{right}$}{rellens.ml:8235}{rellens.ml:8450,rellens.ml:8665,rellens.ml:13759,rellens.ml:34516}{\ref{rellens.ml:8235}}{\ref{rellens.ml:8450}, \ref{rellens.ml:8665}, \ref{rellens.ml:13759}, \ref{rellens.ml:34516}}
+\ocwrefindexentry{$\ocwlowerid{rname}$ (type)}{rellens_types.ml:3575}{rellens_types.ml:3698,rellens_types.ml:5505}{\ref{rellens_types.ml:3575}}{\ref{rellens_types.ml:3698}, \ref{rellens_types.ml:5505}}
+\ocwrefindexentry{$\ocwupperid{Rname}$ (module)}{rellens_types.ml:3698}{rellens_types.ml:3789}{\ref{rellens_types.ml:3698}}{\ref{rellens_types.ml:3789}}
+\ocwrefindexentry{$\ocwlowerid{roots}$}{rellens.ml:13759}{rellens.ml:16109,rellens.ml:34516,rellens.ml:45002}{\ref{rellens.ml:13759}}{\ref{rellens.ml:16109}, \ref{rellens.ml:34516}, \ref{rellens.ml:45002}}
+\ocwrefindexentry{$\ocwlowerid{sdrr}$}{rellens.ml:15193}{rellens.ml:16109}{\ref{rellens.ml:15193}}{\ref{rellens.ml:16109}}
+\ocwrefindexentry{$\ocwlowerid{select}$}{rellens.ml:58451}{}{\ref{rellens.ml:58451}}{}
+\ocwrefindexentry{$\ocwupperid{Select}$}{rellens_types.ml:5505}{rellens.ml:58451}{\ref{rellens_types.ml:5505}}{\ref{rellens.ml:58451}}
+\ocwrefindexentry{$\ocwlowerid{setmap\_PSetofAttr}$}{rellens_types.ml:2995}{rellens.ml:11220}{\ref{rellens_types.ml:2995}}{\ref{rellens.ml:11220}}
+\ocwrefindexentry{$\ocwupperid{SetofAttr}$ (module)}{rellens_types.ml:258}{rellens_types.ml:2593,rellens_types.ml:2630,rellens_types.ml:2940,rellens_types.ml:3167,rellens_types.ml:3355,rellens_types.ml:3940,rellens.ml:201,rellens.ml:667,rellens.ml:840,rellens.ml:1371,rellens.ml:6753,rellens.ml:8060,rellens.ml:8235,rellens.ml:8450,rellens.ml:8665,rellens.ml:9015,rellens.ml:9643,rellens.ml:9844,rellens.ml:13311,rellens.ml:13759,rellens.ml:15193,rellens.ml:21405,rellens.ml:30041,rellens.ml:33162,rellens.ml:34304,rellens.ml:34516,rellens.ml:36633,rellens.ml:37924,rellens.ml:38589,rellens.ml:41061,rellens.ml:41674,rellens.ml:42926,rellens.ml:43638,rellens.ml:44335,rellens.ml:45002,rellens.ml:45169,rellens.ml:49012,rellens.ml:49339,rellens.ml:49893,rellens.ml:51449,rellens.ml:56210,rellens.ml:58957,rellens.ml:60139}{\ref{rellens_types.ml:258}}{\ref{rellens_types.ml:2593}, \ref{rellens_types.ml:2630}, \ref{rellens_types.ml:2940}, \ref{rellens_types.ml:3167}, \ref{rellens_types.ml:3355}, \ref{rellens_types.ml:3940}, \ref{rellens.ml:201}, \ref{rellens.ml:667}, \ref{rellens.ml:840}, \ref{rellens.ml:1371}, \ref{rellens.ml:6753}, \ref{rellens.ml:8060}, \ref{rellens.ml:8235}, \ref{rellens.ml:8450}, \ref{rellens.ml:8665}, \ref{rellens.ml:9015}, \ref{rellens.ml:9643}, \ref{rellens.ml:9844}, \ref{rellens.ml:13311}, \ref{rellens.ml:13759}, \ref{rellens.ml:15193}, \ref{rellens.ml:21405}, \ref{rellens.ml:30041}, \ref{rellens.ml:33162}, \ref{rellens.ml:34304}, \ref{rellens.ml:34516}, \ref{rellens.ml:36633}, \ref{rellens.ml:37924}, \ref{rellens.ml:38589}, \ref{rellens.ml:41061}, \ref{rellens.ml:41674}, \ref{rellens.ml:42926}, \ref{rellens.ml:43638}, \ref{rellens.ml:44335}, \ref{rellens.ml:45002}, \ref{rellens.ml:45169}, \ref{rellens.ml:49012}, \ref{rellens.ml:49339}, \ref{rellens.ml:49893}, \ref{rellens.ml:51449}, \ref{rellens.ml:56210}, \ref{rellens.ml:58957}, \ref{rellens.ml:60139}}
+\ocwrefindexentry{$\ocwupperid{SetofChange}$ (module)}{rellens_types.ml:4690}{rellens.ml:28090,rellens.ml:28865,rellens.ml:30555,rellens.ml:30834,rellens.ml:35835,rellens.ml:36271,rellens.ml:37535,rellens.ml:45455,rellens.ml:45746,rellens.ml:46042,rellens.ml:46428,rellens.ml:46832,rellens.ml:47934,rellens.ml:48291,rellens.ml:52983,rellens.ml:53885,rellens.ml:55763,rellens.ml:56210}{\ref{rellens_types.ml:4690}}{\ref{rellens.ml:28090}, \ref{rellens.ml:28865}, \ref{rellens.ml:30555}, \ref{rellens.ml:30834}, \ref{rellens.ml:35835}, \ref{rellens.ml:36271}, \ref{rellens.ml:37535}, \ref{rellens.ml:45455}, \ref{rellens.ml:45746}, \ref{rellens.ml:46042}, \ref{rellens.ml:46428}, \ref{rellens.ml:46832}, \ref{rellens.ml:47934}, \ref{rellens.ml:48291}, \ref{rellens.ml:52983}, \ref{rellens.ml:53885}, \ref{rellens.ml:55763}, \ref{rellens.ml:56210}}
+\ocwrefindexentry{$\ocwupperid{SetofFD}$ (module)}{rellens_types.ml:2878}{rellens_types.ml:3940,rellens.ml:7875,rellens.ml:8060,rellens.ml:8235,rellens.ml:8665,rellens.ml:9501,rellens.ml:9643,rellens.ml:9844,rellens.ml:13311,rellens.ml:13759,rellens.ml:16109,rellens.ml:17867,rellens.ml:21405,rellens.ml:24878,rellens.ml:31157,rellens.ml:37924,rellens.ml:38589,rellens.ml:44335,rellens.ml:48730,rellens.ml:49012,rellens.ml:49217,rellens.ml:49893,rellens.ml:50561,rellens.ml:51449,rellens.ml:56210}{\ref{rellens_types.ml:2878}}{\ref{rellens_types.ml:3940}, \ref{rellens.ml:7875}, \ref{rellens.ml:8060}, \ref{rellens.ml:8235}, \ref{rellens.ml:8665}, \ref{rellens.ml:9501}, \ref{rellens.ml:9643}, \ref{rellens.ml:9844}, \ref{rellens.ml:13311}, \ref{rellens.ml:13759}, \ref{rellens.ml:16109}, \ref{rellens.ml:17867}, \ref{rellens.ml:21405}, \ref{rellens.ml:24878}, \ref{rellens.ml:31157}, \ref{rellens.ml:37924}, \ref{rellens.ml:38589}, \ref{rellens.ml:44335}, \ref{rellens.ml:48730}, \ref{rellens.ml:49012}, \ref{rellens.ml:49217}, \ref{rellens.ml:49893}, \ref{rellens.ml:50561}, \ref{rellens.ml:51449}, \ref{rellens.ml:56210}}
+\ocwrefindexentry{$\ocwupperid{SetofFDSPRecord}$ (module)}{rellens_types.ml:5308}{rellens.ml:31157,rellens.ml:33162,rellens.ml:50561}{\ref{rellens_types.ml:5308}}{\ref{rellens.ml:31157}, \ref{rellens.ml:33162}, \ref{rellens.ml:50561}}
+\ocwrefindexentry{$\ocwupperid{SetofPRecord}$ (module)}{rellens_types.ml:4970}{rellens_types.ml:5055,rellens.ml:30834,rellens.ml:32886,rellens.ml:33162,rellens.ml:48291,rellens.ml:50215}{\ref{rellens_types.ml:4970}}{\ref{rellens_types.ml:5055}, \ref{rellens.ml:30834}, \ref{rellens.ml:32886}, \ref{rellens.ml:33162}, \ref{rellens.ml:48291}, \ref{rellens.ml:50215}}
+\ocwrefindexentry{$\ocwupperid{SetofRecord}$ (module)}{rellens_types.ml:884}{rellens_types.ml:923,rellens.ml:840,rellens.ml:1061,rellens.ml:1371,rellens.ml:7513,rellens.ml:15193,rellens.ml:17161,rellens.ml:17467,rellens.ml:19080,rellens.ml:19693,rellens.ml:23545,rellens.ml:26951,rellens.ml:28090,rellens.ml:28865,rellens.ml:35334,rellens.ml:35835,rellens.ml:36633,rellens.ml:37074,rellens.ml:44335,rellens.ml:47336,rellens.ml:47488,rellens.ml:51449,rellens.ml:52566,rellens.ml:53885,rellens.ml:60139}{\ref{rellens_types.ml:884}}{\ref{rellens_types.ml:923}, \ref{rellens.ml:840}, \ref{rellens.ml:1061}, \ref{rellens.ml:1371}, \ref{rellens.ml:7513}, \ref{rellens.ml:15193}, \ref{rellens.ml:17161}, \ref{rellens.ml:17467}, \ref{rellens.ml:19080}, \ref{rellens.ml:19693}, \ref{rellens.ml:23545}, \ref{rellens.ml:26951}, \ref{rellens.ml:28090}, \ref{rellens.ml:28865}, \ref{rellens.ml:35334}, \ref{rellens.ml:35835}, \ref{rellens.ml:36633}, \ref{rellens.ml:37074}, \ref{rellens.ml:44335}, \ref{rellens.ml:47336}, \ref{rellens.ml:47488}, \ref{rellens.ml:51449}, \ref{rellens.ml:52566}, \ref{rellens.ml:53885}, \ref{rellens.ml:60139}}
+\ocwrefindexentry{$\ocwlowerid{sort}$}{rellens.ml:17627}{rellens.ml:36633}{\ref{rellens.ml:17627}}{\ref{rellens.ml:36633}}
+\ocwrefindexentry{$\ocwlowerid{sort}$ (type)}{rellens_types.ml:3940}{rellens_types.ml:4053,rellens_types.ml:5410,rellens.ml:17627,rellens.ml:18411,rellens.ml:21405,rellens.ml:24878,rellens.ml:42926,rellens.ml:58957}{\ref{rellens_types.ml:3940}}{\ref{rellens_types.ml:4053}, \ref{rellens_types.ml:5410}, \ref{rellens.ml:17627}, \ref{rellens.ml:18411}, \ref{rellens.ml:21405}, \ref{rellens.ml:24878}, \ref{rellens.ml:42926}, \ref{rellens.ml:58957}}
+\ocwrefindexentry{$\ocwlowerid{split\_phrase}$}{rellens.ml:41674}{rellens.ml:42926}{\ref{rellens.ml:41674}}{\ref{rellens.ml:42926}}
 \ocwrefindexentry{$\ocwupperid{Str}$}{rellens_types.ml:349}{}{\ref{rellens_types.ml:349}}{}
-\ocwrefindexentry{$\ocwlowerid{t}$ (type)}{rellens_types.ml:49,rellens_types.ml:790,rellens_types.ml:2813,rellens_types.ml:3188,rellens_types.ml:4086,rellens_types.ml:4224,rellens_types.ml:4545}{rellens_types.ml:695,rellens_types.ml:923,rellens_types.ml:2502,rellens_types.ml:2593,rellens_types.ml:3430,rellens_types.ml:3543,rellens_types.ml:4545,rellens.ml:201,rellens.ml:7836,rellens.ml:8011,rellens.ml:8226,rellens.ml:8441,rellens.ml:8791,rellens.ml:9277,rellens.ml:9419,rellens.ml:9620,rellens.ml:9882,rellens.ml:11542,rellens.ml:11990,rellens.ml:16098,rellens.ml:26321,rellens.ml:29065,rellens.ml:29388,rellens.ml:34066,rellens.ml:36155,rellens.ml:36820,rellens.ml:39292,rellens.ml:43233,rellens.ml:43400,rellens.ml:46522,rellens.ml:47243,rellens.ml:47448,rellens.ml:47570,rellens.ml:48124,rellens.ml:53994,rellens.ml:54441,rellens.ml:57188}{\ref{rellens_types.ml:49}, \ref{rellens_types.ml:790}, \ref{rellens_types.ml:2813}, \ref{rellens_types.ml:3188}, \ref{rellens_types.ml:4086}, \ref{rellens_types.ml:4224}, \ref{rellens_types.ml:4545}}{\ref{rellens_types.ml:695}, \ref{rellens_types.ml:923}, \ref{rellens_types.ml:2502}, \ref{rellens_types.ml:2593}, \ref{rellens_types.ml:3430}, \ref{rellens_types.ml:3543}, \ref{rellens_types.ml:4545}, \ref{rellens.ml:201}, \ref{rellens.ml:7836}, \ref{rellens.ml:8011}, \ref{rellens.ml:8226}, \ref{rellens.ml:8441}, \ref{rellens.ml:8791}, \ref{rellens.ml:9277}, \ref{rellens.ml:9419}, \ref{rellens.ml:9620}, \ref{rellens.ml:9882}, \ref{rellens.ml:11542}, \ref{rellens.ml:11990}, \ref{rellens.ml:16098}, \ref{rellens.ml:26321}, \ref{rellens.ml:29065}, \ref{rellens.ml:29388}, \ref{rellens.ml:34066}, \ref{rellens.ml:36155}, \ref{rellens.ml:36820}, \ref{rellens.ml:39292}, \ref{rellens.ml:43233}, \ref{rellens.ml:43400}, \ref{rellens.ml:46522}, \ref{rellens.ml:47243}, \ref{rellens.ml:47448}, \ref{rellens.ml:47570}, \ref{rellens.ml:48124}, \ref{rellens.ml:53994}, \ref{rellens.ml:54441}, \ref{rellens.ml:57188}}
-\ocwrefindexentry{$\ocwupperid{TBol}$}{rellens_types.ml:2362}{rellens.ml:2830,rellens.ml:16642,rellens.ml:33565,rellens.ml:34864}{\ref{rellens_types.ml:2362}}{\ref{rellens.ml:2830}, \ref{rellens.ml:16642}, \ref{rellens.ml:33565}, \ref{rellens.ml:34864}}
-\ocwrefindexentry{$\ocwlowerid{tenv}$ (type)}{rellens_types.ml:2502}{rellens_types.ml:3430,rellens.ml:2516}{\ref{rellens_types.ml:2502}}{\ref{rellens_types.ml:3430}, \ref{rellens.ml:2516}}
+\ocwrefindexentry{$\ocwlowerid{t}$ (type)}{rellens_types.ml:49,rellens_types.ml:790,rellens_types.ml:2813,rellens_types.ml:3698,rellens_types.ml:4596,rellens_types.ml:4734,rellens_types.ml:5055}{rellens_types.ml:695,rellens_types.ml:923,rellens_types.ml:2502,rellens_types.ml:2593,rellens_types.ml:3355,rellens_types.ml:3940,rellens_types.ml:4053,rellens_types.ml:5055,rellens.ml:201,rellens.ml:8060,rellens.ml:8235,rellens.ml:8450,rellens.ml:8665,rellens.ml:9015,rellens.ml:9501,rellens.ml:9643,rellens.ml:9844,rellens.ml:10106,rellens.ml:11220,rellens.ml:13311,rellens.ml:13759,rellens.ml:17867,rellens.ml:28090,rellens.ml:30834,rellens.ml:31157,rellens.ml:35835,rellens.ml:37924,rellens.ml:38589,rellens.ml:41061,rellens.ml:45002,rellens.ml:45169,rellens.ml:48291,rellens.ml:49012,rellens.ml:49217,rellens.ml:49339,rellens.ml:49893,rellens.ml:55763,rellens.ml:56210,rellens.ml:58957}{\ref{rellens_types.ml:49}, \ref{rellens_types.ml:790}, \ref{rellens_types.ml:2813}, \ref{rellens_types.ml:3698}, \ref{rellens_types.ml:4596}, \ref{rellens_types.ml:4734}, \ref{rellens_types.ml:5055}}{\ref{rellens_types.ml:695}, \ref{rellens_types.ml:923}, \ref{rellens_types.ml:2502}, \ref{rellens_types.ml:2593}, \ref{rellens_types.ml:3355}, \ref{rellens_types.ml:3940}, \ref{rellens_types.ml:4053}, \ref{rellens_types.ml:5055}, \ref{rellens.ml:201}, \ref{rellens.ml:8060}, \ref{rellens.ml:8235}, \ref{rellens.ml:8450}, \ref{rellens.ml:8665}, \ref{rellens.ml:9015}, \ref{rellens.ml:9501}, \ref{rellens.ml:9643}, \ref{rellens.ml:9844}, \ref{rellens.ml:10106}, \ref{rellens.ml:11220}, \ref{rellens.ml:13311}, \ref{rellens.ml:13759}, \ref{rellens.ml:17867}, \ref{rellens.ml:28090}, \ref{rellens.ml:30834}, \ref{rellens.ml:31157}, \ref{rellens.ml:35835}, \ref{rellens.ml:37924}, \ref{rellens.ml:38589}, \ref{rellens.ml:41061}, \ref{rellens.ml:45002}, \ref{rellens.ml:45169}, \ref{rellens.ml:48291}, \ref{rellens.ml:49012}, \ref{rellens.ml:49217}, \ref{rellens.ml:49339}, \ref{rellens.ml:49893}, \ref{rellens.ml:55763}, \ref{rellens.ml:56210}, \ref{rellens.ml:58957}}
+\ocwrefindexentry{$\ocwupperid{TBol}$}{rellens_types.ml:2362}{rellens.ml:2830,rellens.ml:18411,rellens.ml:35334,rellens.ml:36633}{\ref{rellens_types.ml:2362}}{\ref{rellens.ml:2830}, \ref{rellens.ml:18411}, \ref{rellens.ml:35334}, \ref{rellens.ml:36633}}
+\ocwrefindexentry{$\ocwlowerid{tenv}$ (type)}{rellens_types.ml:2502}{rellens_types.ml:3940,rellens.ml:2516}{\ref{rellens_types.ml:2502}}{\ref{rellens_types.ml:3940}, \ref{rellens.ml:2516}}
 \ocwrefindexentry{$\ocwupperid{TFlt}$}{rellens_types.ml:2362}{rellens.ml:2830}{\ref{rellens_types.ml:2362}}{\ref{rellens.ml:2830}}
 \ocwrefindexentry{$\ocwupperid{TInt}$}{rellens_types.ml:2362}{rellens.ml:2830}{\ref{rellens_types.ml:2362}}{\ref{rellens.ml:2830}}
 \ocwrefindexentry{$\ocwupperid{TStr}$}{rellens_types.ml:2362}{rellens.ml:2830}{\ref{rellens_types.ml:2362}}{\ref{rellens.ml:2830}}
-\ocwrefindexentry{$\ocwlowerid{typeinf\_drop}$}{rellens.ml:41157}{rellens.ml:41869,rellens.ml:42566,rellens.ml:57188}{\ref{rellens.ml:41157}}{\ref{rellens.ml:41869}, \ref{rellens.ml:42566}, \ref{rellens.ml:57188}}
-\ocwrefindexentry{$\ocwlowerid{typeinf\_join\_dl}$}{rellens.ml:19636}{rellens.ml:20907,rellens.ml:57188}{\ref{rellens.ml:19636}}{\ref{rellens.ml:20907}, \ref{rellens.ml:57188}}
-\ocwrefindexentry{$\ocwlowerid{typeinf\_select}$}{rellens.ml:16642}{rellens.ml:17311,rellens.ml:57188}{\ref{rellens.ml:16642}}{\ref{rellens.ml:17311}, \ref{rellens.ml:57188}}
-\ocwrefindexentry{$\ocwlowerid{typeinf\_union}$}{rellens.ml:23109}{rellens.ml:24704}{\ref{rellens.ml:23109}}{\ref{rellens.ml:24704}}
-\ocwrefindexentry{$\ocwlowerid{uf\_and}$}{rellens.ml:27770}{rellens.ml:27770,rellens.ml:28272,rellens.ml:39905}{\ref{rellens.ml:27770}}{\ref{rellens.ml:27770}, \ref{rellens.ml:28272}, \ref{rellens.ml:39905}}
-\ocwrefindexentry{$\ocwlowerid{uf\_or}$}{rellens.ml:27959}{rellens.ml:27959,rellens.ml:34502,rellens.ml:46165,rellens.ml:46961,rellens.ml:48446,rellens.ml:48792}{\ref{rellens.ml:27959}}{\ref{rellens.ml:27959}, \ref{rellens.ml:34502}, \ref{rellens.ml:46165}, \ref{rellens.ml:46961}, \ref{rellens.ml:48446}, \ref{rellens.ml:48792}}
-\ocwrefindexentry{$\ocwlowerid{updated\_pred}$}{rellens.ml:32747}{rellens.ml:33565}{\ref{rellens.ml:32747}}{\ref{rellens.ml:33565}}
-\ocwrefindexentry{$\ocwlowerid{updated\_var\_expr}$}{rellens.ml:32535}{rellens.ml:32747}{\ref{rellens.ml:32535}}{\ref{rellens.ml:32747}}
-\ocwrefindexentry{$\ocwlowerid{upd\_left}$}{rellens.ml:44659}{rellens.ml:45280,rellens.ml:51214}{\ref{rellens.ml:44659}}{\ref{rellens.ml:45280}, \ref{rellens.ml:51214}}
-\ocwrefindexentry{$\ocwlowerid{upd\_right}$}{rellens.ml:45063}{rellens.ml:45422,rellens.ml:52116}{\ref{rellens.ml:45063}}{\ref{rellens.ml:45422}, \ref{rellens.ml:52116}}
-\ocwrefindexentry{$\ocwlowerid{value}$ (type)}{rellens_types.ml:349}{rellens_types.ml:455,rellens_types.ml:695,rellens_types.ml:988,rellens_types.ml:4995,rellens.ml:326,rellens.ml:4432}{\ref{rellens_types.ml:349}}{\ref{rellens_types.ml:455}, \ref{rellens_types.ml:695}, \ref{rellens_types.ml:988}, \ref{rellens_types.ml:4995}, \ref{rellens.ml:326}, \ref{rellens.ml:4432}}
-\ocwrefindexentry{$\ocwlowerid{var\_case\_expr}$}{rellens.ml:31117}{rellens.ml:31393}{\ref{rellens.ml:31117}}{\ref{rellens.ml:31393}}
+\ocwrefindexentry{$\ocwlowerid{typeinf\_drop}$}{rellens.ml:42926}{rellens.ml:43638,rellens.ml:44335,rellens.ml:58957}{\ref{rellens.ml:42926}}{\ref{rellens.ml:43638}, \ref{rellens.ml:44335}, \ref{rellens.ml:58957}}
+\ocwrefindexentry{$\ocwlowerid{typeinf\_join\_dl}$}{rellens.ml:21405}{rellens.ml:22676,rellens.ml:58957}{\ref{rellens.ml:21405}}{\ref{rellens.ml:22676}, \ref{rellens.ml:58957}}
+\ocwrefindexentry{$\ocwlowerid{typeinf\_select}$}{rellens.ml:18411}{rellens.ml:19080,rellens.ml:58957}{\ref{rellens.ml:18411}}{\ref{rellens.ml:19080}, \ref{rellens.ml:58957}}
+\ocwrefindexentry{$\ocwlowerid{typeinf\_union}$}{rellens.ml:24878}{rellens.ml:26473}{\ref{rellens.ml:24878}}{\ref{rellens.ml:26473}}
+\ocwrefindexentry{$\ocwlowerid{uf\_and}$}{rellens.ml:29539}{rellens.ml:29539,rellens.ml:30041,rellens.ml:41674}{\ref{rellens.ml:29539}}{\ref{rellens.ml:29539}, \ref{rellens.ml:30041}, \ref{rellens.ml:41674}}
+\ocwrefindexentry{$\ocwlowerid{uf\_or}$}{rellens.ml:29728}{rellens.ml:29728,rellens.ml:36271,rellens.ml:47934,rellens.ml:48730,rellens.ml:50215,rellens.ml:50561}{\ref{rellens.ml:29728}}{\ref{rellens.ml:29728}, \ref{rellens.ml:36271}, \ref{rellens.ml:47934}, \ref{rellens.ml:48730}, \ref{rellens.ml:50215}, \ref{rellens.ml:50561}}
+\ocwrefindexentry{$\ocwlowerid{updated\_pred}$}{rellens.ml:34516}{rellens.ml:35334}{\ref{rellens.ml:34516}}{\ref{rellens.ml:35334}}
+\ocwrefindexentry{$\ocwlowerid{updated\_var\_expr}$}{rellens.ml:34304}{rellens.ml:34516}{\ref{rellens.ml:34304}}{\ref{rellens.ml:34516}}
+\ocwrefindexentry{$\ocwlowerid{upd\_left}$}{rellens.ml:46428}{rellens.ml:47049,rellens.ml:52983}{\ref{rellens.ml:46428}}{\ref{rellens.ml:47049}, \ref{rellens.ml:52983}}
+\ocwrefindexentry{$\ocwlowerid{upd\_right}$}{rellens.ml:46832}{rellens.ml:47191,rellens.ml:53885}{\ref{rellens.ml:46832}}{\ref{rellens.ml:47191}, \ref{rellens.ml:53885}}
+\ocwrefindexentry{$\ocwlowerid{value}$ (type)}{rellens_types.ml:349}{rellens_types.ml:455,rellens_types.ml:695,rellens_types.ml:988,rellens_types.ml:5505,rellens.ml:326,rellens.ml:4431}{\ref{rellens_types.ml:349}}{\ref{rellens_types.ml:455}, \ref{rellens_types.ml:695}, \ref{rellens_types.ml:988}, \ref{rellens_types.ml:5505}, \ref{rellens.ml:326}, \ref{rellens.ml:4431}}
+\ocwrefindexentry{$\ocwlowerid{var\_case\_expr}$}{rellens.ml:32886}{rellens.ml:33162}{\ref{rellens.ml:32886}}{\ref{rellens.ml:33162}}
 
 
 \ocwendindex{}
