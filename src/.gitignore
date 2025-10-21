@@ -1,2 +1,11 @@
 *~
-rellens.pdf
+*.aux
+*.cmi
+*.cmo
+*.cmx
+*.o
+*.dvi
+*.log
+*.synctex.gz
+_build/*
+# rellens.pdf
